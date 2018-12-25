@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<mata charset="UTF-8">
+	<title>登录 | 美团网</title>
+	<link rel="shortcut icon" href="img/meituan.ico">
+	<link rel="icon" href="img/meituan.ico" sizes="16x16 32x32">
+	<!-- 加上面两行以在网页标题前显示小图标 -->
+<style type="text/css">
+	body{
+		color: #666;
+		font-size: 14px;
+	}
+	
+	#header{
+		width:980px;
+		margin: 40px auto 30px;/*上左右下*/
+		/*height:126px;*/
+		/*background: blue;*/
+		/*background: url(img/logo.png) no-repeat;*/
+		height: 54px;
+	}
+	#header img{
+		height: 54px;
+		width: 82px;/**/
+		/*margin-left: 177px;
+		margin-top: 32px;*/
+	}
+	#main{
+		/*width:100%;*/
+		height:440px;/*background:gray;*//*border:1px solid red;*/ 
+		/*margin-left: 177px;*//*缩小时会不动，所以应该改为auto*/
+		margin: 0 auto;
+		width: 980px;
+	}
+	#main #left{/*width:50%;*/
+		height:100%;/*background: yellow;*/
+		float: left;
+		margin-right: 115px;
+	}
+	#main #left img{
+		height: 370px;
+		width:480px;
+		/*margin-left: 177px;*/
+		/*margin-top: -10px;*/
+		}
+	#main #right{
+		/*width:50%;*/
+		height:100%;/*background: green;*/
+		float: left;
+	}
+	#main #right form{
+		background: white;
+		/*border: solid 1px red;*/
+		width: 270px;
+		/*margin-left: 95px;*/
+		margin-top: 51px;
+		}
+	#main #right form #pho-login{
+		font-size: 12px;
+		float: right;
+		color: #666;
+		/*margin-top: 2px;*/
+		margin-right: 1px;
+	}
+	#main #right form #pho-ic{
+		background: url(img/all.png);
+		background-position: -877px -677px;
+		height: 14px;
+		width: 12px;
+		float: right;
+		margin-left: 2px;
+		margin-right: 1px;
+		margin-top: 1px;
+	}
+	#main #right form .input-sty{
+		margin-top: 9px;
+		border: 1px solid #999;
+		/*margin-bottom: 16px;*/
+
+	}
+	#main #right form .input-sty:hover{
+		border: 1px solid #2bb8aa;
+	}
+	#main #right form .input-sty:focus{
+		/*background:yellow;
+		border: yellow solid 1px;*/
+	}
+	#main #right form .input-sty input{
+		border:0px ;/*默认有框要设为0px;*/
+		height: 24px;
+		padding: 5px 0px;
+		width: 236px;
+		outline: 0px;
+		
+		font-size: 14px;
+		font-family: inherit;
+		line-height: 24px;
+		
+	}
+	#main #right form .input-sty input:focus{
+		/*background:yellow;*/
+	}
+	#main #right form #input-styS{
+		margin-top: 16px;
+	}
+	#main #right form #input-styS #phoneCore{
+		/*position: absolute;*/
+		/*对象脱离常规流，此时偏移属性参照的是离自身最近的定位祖先元素，如果没有定位的祖先元素，则一直回溯到body元素。其margin不与其他任何margin折叠
+		绝对定位的元素，在top，right，bottom，left属性未设置时，会紧随在其前面的兄弟元素之后，但在位置上不影响常规流中的任何元素*/
+
+		float:right;/*脱离文档流，即不在div中仍留有空间，这样border会被撑大*/
+		position: relative;/*用相对布局来调整位置*/
+		right: 5px;
+		bottom:27px;
+		font-size: 12px;
+	}
+	#main #right form #input-styS #phoneCore a:hover{
+		text-decoration: none;
+	}
+	#main #right form a{
+		text-decoration: none;
+	}
+	#main #right form a:hover{
+		text-decoration: underline;
+		cursor: pointer;
+	}/*不能设为body a{}?*/ 
+	
+	#main #right form #user-ic{
+		background: url(img/all.png);
+		background-position: -1250px -617px;
+		height: 18px;
+		width: 18px;
+		float: left;
+		/*margin: 7px 9px;*//*2表示上下，左右*/
+		margin: 7px 5px 0px 9px;/*上右下左*/
+	}
+	#main #right form #mobileuser-ic{
+		background: url(img/all.png);
+		background-position: -1250px -581px;
+		height: 18px;
+		width: 18px;
+		float: left;
+		/*margin: 7px 9px;*//*2表示上下，左右*/
+		margin: 7px 5px 0px 9px;/*上右下左*/
+	}
+	#main #right form #code-ic{
+		background: url(img/all.png);
+		background-position: -1250px -527px;
+		height: 18px;
+		width: 18px;
+		float: left;
+		margin: 7px 5px 0px 9px;
+	}
+	#main #right form .bor{
+		/*border:  solid 1px blue;*/
+		font-family: "Hiragino Sans GB", "WenQuanYi Micro Hei", tahoma, sans-serif;
+		width: 270px;
+		margin-top: 13px;
+	}
+	#main #right form #fo{
+		margin-top: 8px;
+		margin-bottom: 17px;
+	}
+	#main #right form #fog{
+		font-size: 12px;
+		margin-left: 210px;
+		color: #2bb8aa;
+	}
+	#main #right #but{
+		width: 270px;
+		background:#2bb8aa;
+		height: 35px;
+		color: white;
+		font-size: 14px;
+		font-weight: 700;
+		font-family: inherit;
+		line-height: 1.5;
+    	letter-spacing: 1em;
+		/*border-style: inset;*/
+		border: 0px;
+		border-bottom: 1px solid #098779;
+		border-radius: 2px;
+	}
+	#main #right #but:hover{
+		/*background: #2eb7aa;*//**//*hover必须紧贴上个*/
+		background:linear-gradient(#2eb1aa,#2bb8aa);/*线性渐变*/
+	}
+	#main #right form #reg-d{
+		font-size: 12px;
+		margin-bottom: 21px;
+		margin-top: 9px;
+	}
+	#main #right form #reg-d #reg{
+		color: #2bb8aa;
+	}
+	#main #right .bor hr{
+		;
+	}
+	#main #right form .bor #other{
+		position: relative;
+		top:-18px;
+		background: white;
+		left:62px;
+		padding-left:10px;
+		padding-right:10px;
+	}
+	#main #right .bor .ic{
+		margin-top: -15px;
+		/*margin-left: 50px;*/
+	}
+	#main #right .bor .bor #qq-ic{
+		background: url(img/all.png);
+		background-position: -1250px -491px;
+		
+		height: 18px;
+		width: 18px;
+		float: left;
+		margin-left: 110px;
+		margin-right: 20px;
+	}
+	#main #right .bor .bor #qq-ic:hover{
+		background-position: -1250px -509px;
+	}
+	
+	#main #right .bor .bor #blog-ic{
+		background: url(img/all.png);
+		background-position: -1250px -599px;
+		height: 18px;
+		width: 18px;
+		float: left;
+		margin-right: 20px;
+	}
+	#main #right .bor .bor #blog-ic:hover{
+		background-position: -1250px -545px;
+	}
+	#footer{
+		/*width:100%;*/
+		height:100px;
+		/*background: blue;*/
+		/*text-align: center;*/
+		margin: 0 auto;/*居中，内部有宽度才行*/
+		width: 980px;
+		/*margin-left: 177px;*//*设置了%宽和margin，会使得页面容不下，从而出现水平滚动条*/
+		/*margin-top: -10px;*/
+	}
+	#footer #fir-footer{
+		line-height: 14px;
+		font-size: 12px;
+		margin-bottom: 21px;
+    	padding: 17px 0;
+    	padding-bottom: 15px;
+    	border-top: 1px solid #EEE;
+    	border-bottom: 1px solid #EEE;
+		/*border:1px solid red;*/
+	}
+	#footer #fir-footer ul{
+		padding-left: 0px;
+		margin: 0px;/*ul会有默认margin*/
+		display: inline-block;/*不设置为块的话，li设为浮动则整个ul跑出div,且下一个div会靠上来*/
+		
+		color: #999;
+	}
+	
+	#footer #fir-footer ul li{
+		
+		list-style: none;
+		float: left;
+		padding-right: 33px;
+	}
+	#footer  a{
+		text-decoration: none;
+		color: #999;
+	}
+	#footer  a:hover{text-decoration: underline;}
+	#footer .copyright{
+		font-size: 12px;
+		color: #999;
+		/*border:1px solid red;*/
+	}
+	#footer .clear{
+
+	}
+</style>
+<script type="text/javascript">
+	function $(id){return document.getElementById(id);}/*都不需要加双引号，但是用$函数时，id要加双引号*/
+	function changeLoginStyle(){
+		// $("header").style.display= "none "; 
+		// alert("kong");
+		// $("mobilLogin").style.display="none";
+		// 注意中文括号与英文括号,大括号也是，点也是。这些都会报函数未定义
+		 if($("mobilLogin").style.display=="none")
+			{
+				// alert("kong");
+				$("normalLogin").style.display="none";
+				$("mobilLogin").style.display="block";
+				
+			}else{
+				// alert("block");
+				$("normalLogin").style.display="block";
+				$("mobilLogin").style.display="none";
+			}
+	}
+	function getPhoneCore(){
+		$("input-styF").style.border="red solid 1px";
+	}
+	function moseOver(){
+		$("input-styF").style.border="#2bb8aa solid 1px";
+	}
+	function moseOut(){
+		$("input-styF").style.border="red solid 1px";
+	}
+	function getFocus(a){
+
+		// 获取焦点边框固定为蓝色
+		console.log(a);
+		a.par
+		style.border="#2bb8aa solid 1px";
+	}
+	function lostFocus(){
+		// 失去焦点边框变为灰色
+		// .style.border="#999 solid 1px";
+	}
+</script>
+</head>
+<body>
+	<div id="header"><img src="img/logo.png" /></div>
+	<div id="main">
+		<div id="left"><img src="img/www.jpg" /></div>
+		<div id="right">
+			<form id="normalLogin" style="display:none;">
+				<span>账号登录</span>
+				
+				<a id="pho-login" onclick="changeLoginStyle()" >
+                手机动态码登录
+                	<div id="pho-ic"></div>
+            	</a>
+				<div class="input-sty">
+					<div id="user-ic"></div>
+					<input placeholder="手机号/用户名/邮箱">
+				</div>
+				<div class="input-sty" id="input-styS">
+					<div id="code-ic"></div>
+					<input placeholder="密码">
+				</div>
+				<div class="bor" id="fo">
+					<a id="fog"  href="https://passport.meituan.com/useraccount/retrievepassword?risk_partner=0&amp;service=www&amp;continue=https%3A%2F%2Fwww.meituan.com%2Faccount%2Fsettoken%3Fcontinue%3Dhttp%253A%252F%252Fwww.meituan.com%252Faccount%252Fuserinfo%252F" target="_top" >忘记密码？</a>
+				</div>
+				<!-- <button>登录</button> --><!-- 尽量不用button按钮，因为不同浏览器会提交不同的值，所以用input代替 -->
+				<input id="but" type="button" value="登录">
+				<div class="bor" id="reg-d">
+				还没有账号？<a id="reg" href="/account/unitivesignup?service=www&amp;continue=https%3A%2F%2Fwww.meituan.com%2Faccount%2Fsettoken%3Fcontinue%3Dhttp%253A%252F%252Fwww.meituan.com%252Faccount%252Fuserinfo%252F" target="_top">免费注册</a>
+				</div>
+				<div class="bor">
+					<div >
+						<hr size="1" color="#D0CDC7"/>
+						<span id="other">用合作网站账号登录</span>
+					</div>
+					<div class="bor" >
+						<a class="oauth__link oauth__link--qq" href="/account/connect/tencent" data-mtevent="{&quot;la&quot;:&quot;oauth/qq&quot;}" target="_blank">
+							<div id="qq-ic" class="ic"></div>
+						</a>
+						<a class="oauth__link oauth__link--weibo" href="/account/connect/sina" data-mtevent="{&quot;la&quot;:&quot;oauth/sina&quot;}" target="_blank">
+							<div id="blog-ic" class="ic"></div>
+						</a>
+					</div>
+				</div>
+			</form>
+			<form id="mobilLogin" style="display:block;">
+				<span>账号登录</span>
+				
+				<a id="pho-login" onclick="changeLoginStyle();" >
+                普通方式登录
+                	<div id="pho-ic"></div>
+            	</a>
+				<div class="input-sty" id="input-styF" onfocus="" >
+				<!--onmouseover="moseOver()" onmouseout="moseOut();" -->
+					<div id="mobileuser-ic"></div>
+					<input placeholder="手机号" onfocus="getFocus(this)" onblur="lostFocus(this)" onm>
+					<!-- onfocus是表单控件才有的焦点函数 -->
+				</div>
+				<div class="input-sty" id="input-styS" >
+					<div id="code-ic"></div>
+					<input placeholder="动态码"onfocus="getFocus()" onblur="lostFocus()">
+					<span id="phoneCore"onclick="getPhoneCore();">
+						<a>获取手机动态码</a>
+					</span>
+				</div>
+				<div class="bor" id="fo">
+					<a id="fog"  href="https://passport.meituan.com/useraccount/retrievepassword?risk_partner=0&amp;service=www&amp;continue=https%3A%2F%2Fwww.meituan.com%2Faccount%2Fsettoken%3Fcontinue%3Dhttp%253A%252F%252Fwww.meituan.com%252Faccount%252Fuserinfo%252F" target="_top" >忘记密码？</a>
+				</div>
+				<!-- <button>登录</button> --><!-- 尽量不用button按钮，因为不同浏览器会提交不同的值，所以用input代替 -->
+				<input id="but" type="button" value="登录">
+				<div class="bor" id="reg-d">
+                提示：
+                    未注册美团账号的手机号，登录时将自动注册美团账号，且代表您已同意
+					<a id="reg" href="https://www.meituan.com/about/terms" target="_blank">《美团网用户协议》</a>
+              
+				</div>
+				<div class="bor">
+					<div >
+						<hr size="1" color="#D0CDC7"/>
+						<span id="other">用合作网站账号登录</span>
+					</div>
+					<div class="bor" >
+						<a class="oauth__link oauth__link--qq" href="/account/connect/tencent" data-mtevent="{&quot;la&quot;:&quot;oauth/qq&quot;}" target="_blank">
+							<div id="qq-ic" class="ic"></div>
+						</a>
+						<a class="oauth__link oauth__link--weibo" href="/account/connect/sina" data-mtevent="{&quot;la&quot;:&quot;oauth/sina&quot;}" target="_blank">
+							<div id="blog-ic" class="ic"></div>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="footer">
+		<div id="fir-footer">	
+			<div class="clear"></div>	
+			<ul>
+				<li class="first"><a rel="nofollow" href="https://about.meituan.com/about.html">关于美团</a></li>
+				<li><a rel="nofollow" href="https://zhaopin.meituan.com/">加入我们</a></li>
+				<li><a rel="nofollow" href="http://emis.meishi.meituan.com/merchantsSettled">商家入驻</a></li>
+				<li><a rel="nofollow" href="https://www.meituan.com/help/faq">帮助中心</a></li>
+				<li class="last"><a href="http://meituan.com/mobile">美团手机版</a></li>
+			</ul>
+		</div>
+
+		<div class="copyright">
+        <p>
+            ©<span>2018</span>
+            <a href="https://www.meituan.com">美团网团购</a>
+            meituan.com
+            <a href="http://www.miibeian.gov.cn/" target="_blank">京ICP证070791号</a>
+            京公网安备11010502025545号
+        </p>
+    </div>
+	</div>
+</body>
+</html>
