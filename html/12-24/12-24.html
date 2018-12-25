@@ -1,0 +1,104 @@
+<!doctype html>
+<!-- 
+声明头 面试题：声明该页面是以html5标准书写的
+快捷方式!+tab
+
+-->
+<html lang="en"><!-- 根元素 lang？ -->
+<!-- 头部 多用于设置一些语言信息给浏览器解析 -->
+<head>
+	<meta charset="UTF-8">
+	<!--  charset设置字符集 gbk gb2312  -->
+	<title>12-24</title>
+</head>
+<body>
+<!-- 标签 
+		HTML 标签对大小写不敏感 但是提倡小写
+		双标签 开始标记 结束标记,未闭合会影响后面的标签
+		 如 h1-h6 加粗加大 自动换行 p自动换行
+		单标签 br mata
+		属性名 属性值
+		width：200px;
+		html 超文本标记语言
+		p 有语义，代表段落标签
+		div 无语义标签 容器 会换行
+		语义化 合适标签包合适内容 有利于排名
+		换行，多行，多个空格都将被解析为一个空格
+		p标签：会换行，有上下外间距
+		a 超链接标签 下划线 蓝色字体 一定要有href属性
+			href 
+				网址 
+				本地地址				
+				跳转到相应路径 herf="#top" ,top是相应位置的id
+				下载 <a href="1.zip" download="new"></a>download值来规定下载文件的名称。所允许的值没有限制，浏览器将自动检测正确的文件扩展名并添加到文件 (.img, .pdf, .txt, .html, 等等)。
+			targget <a href="" target=""></a>
+		br 换行 强行换行
+		hr 分割线特点居中，
+		img 
+			src 绝对路径：H:\Users\junmao cai\Desktop\h5\12-23\img/1.jpg
+				注意最后一个是/
+				相对路径：
+					当前目录：img
+					上一级目录 ../ 再上一级 ../../
+				网址
+			alt当图片不存在或无法显示时说明文字出现
+			width
+			height 宽高属性只设置一个时，另一个会自适应，也就是等比缩放
+			title 鼠标悬停时显示的说明文字
+		由显示方式不同，有以下三种划分：
+		span:行内元素，多个span显示在同一行,（a也是行内元素）可以设置宽高，但是无效，因为其宽高由内容决定
+		div 块级元素（p，h1-h6），占领一行，默认宽度100%,由高度由内容决定
+		img 行内块级元素 可以显示在同一行，也可以设置宽高
+		pre 定义预格式化的文本。被包围在 pre 中文本的保留空格和换行符，即怎么写怎么输出，但是标签的话要用字符实体写，因为会被浏览器解析为标签
+
+	-->
+	<!-- 
+	shift f12 或右键检查  谷歌浏览器检查页面
+	注释 ctrl+/
+
+	-->
+	<a href="1.txt" download="new">下载文件</a>
+	<!-- txt文件new不加后缀也能自动识别是txt文件 -->
+	<a href="1.rar" download="new">下载rar压缩文件</a>
+	<!-- rar文件必须加上后缀，否则下载下来的文件为new文件，无法自动加压缩包后缀 -->
+	<a href="1.zip" download="new">下载zip压缩文件</a>
+	<!-- 能识别后缀 -->
+	<a href="1.jpg" download="new">下载图片</a>
+	<!-- 能识别后缀 -->
+	<img src="1.jpg" alt="二维码" title="说明文字：二维码">
+	<!-- 2.jpg不存在，显示alt -->
+	<img src="2.jpg" alt="二维码" title="相对路径，当前目录中">
+	<!-- 相对路径 -->
+	<img src="img/1.jpg" alt="二维码" title="相对路径，当前目录的img中">
+	<!-- 绝对路径 -->
+	<img src="H:\Users\junmao cai\Desktop\h5\12-23\img/1.jpg" alt="绝对路径" title="绝对路径">
+	<div>
+		<h1>行内元素span,a、块级元素div，h1-h6、行内块级元素img</h1>
+		<span>span行内元素</span>
+		<span>多个span显示在同一行,</span>
+		<span style="width:200px;height:50px;">宽高设置无效</span>
+		<span><h3>宽高由内容决定,换不换行也由内容决定，如h3是块级元素，会占用一行</h3></span>
+		<div>div是块级元素</div>
+		<div>块级元素占用一行，所以后面的元素自动换行</div>
+		<div style="height:50px;">宽高有效</div>
+		<div>宽高有效</div>
+		<div>
+			<img src="1.jpg" alt="">
+			<img src="2.jpg" alt="img是行内块元素，可放同一行">
+			<img src="1.jpg" alt="宽高有效width:50px;" style="width:50px;">
+			<img src="1.jpg" alt="">
+		</div>
+	</div>
+	<div>
+		<h1>pre</h1>
+		<pre>保留换行，例如这里换行
+			不用br也换了行。而前面空格也同样保留了
+			pre常用来写源码，但是在pre中仍然要用字符实体来代表大于号小于号等，因为这些字符是预留的，浏览器会误认为是标签。如以下一行：
+			<h3>这个h3标签只会显示文字，  （这里前面空格有效）要想把源码显示出来要向下面这样写</h3>
+			&lt;h3&gt;这里用字符实体写的&nbsp;&nbsp;前面有两个空格&lt;/h3&gt;
+			如果不造成误会，单独写，如<还是可以显示的
+		</pre>
+		<h3>常用的字符实体：空格&nbsp; 小于号<&lt;大于号>&gt; ,版权&copy;注册商标&reg;商标&trade;</h3>
+	</div>
+</body>
+</html>
