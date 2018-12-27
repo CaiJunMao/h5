@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>12-26</title>
+	<style>
+		*{
+			/*background: #02ffff;*/
+		}
+		span{
+			background: blue;
+		}	
+		.lm{
+			background: pink;
+		}
+		#idname{
+			background: red;
+		}
+		#father1 span{
+			background: red;
+		}
+		#father2>div{
+			background: yellow;
+		}
+		#brother1~div{
+			background: pink;
+		}
+		#brother2+div{
+			background: skyblue;
+		}
+		p.tiaojian{background: pink;}
+		/*p#tiaojian{background: red;}这种不行*/
+		/*#aId{color:red;}*/
+		/*link、visited只能a标签使用,不能用a的id来调用,用id调用很奇怪，一直都是visited的效果，即使改回了a*/
+		/*访问前*/
+		a:link{color:red;}
+		/*访问后，无法改下划线*/
+		a:visited{text-decoration:none;color:white;}
+		/*改下划线*/
+		a{text-decoration:none;}
+		
+
+	</style>
+	<link rel="stylesheet" type="text/css" href="1.css">
+</head>
+<body>
+	<!-- 
+	CSS
+		css样式
+			行内样式 标签加styles属性<div style="border:10px;"></div>
+			内联样式 head内style
+				<style>
+					div{border:10px;}
+				</style>
+			外联样式 link css文件中 div{……}
+		属性优先级：
+			同个样式里属性设置依次往下执行，行内>内联>引入，其实也是从上往下，因为一般link先写，再放内联，再写行内的style;
+			!important>行内>id>类名>标签>通配符选择器>继承
+			属性,(如字体颜色color?还有哪些
+			a自身的颜色优先级高于继承的)可被继承，继承来的属性优先级最低
+			属性后加！important表示属性优先级最高 如border：red !important;一般用来规定绝对不能改的属性，但是不能滥用
+		选择器
+			基本选择器：
+				通配符 匹配页面上所有元素
+					*{}
+				标签选择器 
+					标签名：{} 匹配页面上所有元素 
+				类名选择器
+					.class名{} 一类的属性
+					对于既有共同又有不同的属性这种情况，可以设置class="a b" class="a c",用.a{共同}，.b{b不同} .c{c不同}
+				id选择器
+					#id名{}属性值具有唯一性，常用在js中
+			元素之间关系：嵌套，并列
+			组合（复杂）选择器
+				后代选择器 a b{} 所有a的b后代
+				子选择器 
+					a>b{} 只对a直接后代b起作用，例如b的后代还有b则不起作用
+				
+				普通兄弟选择器 a~b{}选中a的后面的兄弟元素b，可有多个兄弟b
+				相邻兄弟选择器 a+b{}选中a的后面紧邻的第一个兄弟元素b，再有b不起作用
+				
+				并集选择器 a,b{}选中a和b
+
+				标签.类名 a.lieming{}选中标签为a且类名为lieming
+			伪类选择器：
+				a:link{}针对超链接 只管链接未被访问前的字体颜色和背景色
+				a:visited{}针对链接访问之后的字体颜色和背景色，下划线无法修改，只能让a去改
+				a:hover{}鼠标悬浮在上的样式，可改变的样式就很多,hover不只链接可用
+				a:active{}鼠标按下的效果，同样不只a可用
+
+				伪类元素不一定要放在选择器之后，也可以在中间，实现其他元素的改变 li:hover div{}这实现了鼠标在li上面时，lid的后代被应用样式。
+	-->
+	<!-- google 检查界面：user agent stylesheet代理默认样式 inherited 继承
+	-->
+	<!-- 选择器 -->
+	<div>
+		<h1>选择器</h1>
+		<p>所有标签受通配符影响，背景色为#02ffff，但是优先级低</p>
+		<span>标签选择器</span>
+		<p class="lm">类名选择器</p>
+		<p id="idname">id选择器</p>
+		<!-- 后代选择器 -->
+		<div id="father1">
+			<span>p的直接后代span<br>
+				<span>p的直接后代span的后代span,受p span{background: pink;}影响</span><br>
+			</span>
+			<span>p的直接后代span</span><br>
+		</div>
+		<!-- 子选择器 -->
+		<div id="father2">
+		<!-- p不能嵌套p，浏览器会解析为并列多个p，p也不能包裹div，会解析为两个p，中间一个div,总之p别嵌套块级元素就好了,span可以放在 p中-->
+			<div>p的直接后代p
+				<div>father2的直接后代div的后代div,不受#father2>div{background: yellow;}影响</div>
+			</div>
+			<div>p的直接后代p</div>
+		</div>
+		<!-- 普通兄弟选择器  -->
+		<div>
+			<div>兄弟0</div>
+			<div id="brother1">兄弟1
+				<div>兄弟1的孩子</div>
+			</div>
+			<div>兄弟2，#brother1~div，对所有之后的兄弟起作用，之前的不起作用</div>
+			<div>兄弟3</div>
+		</div>
+		<!-- 相邻兄弟 -->
+		<div>
+			<div>兄弟0</div>
+			<div id="brother2">兄弟1
+				<div>兄弟1的孩子</div>
+			</div>
+			<div>兄弟2,#brother2+div只对后面第一个紧邻的兄弟起作用</div>
+			<div>兄弟3</div>
+		</div>
+		<!-- 并集选择器 -->
+		<div>
+			<p class="a">并集a,b对a起作用</p>
+			<p class="b">并集a,b，对b起作用</p>
+		</div>
+		<!-- 标签自身有多重条件 -->
+		<div><p class="tiaojian">标签.类名</p></div>
+		<div><p id="tiaojian2">标签#id名不行</p></div>
+		<!-- 伪类:visited -->
+		<a href="#" id="aId">试试伪类visited能否改变下划线</a>
+		<p><span>444</span></p>
+
+	</div>
+	<!-- 字体 -->
+	<div>
+		<h1>字体</h1>
+		<!-- 
+		 font-style 是否倾斜 italic normal
+		 font-weight 是否加粗 
+		 	lighter细的
+		 	正常nornal=400 
+		 	加粗bold =700
+		 	更粗bolder
+		 	
+		 	100-900整百  
+		 font-size px %以父元素为基数
+		 font-family:字体，有空格的字体类型要加引号，多种字体，逗号隔开
+		 font:italic 700 50px 黑体;如果用fond连写，按这样的顺序写，后两个必选
+		 color 字体颜色 
+		 	16进制 0-9 a-f A-f,如#fffff；
+		 	red green pink black purple skyblue;
+		 	rgb(255,255,255)
+		 	rgba(255,255,255,0.1),最后一个是透明度，1是完全不透明，0可以省略，.1表示0.1
+		 -->
+		 <p style="font-style:italic;">这是被观察的字体</p><br>
+		 <i>这是被观察的字体 无语义标签 倾斜i</i><br>
+		 <em>这是被观察的字体 语义标签 倾斜em</em><br>
+		 <p style="font-weight:100">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:200">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:300">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:lighter">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:400">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:normal">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:500">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:600">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:700">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:bold">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:800">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:border">哈哈哈哈哈啊哈哈</p>
+		 <p style="font-weight:900">哈哈哈哈哈啊哈哈</p>
+		 <p>默认字体大小=16ps</p>
+		 <p style="font-size:16px">16px字体大小</p>
+		 <p style="font-size:20px">20px字体大小</p>
+		 <div style="font-size:10px">
+		 	<p style="font-size:20%">20%字体大小</p>
+		 	<p style="font-size:200%">200%字体大小</p>
+		 </div>
+	</div>
+	
+</body>
+</html>
