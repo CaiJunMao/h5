@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>12-26-work</title>
+	<style>
+		*{margin:0;padding:0;}
+		a{color: white;text-decoration: none;}
+		.box{color: white;list-style: none;
+			/*下方的li能继承到list-style，但是li中的ul和再下方的li无法继承到*/
+		}
+		.box li{background:#464646;}
+		.box ul{list-style:none;}
+		.box ul.dropDown{
+			/**/
+			display: none;
+			/*background:#464646;*/
+		}
+		.box li:hover .dropDown{display: block;background:#464646;}
+		.dropDown:hover{display: block;}
+	</style>
+</head>
+<body>
+	<div>
+		<h1>作业</h1>
+		<div>
+			<ul class="box">
+				<li>
+					<a href="#">好物</a>
+					<ul class="dropDown">
+						<li>精选好品</li>
+						<li>全部好品</li>
+						<li>优惠券</li>
+						<li>白菜价</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

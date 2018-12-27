@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>12-27</title>
+	<style>
+		body{
+			/*h100+tab*/
+			/*height: 100px;*/
+			/*w100+tab*/
+			/*width: 100px;*/
+
+		}
+		#divBorder{
+			width: 100px;
+			height: 100px;
+			border-left: 50px solid transparent;
+			border-right: 50px solid;
+			/*默认黑色*/
+			border-right-style: none;
+			/*50px不起作用*/
+			border-top: 50px red;
+			/*一定要有border-style，因为默认是none的，必须设置为solid等才能显示*/
+		}
+
+		#koutu i{
+			width: 18px;
+			height: 16px;
+			/*width: 50px;
+			height: 50px;*/
+			/*border: 1px solid red;*/
+			background-image: url("carmar.png");
+			background-position:0px 0px;
+			/*第一个值为x方向 第二个值为y方向 只写一个则是宽，高与图片宽等比缩放*/
+			/*background-size: 10px;*/
+			background-repeat: no-repeat;
+			/*background-position:0 0;也是对的但是仅限0可以省略px */
+			display: inline-block;
+			/*background-position:0px -20px;
+			background-image: url("carmar.png");*/
+			/*上面两行有效果的，说明position不必须放image后面，下面的连写也是*/
+			/*background: 0px -20px url("carmar.png");*/
+
+		}
+		#koutu i:hover{
+			/*background-position:18px 16px;*/
+			/*正直也能出来是因为平铺了驾驶no-repeated就不行了*/
+			background-position:0px -20px;
+			/*往左走0，往上移20 。都是取负值*/
+
+		}
+		#lianxie{
+			width: 200px;
+			height: 200px;
+			/*只写两个px默认是先位置，所以这里图片200 往下移了200px 往右走了200px,所以看不到*/
+			/*background:url(carmar.png) 200px 200px no-repeat;*/
+			/*background:url(carmar.png) 0px 0px /200px 200px no-repeat;*/
+			/*位置与大小用/隔开*/
+			background:url(carmar.png) 0px/200px 100px no-repeat;
+			/*background:url(carmar.png) 0px/100px no-repeat;*/
+			/*只写一个位置也是可以的，但是也是要用/与大小隔开*/
+			/*background:url(carmar.png) /100px no-repeat;*/
+			/*这句错误*/
+			
+		}
+	</style>
+</head>
+<body>
+	<!-- 
+		list-style  简写属性（list-style-type list-style-position list-style-image 按这个顺序设置）在一个声明中设置所有的列表属性 常用来设置列表的点
+			list-style-type 如none disc默认实心圆 circle空心圆等
+			list-style-position 如inside点在li中的最左边 outside（默认）点在li外左边 inherit
+			list-style-image url 图像路径 none（默认） inhert
+			inherit
+			一般只这样用：list-style:none;这时其他的都选默认值
+		text-decoration 添加到文本的修饰 常用于修改下户线
+			none underline下划线 overline上划线 line-through贯穿线 blink闪烁 inherit继承父元素 
+		text-align 文本位置
+			left right center居中 justify两端对齐（不用）
+			注：text-align设置给父元素，作用在其内容上，如div内内容如果是行内元素如span的话，span会居中，但是如果是块级元素如p，p中放文本，文本不会再div中居中，
+		text-indent:首行缩进 px % em以body？ */
+		display	元素应该生成的框的类型
+			block 块级
+			inline 行内
+			inline-block 行内块级
+			none 不显示 在页面上不占位置
+			i标签这些要用来做小图标就需要display
+		line-height 行高 基线到基线的距离 有继承性
+			上间距 文本高度 下间距
+			文本在自身的行高中居中 在div中=div的height时垂直居中
+			number font-size为基准
+			px 
+			em font-size为基准
+			% font-size为基准
+		border 边框 border-width border-style border-color的简写
+			可以细分为border-top，border-buttom,boder-left,border-right
+			没个边框线都能有以下属性，所以亦可以写成如border-top-color:red;这么细的。不过一般都是直接用border,除非有需要。
+			border-width 
+				可以用
+				thin	定义细的边框。
+				medium	默认。定义中等的边框。
+				thick	定义粗的边框。
+				length	允许您自定义边框的宽度。px
+				inherit
+				不过一般只用length
+				1个表示上下左右都用，如：border-width:5px;
+				4个：上下左右 顺时针
+				2个：上下 左右，如：border-width:5px 10px;
+				3个：上 左右 下，如：border-width:5px 10px 20px;		
+			border-style 默认为none，当设置none时，border-width重置为0
+				none
+				hidden 同none,应用于表示除外，可解决边框冲突
+				dotted	定义点状边框。在大多数浏览器中呈现为实线。
+				dashed	定义虚线。在大多数浏览器中呈现为实线。
+				solid	定义实线。
+				double	定义双线。双线的宽度等于 border-width 的值。
+				groove	定义 3D 凹槽边框。其效果取决于 border-color 的值。
+				ridge	定义 3D 垄状边框。其效果取决于 border-color 的值。
+				inset	定义 3D inset 边框。其效果取决于 border-color 的值。
+				outset	定义 3D outset 边框。其效果取决于 border-color 的值。
+			border-color 边框颜色。默认黑色
+			transparent:透明色
+		border-radius:简写属性，设置所有四个 border-*-radius 属性。
+			如border-top-left-radius	定义边框左上角的形状。 px或% 如果两个值则是水平半径和垂直半径
+		border-image:简写属性，设置所有 border-image-* 属性。
+			border-image-outset	规定边框图像区域超出边框的量。	
+			border-image-repeat	图像边框是否应平铺(repeated)、铺满(rounded)或拉伸(stretched)。	
+			border-image-slice	规定图像边框的向内偏移。	
+			border-image-source	规定用作边框的图片。	
+			border-image-width	规定图片边框的宽度。
+		background	连写设置所有的背景属性。
+			连写时注意：背景位置/大小如background:pink url(...) no-repead 200px 20px/200px 200px;其次如果设置两个background,有时会后面的覆盖前面，所以尽量用一个写，实在要用两个就先写background，再写background-*
+			分开写image要在position之前?连写时也要？试了下好像都不用
+			background-color	背景颜色
+			background-image	背景图像 在背景颜色上面
+			background-size		背景图片的尺寸 
+				单位：%以元素为基准 px
+				第一个值为x方向 第二个值为y方向 只写一个则高等比缩放？
+				cover 覆盖整个元素，保持突变宽高比例
+				contain 水平或垂直有一方盖满则停止拉伸，所以不一定会完全覆盖元素
+			background-position	开始位置。
+				单词：left right top buttom center
+					两个值 如left top 左上角
+					只写一个第二个默认center
+					没有规定先写x方向还是y方向
+				单位：
+					px 如0 -20px往左走0，往上移20 都是取负值
+					%	水平位置 垂直位置。右下角是 100% 100% 左上角是 0% 0%
+			background-repeat	repeat no-repeat
+			background-attachment	scroll：背景随内容滚动 fixed 固定
+			background-clip		规定背景的绘制区域。
+				border-box 包含边框
+				padding-box 不包含边框，只包含到内间距
+				content-box 不包含内间距
+			background-origin	规定背景图片的定位区域。
+			
+
+	 -->
+	<div style="text-align:center;">
+		<span>行内元素span会在div中居中</span>
+		<p style="width:500px;">我（p）想居中,然而我块级元素所以父div的text-align对我不起作用，只对我（p）里面的文本是起作用，所以文本在我里面居中，相对div没有居中</p>
+		<img src="1.jpg" title="行内会级元素会居中">
+	</div>
+	<div>
+		<h1>边框</h1>
+		<div id="divBorder">留意边框</div>
+	</div>
+	<div>
+		<h1>背景</h1>
+		<div id="koutu">
+			<i></i>
+		</div>
+		<div id="lianxie"></div>
+	</div>
+</body>
+</html>
