@@ -62,6 +62,7 @@
 			/*background:url(carmar.png) /100px no-repeat;*/
 			/*这句错误*/
 			
+			
 		}
 	</style>
 </head>
@@ -80,14 +81,14 @@
 			注：text-align设置给父元素，作用在其内容上，如div内内容如果是行内元素如span的话，span会居中，但是如果是块级元素如p，p中放文本，文本不会再div中居中，
 		text-indent:首行缩进 px % em以body？ */
 		display	元素应该生成的框的类型
-			block 块级
-			inline 行内
-			inline-block 行内块级
+			block 块级 前后自动换行
+			inline 行内 宽高无效
+			inline-block 行内块级 宽高有效，放一行
 			none 不显示 在页面上不占位置
 			i标签这些要用来做小图标就需要display
 		line-height 行高 基线到基线的距离 有继承性
 			上间距 文本高度 下间距
-			文本在自身的行高中居中 在div中=div的height时垂直居中
+			单行文本在自身的行高中居中 在div中=div的height时实现垂直居中
 			number font-size为基准
 			px 
 			em font-size为基准
@@ -102,22 +103,22 @@
 				thick	定义粗的边框。
 				length	允许您自定义边框的宽度。px
 				inherit
-				不过一般只用length
+				不过一般只用px
 				1个表示上下左右都用，如：border-width:5px;
 				4个：上下左右 顺时针
 				2个：上下 左右，如：border-width:5px 10px;
 				3个：上 左右 下，如：border-width:5px 10px 20px;		
 			border-style 默认为none，当设置none时，border-width重置为0
-				none
+				none	如input的边框不需要,=设置0px
 				hidden 同none,应用于表示除外，可解决边框冲突
-				dotted	定义点状边框。在大多数浏览器中呈现为实线。
-				dashed	定义虚线。在大多数浏览器中呈现为实线。
-				solid	定义实线。
-				double	定义双线。双线的宽度等于 border-width 的值。
-				groove	定义 3D 凹槽边框。其效果取决于 border-color 的值。
-				ridge	定义 3D 垄状边框。其效果取决于 border-color 的值。
-				inset	定义 3D inset 边框。其效果取决于 border-color 的值。
-				outset	定义 3D outset 边框。其效果取决于 border-color 的值。
+				dotted	点状边框。在大多数浏览器中呈现为实线。
+				dashed	虚线。在大多数浏览器中呈现为实线。
+				solid	实线。
+				double	双线。双线的宽度等于 border-width 的值。
+				groove	3D 凹槽边框。其效果取决于 border-color 的值。
+				ridge	3D 垄状边框。其效果取决于 border-color 的值。
+				inset	3D inset 边框。其效果取决于 border-color 的值。
+				outset	3D outset 边框。其效果取决于 border-color 的值。
 			border-color 边框颜色。默认黑色
 			transparent:透明色
 		border-radius:简写属性，设置所有四个 border-*-radius 属性。
@@ -135,9 +136,9 @@
 			background-image	背景图像 在背景颜色上面
 			background-size		背景图片的尺寸 
 				单位：%以元素为基准 px
-				第一个值为x方向 第二个值为y方向 只写一个则高等比缩放？
+				第一个值为x方向 第二个值为y方向 只写一个默认为为宽，则高等比缩放
 				cover 覆盖整个元素，保持突变宽高比例
-				contain 水平或垂直有一方盖满则停止拉伸，所以不一定会完全覆盖元素
+				contain 水平或垂直有一方盖满则停止拉伸或缩小，所以不一定会完全覆盖元素
 			background-position	开始位置。
 				单词：left right top buttom center
 					两个值 如left top 左上角
@@ -149,10 +150,10 @@
 			background-repeat	repeat no-repeat
 			background-attachment	scroll：背景随内容滚动 fixed 固定
 			background-clip		规定背景的绘制区域。
-				border-box 包含边框
+				border-box 包含边框 默认
 				padding-box 不包含边框，只包含到内间距
 				content-box 不包含内间距
-			background-origin	规定背景图片的定位区域。
+			background-origin	规定背景图片的定位区域。同background-clip差不多，取值相同，效果区别就是clip用来规定背景色，这个用来规定背景图，cilp无法移动背景图
 			
 
 	 -->
