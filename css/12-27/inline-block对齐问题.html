@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>question</title>
+	<style>
+		*{/*margin:0;padding:0;*/}
+		a{
+			color: blue;
+			/*color: white;*/
+			text-decoration: none;}
+		ul.box{
+			/*ul是块级元素*/
+			width: 980px;
+			margin: 80px auto ;
+			/*设置水平居中*/
+			/*text-align: center;*/
+			color: white;
+			list-style: none;
+			/*下方的li能继承到list-style，但是li中的ul和再下方的li无法继承到*/
+			background:#464646;
+			/*使ul展示为一条固定的黑色线，而不是由于li变大而撑开*/
+			height: 20px;
+			/*行高=高度->居中*/
+			line-height: 20px;
+		}
+		ul.box>li{
+			/*ul.box>li只对.box的直接后代li起作用*/
+			display: inline;
+			/*li水平放*/
+			/*为什么设置了同种高度，li还对不齐？
+			行内块级元素同样由内容撑开，而inline-block元素之间默认基线对齐，所以当几个li高度不一致时，看起来就会底部对齐，而我们想要的时顶部对齐，所以使用：vertical-align: top;*/
+			/*如果设为inline行内元素li包含块级元素ul，块级元素ul会跑出行内元素的空间，导致父元素li（行内元素）与其兄弟元素li（行内元素）不在同一行，但是一般不会这样，因为inline一般只用来给最小的元素*/
+			width: 200px;
+			height: 50px;
+		}
+		ul.box ul.dropDown{
+			color: black;
+			/*display: inline-block;*/
+			width: 200px;
+			/*display: inline;*/
+			/*li默认是list-item,必须放在块中，才不会占整行,所以ul设为*/
+			/*display: block;*/
+		}
+		ul.box ul.dropDown li{
+			width: 100px;
+			/*display: list-item;*/
+			/*display: inline-block;*/
+			/*display: inline;*/
+			/*li默认是list-item,必须放在块中，才不会占整行*/
+
+		}
+		ul.dropDown:hover{/*display: block;*/}
+		ul.box li:hover .dropDown{
+			/*display: block;*/
+			/*background:#464646;*/
+		}
+		
+	</style>
+</head>
+<body>
+	<div>
+		<!-- <h1>作业</h1> -->
+		<div>
+			<ul class="box">
+				<li><a href="">首页</a></li>
+				<li>
+					<a href="#">好价</a>
+					<ul class="dropDown">
+						<li>精选好价</li>
+						<li>全部好价</li>
+						<li>优惠券</li>
+						<li>白菜价</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">好物</a>
+					<!-- <ul class="dropDown">
+						<li>好物榜单</li>
+						<li>消费众测</li>
+						<li>新锐品牌</li>
+					</ul> -->
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
