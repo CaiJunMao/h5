@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>12-28</title>
+	<style>
+		#wenzi:before{
+			/*content: "h";*/
+			/*必须要有content，即使值为空,值为空也要写“”*/
+			content: "";
+			background: #ccc;
+			/*表现形式为inline*/
+			display: inline-block;
+			height: 10px;
+			width: 30px;
+		}
+		#wenzi:after{
+			content: "d";
+			background: #ddd;
+			/*表现形式为inline*/
+		}
+		#tubiao:before{
+			/*用content加个图标,写路径，不要把路径url(carmar.png)用引号包起来，会解析成字符串url(carmar.png)*/
+			/*content: url(carmar.png);*/
+			/*这样写无法改变图片大小，应该设置conten为空，然后设置背景图片*/
+			content: "";
+			background: url(carmar.png) 0 0/ contain no-repeat;
+			display: inline-block;
+			height: 100px;
+			width: 100px;
+		}
+		input:enabled{
+			background: green;
+			color: black;
+		}
+		input:disabled{
+			background: black;
+			/**/
+		}
+		input:focus{
+			/*获取焦点的input应用该样式*/
+			border: dotted 2px skyblue;
+		}
+		.a{
+			width: 200px;
+			height: 200px;
+			background: pink;
+			/*三种解决塌陷的方法如下*/
+			/*border-top:1px solid transparent;*/
+			/*overflow: auto;*/
+			/*padding-top:50px;*/
+			/*把子元素的margin-top注释掉，否则变100了*/
+		}
+		.b{
+			width: 50px;
+			height: 50px;
+			margin-top: 50px;
+			/*父元素也会下移，有四种解决方法*/
+			background: blue;
+			/*第四种方法：设置浮动*/
+			float: left;
+		}
+	</style>
+</head>
+<body>
+	<!-- 
+	伪类元素
+		:after 在每个 <p> 元素的内容之后插入内容。
+		:before 在每个 <p> 元素的内容之前插入内容。
+		:first-letter p元素的第一个字符
+		:first-line p元素的第一行
+		:enabled 选择启用的input元素
+		:disabled 选择禁用的input元素
+		:checked 选择被选中的input元素 但是对于radio是改变不了背景色的
+		:focus 选择获得焦点的 input 元素。
+	元素隐藏/显示
+		display:none/(block,inline-block,inline... 元素在页面消失时，不占位置
+		visibltity:hidden/visible 元素在页面隐藏时，占位置
+	解决空隙：
+		空隙产生的原因：1 元素换行或空格产生，浏览器解析为一个空格，在元素中，空格也是一个文本；2 inline或inline-block元素编辑器中换行会导致显示时中间有空白；
+		1不换行
+		2对于inline或inline这种换行产生的空格，可以给父元素设置font-size:0来解决(因为空格也是文本，把该文本设置为0就可以不显示);但是要注意font-size有继承性，所以后面子元素也要设置如fond-size：20px;
+	设置元素透明度：
+		background:rgba(255,0,0,0.2):背景有透明度 不会影响元素内容
+		opacity：0.2属性:整个元素有透明度 会影响元素内容		
+	超出处理
+		over-flow
+			visible 可见 默认值
+			hidden 超出部分不可见
+			scroll 一定出现滚动条
+			auto 超出则有滚动条 不超出则无
+	内外边距：
+		padding 内填充/内边距/内间距 简写属性 可以细分为padding-left,padding-right,padding-top,padding-bottom
+			px cm %基于父元素的宽度 inherit从父元素继承
+		margin 外填充/外边距/外间距
+			body有默认的margin:8
+			间距合并
+				块级元素的垂直相邻外边距会合并
+				行内元素上下外边距不起作用 左右外边距不会合并而是相加
+				上下padding和margin撑不开父元素垂直高度
+				浮动元素的外边距也不会合并。
+			允许指定负的外边距值 但要慎用
+			margin的塌陷现象：父元素div中的子div设置magin-top:100;会带动父元素也往下移
+				解决方法：
+					1设置父divv设置上边框，刻印设为透明但是要存在
+					2用父元素的padding-top代替子元素的margin-top
+					3给父元素设置over-flow属性除外了visible之外的值
+					4浮动
+			居中 
+				保证块级元素如div p等的margin左右值为auto，常用：margin：0 auto;
+	盒子模型：
+		content+padding+border+margin
+
+	 -->
+	<p id="wenzi">ello worl</p>
+	<!-- 用：before做小图标 -->
+	<p id="tubiao">用伪元 素before在前面加图标</p>
+	<input type="text" placeholder="被enabled选中" ><br>
+	<input type="text"placeholder="被enabled选中"><br>
+	<input type="text" disabled placeholder="被disabled选中"><br>
+	<div style="background:rgba(255,0,0,0.4);">rbga(255,0,0,0.2):背景有透明度 不会影响元素内容</div><br>
+	<div style="opacity:0.4;background:red;">opacity：0.2属性:整个元素有透明度 会影响元素内容</div>
+	<!-- 内外边距的注意事项 -->
+	<div>
+		<h1>内外边距的注意事项</h1>
+		<!-- 块元素margin垂直上合并，以大的为准 -->
+		<p style="margin-bottom:20px;">块元素</p>
+		<p style="margin-top:50px;">间距垂直合并合并,大的为准</p>
+		<!-- 行内元素 margin-top,margin-bottom不起作用-->
+		<div style="border:1px solid red;width:500px;">
+			<span style="background:#999; margin-top:20px;margin-bottom:20px;margin-left:50px;">行内1</span>
+			<!-- marging-left,marging_right会相加而不是合并 -->
+			<span style="background:#666;margin-left:50px;margin-right:50px;">行内2</span>
+			<!-- padding-top:不会撑开父元素 但是是有效的，例如背景颜色就超出了父元素所在空间 -->
+			<span style="background:#999;margin-left:50px;">行内3</span>
+			<!-- 这一行有点奇怪，padding放不下，结果padding全跑第二行，还把父元素撑开？ -->
+			<span style="background:#666;padding-right:200px;">行内4</span>
+		</div>
+		<p></p>
+	</div>
+	<!-- div的外边距塌陷现象处理 -->
+	<div>
+		<hr>
+		<!-- .a>.b -->
+		<div class="a">
+			<div class="b"></div>
+		</div>
+	</div>
+</body>
+</html>
