@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>12-29</title>
+	<style>
+		#jianju div{
+			letter-spacing: 50px;
+		}
+		#jianju p{
+			word-spacing: 50px;
+			
+		}
+		.clearfix:after{
+			content:"";
+			display:block;
+			clear:both;
+		}
+		.clearfix{
+			zoom:1;
+		}
+		#dingwei .a,#dingwei .b,#dingwei .c{
+			width: 100px;
+			height: 50px;
+		}
+		#dingwei{
+			width: 200px;
+			height: 350px;
+			border: 2px solid black;
+		}
+		#dingwei .a{
+			background: orange;
+			position: absolute;
+		}
+		#dingwei .b{
+			background: red;
+			position: relative;
+			/*top:25px;*/
+		#dingwei .c{
+			/*固定定位相对浏览器窗口*/
+			background: blue;
+			position: fixed;
+			left: 100px;
+			top: 100px;
+			/*必须设置两个方向，默认是在窗口左下角外，窗口显示不出？好像是的，我的浏览器是这样，但是其他同学的不会*/
+		}
+
+	</style>
+</head>
+<body>
+	<!-- 
+
+		letter-spacing 字符间距 也对空格起作用
+		word-spacing 只对空格起作用
+		word-break:break-all;
+			英文和数字默认是一个单词不会换行，所以在一个宽高固定的div中有时会超出，而中文则会自动换到另一行显示	
+		vertical-align:设置对齐的四格线的哪一条
+			行内块对齐基线，即底下倒数第二条，所以img底下一般有空白，为了消除空白：1.vertical-align:bottom，2.display:block.
+		浮动：float
+			none right left
+			脱离普通/标准文档流，即在原来的容器中不占位置，下方的普通文档流元素会挤上来
+			浮动到父元素的框或同样浮动的兄弟元素的框
+			如果块级浮动元素的上一个元素是标准流元素，则浮动元素的垂直位置不变？
+			父元素内只有浮动元素，未设置高度的父元素会丧失高度，高度变为0，父元素下方的元素会顶上来
+				1如果父元素高度确定，直接设置父元素高度
+				2不能确定的话 父元素设置overflow除visiable
+					创建块级的格式化上下文（BFC）
+				3给浮动元素后加一个有clear:both属性的块级元素，清除浮动带来的影响
+				4给父div加一个类
+				.clearfix:after{
+					content:"";
+					display:block;
+					clear:both;
+				}
+				后面这在IE浏览器中要加，为了兼容它
+				.clearfix{
+					zoom:1
+				}
+			浮动元素可能会被浮动元素卡住
+			文本不会被float挡住
+			浮动元素表现形式像行内块元素
+		样式清除表
+		定位 position
+			absolute 绝对定位 不占位置（脱离标准流） 后面元素顶上来 
+				同浮动不同的是文字也会被盖住
+				top left bottom right =margin 这些值更改不会影响后面的元素
+				相对第一个position属性不为static的，父或父级以上的元素进行定位。父或父级以上的元素没定位则相对body
+			relative 相对定位 占位置（不脱离标准流） 后面元素无法顶上来 
+				top left bottom right ！=margin后者会带动后面的元素
+				相对原来位置移动
+			fixed 同绝对定位，不过相对于浏览器窗口本身移动，狗屁膏药的广告就是
+		层级
+		 定位元素的层级比非定位元素高，相对>绝对>非定位
+		 z-index 定位元素才有这个属性，
+			设置在非定位之下,设置负值如z-index:-1;
+		 	定位元素设置z-index越大层级更高 
+	 -->
+	<div id="jianju" >
+		<div>文本间距 hello world</div>
+		<p>文本间距 hello world</p>
+		<p>文 本 间 距  hello  world</p>
+	</div>
+	<div>
+		<div style="width:100px;background:#ccc;border:red 1px solid">我会超出13213121afafdaf</div>
+		<div style="width:100px;background:#ccc;border:red 1px solid">我不会超出我不会超出我不会超出</div>
+	</div>
+	<div style="border:3px solid black; ">
+		<img src="favicon.ico" alt="" style="width:100px;width:100px;">
+	</div>
+	<div style="width:150px;border:1px solid black;">
+		<!-- 60的高度会卡主放在下一行浮动的块3 -->
+		<div style="float:left;background:blue;width:50px;height:50px;height:60px;">块1</div>
+		<div style="float:left;background:green;width:50px;height:50px;">块2</div>
+		<!-- 一行放不下了会放在下一行左浮 -->
+		<div style="float:left;background:red;width:60px;height:50px;">块3</div>
+		<!-- 文本不会被浮动元素挡住 -->
+		<div style="background:orange;">块4，这些文字本来应该跟着块4一起顶上去，但是因为上方是浮动块，文字不能被他们挡住，所以我靠着他们显示</div>
+	</div>
+	<hr>
+	<!-- 清除浮动带来的影响 -->
+		<!-- 1 overflow:auto; 2 height:50px; 3 class="clearfix"-->
+	<div style="width:100px;border:1px solid black;" class="clearfix">
+		<div class="a"style="float:left;background:green;width:50px;height:50px;">浮动块1</div>
+		<div class="b" style="float:left;background:yellow;width:50px;height:50px;">浮动块2</div>
+	</div>
+		<!-- 4 clear:both" -->
+	<div style="background:orange;width:200px;">我的上个元素没高度，我会顶上去，除非他用四种方法消除了他子元素浮动带来的影响</div>
+	<!-- 定位 -->
+	<div id="dingwei">
+		<h1>定位</h1>
+		<!-- 兄弟div同时有绝对，相对，相对最上，然后是绝对？
+		父子的话？ -->
+		<div class="a">绝对定位</div>
+		<div class="b">相对定位</div>
+
+		<!-- <div class="c">固定定位</div> -->
+		
+		<div style="border:1px solid red; ">static的我会被影响吗？</div>
+	</div>
+</body>
+</html>
