@@ -46,7 +46,7 @@
 <body>
 	<!-- 
 	CSS
-		css样式
+		css样式应用方法
 			行内样式 标签加styles属性<div style="border:10px;"></div>
 			内联样式 head内style
 				<style>
@@ -88,7 +88,7 @@
 				a:hover{}鼠标悬浮在上的样式，可改变的样式就很多,hover不只链接可用
 				a:active{}鼠标按下的效果，同样不只a可用
 
-				伪类元素不一定要放在选择器之后，也可以在中间，实现其他元素的改变 li:hover div{}这实现了鼠标在li上面时，lid的后代被应用样式。
+				伪类元素不一定要放在选择器之后，也可以在中间，实现其他元素的改变 li:hover div{}这实现了鼠标在li上面时，li的后代div被应用样式。
 	-->
 	<!-- google 检查界面：user agent stylesheet代理默认样式 inherited 继承
 	-->
@@ -156,10 +156,12 @@
 		 	加粗bold =700
 		 	更粗bolder
 		 	
-		 	100-900整百  
+		 	数值：100-900整百  不加px
 		 font-size px %以父元素为基数
 		 font-family:字体，有空格的字体类型要加引号，多种字体，逗号隔开
-		 font:italic 700 50px 黑体;如果用fond连写，按这样的顺序写，后两个必选
+		 fond连写 
+		 	font:italic 700 50px 黑体;
+		 	按这样的顺序写，后两个必选
 		 color 字体颜色 
 		 	16进制 0-9 a-f A-f,如#fffff；
 		 	red green pink black purple skyblue;

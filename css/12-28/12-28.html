@@ -64,12 +64,13 @@
 </head>
 <body>
 	<!-- 
-	伪类元素
-		:after 在每个 <p> 元素的内容之后插入内容。
-		:before 在每个 <p> 元素的内容之前插入内容。
-		:first-letter p元素的第一个字符
+	伪元素
+		:after 在每个 <p> 元素的内容之后插入内容。必须要有content，即使值为空,值为空也要写“”
+		:before 在每个 <p> 元素的内容之前插入内容。必须要有content
+	伪类选择器
+		:first-letter p元素的第一个字符，也算是伪元素 伪元素与伪类选择器区别？
 		:first-line p元素的第一行
-		:enabled 选择启用的input元素
+		:enabled 选择启用的input元素 对于input默认是enable
 		:disabled 选择禁用的input元素
 		:checked 选择被选中的input元素 但是对于radio是改变不了背景色的
 		:focus 选择获得焦点的 input 元素。
@@ -77,14 +78,15 @@
 		display:none/(block,inline-block,inline... 元素在页面消失时，不占位置
 		visibltity:hidden/visible 元素在页面隐藏时，占位置
 	解决空隙：
-		空隙产生的原因：1 元素换行或空格产生，浏览器解析为一个空格，在元素中，空格也是一个文本；2 inline或inline-block元素编辑器中换行会导致显示时中间有空白；
-		1不换行
-		2对于inline或inline这种换行产生的空格，可以给父元素设置font-size:0来解决(因为空格也是文本，把该文本设置为0就可以不显示);但是要注意font-size有继承性，所以后面子元素也要设置如fond-size：20px;
+		1对于元素换行或空格浏览器解析为一个空格，在元素中，空格也是一个文本；
+		解决方法：不换行
+		2inline或inline-block元素编辑器中换行会导致显示时中间有空白
+		解决方法：可以给父元素设置font-size:0来解决(因为空格也是文本，把该文本设置为0就可以不显示);但是要注意font-size有继承性，所以后面子元素也要设置如fond-size：20px;
 	设置元素透明度：
 		background:rgba(255,0,0,0.2):背景有透明度 不会影响元素内容
 		opacity：0.2属性:整个元素有透明度 会影响元素内容		
 	超出处理
-		over-flow
+		overflow
 			visible 可见 默认值
 			hidden 超出部分不可见
 			scroll 一定出现滚动条
@@ -94,22 +96,23 @@
 			px cm %基于父元素的宽度 inherit从父元素继承
 		margin 外填充/外边距/外间距
 			body有默认的margin:8
-			间距合并
+			允许指定负的外边距值 但要慎用
+		间距合并
 				块级元素的垂直相邻外边距会合并
 				行内元素上下外边距不起作用 左右外边距不会合并而是相加
 				上下padding和margin撑不开父元素垂直高度
 				浮动元素的外边距也不会合并。
-			允许指定负的外边距值 但要慎用
-			margin的塌陷现象：父元素div中的子div设置magin-top:100;会带动父元素也往下移
+		margin的塌陷现象：父元素如div中的第一个子元素如div设置如magin-top:100;会带动父元素也往下移
 				解决方法：
-					1设置父divv设置上边框，刻印设为透明但是要存在
+					1设置父divv设置上边框，可以设为透明但是要存在
 					2用父元素的padding-top代替子元素的margin-top
 					3给父元素设置over-flow属性除外了visible之外的值
 					4浮动
-			居中 
-				保证块级元素如div p等的margin左右值为auto，常用：margin：0 auto;
+		居中 
+			保证块级元素如div p等的margin左右值为auto，常用：margin：0 auto;
 	盒子模型：
 		content+padding+border+margin
+		单说盒子宽高是不把margin加进去的，另外height只是属于content
 
 	 -->
 	<p id="wenzi">ello worl</p>

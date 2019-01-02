@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<title>小米商城 - 小米MIX 3、小米8、红米6 Pro、小米电视官方网站</title>
+	<style>
+		body{
+			margin:0;
+			padding: 0;
+
+		}
+		#footer{
+			height: 40px;
+			background: #666;
+		}
+		#menu{
+			height: 100px;
+			background: #999;
+		}
+		#content{
+			width: 1226px;
+			height: 460px;
+			/*background: #333;*/
+			background: url(bk2.jpg) 0 0/contain no-repeat;
+			margin: 0 auto;
+		}
+		#content #listMenu{
+			height: 460px;
+			width: 234px;
+			background-color: rgba(0,0,0,0.6)
+
+		}
+		#content #listMenu ul{
+			list-style: none;
+			color: #fff;
+			margin:0;
+			padding: 20px 0;
+		}
+		#content #listMenu ul li{
+			width: 234px;
+			height: 42px;
+			font-size: 14px;
+		}
+		#content #listMenu ul li:hover{
+			background: #ff6700;
+		}
+		#content #listMenu ul li a{
+			text-decoration: none;
+			color: #fff;
+			display: block;
+			/*将a设为块，以便设置宽高*/
+			height: 42px;
+			padding-left: 30px;
+			line-height: 42px;
+		}
+		#content #listMenu ul li a i{
+			display: inline-block;
+			/*height: 42px;*/
+			font-family: "iconfont" !important;
+    		font-style: normal;
+    		font-size: 25px;
+    		/*line-height: 16px;*/ 
+    		/*行高=height,使文本垂直居中*/
+    		/*使完全占满i，这样在检查器中>才不会跑出i的位置*/
+    		line-height: 42px;
+    		float: right;
+    		margin-right:20px;
+    		/*margin-top: 13px;*/		
+    		/*设置i透明度*/
+    		/*opacity: 0.6;*/
+    		/*假如是背景图标，要给i设置一个显示的空间，宽高都要有否则显示不出*/
+    		height: 42px;
+    		width: 16px;
+    		background: rgba(0,0,0,0.1) url(ico.png) 0 center no-repeat ;
+    		z-index: 20;
+		}
+	</style>
+</head>
+<body>
+	<div id="footer"></div>
+	<div id="menu"></div>
+	<div id="content">
+		<div id="listMenu">
+			<ul>
+				<li><a href="">手机 电话卡<i><!-- > --></i></a></li>
+				<li><a href="">电视 盒子<i></i></a></li>
+				<li><a href="">笔记本 平板<i></i></a></li>
+				<li><a href="">家电 拨线板<i></i></a></li>
+				<li><a href="">出现 穿戴<i></i></a></li>
+				<li><a href="">智能 路由器<i></i></a></li>
+				<li><a href="">电源 配件<i></i></a></li>
+				<li><a href="">健康 儿童<i></i></a></li>
+				<li><a href="">耳机 音箱<i></i></a></li>
+				<li><a href="">生活 箱包<i></i></a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

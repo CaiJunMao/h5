@@ -11,103 +11,103 @@
 	</style>
 </head>
 <body>
+	<!-- 文本元素 -->
 	<div>
 		<h1>文本元素</h1>
 		<!-- 
-	无语义标签 不会自动换行，宽高无效，行内元素,不建议使用,常用作小图标，即写成空元素设置背景
-		i 倾斜 font-style：italic；
-		b 加粗 font-width：bold;
-		s 删除线 text-decoration:line-through;
-		u 下划线 text-decoration:underline line-through ;
-	-->
-	
-	</div>
-	<div>	
-		
-	
-
+		无语义标签 不会自动换行，宽高无效，行内元素,
+			不建议使用,因为违反了语义化，用如下的css样式可以代替。
+			常用作小图标，即写成空元素设置背景
+			i 倾斜 font-style：italic；
+			b 加粗 font-width：bold;
+			s 删除线 text-decoration:line-through;
+			u 下划线 text-decoration:underline/line-through ;
+		-->
 		今天没有下雨了<br>
 		<i>今天没有下雨了</i><br>
 		<b>今天没有下雨了</b><br>
 		<s>今天没有下雨了</s><br>
 		<u>今天没有下雨了</u><br>
-	<!-- 
-		有语义标签 不会换行 
+		<!-- 
+		有语义标签 短语元素 不会换行 宽高无效，行内元素
+			不要为了其视觉效果而用，而是因为其语义而使用
 			em 倾斜
 			strong 加粗
 			del 删除线
 			ins 下划线
 		-->
 		那中午吃什么呢<br>
-		<em style="width:100px;">今天没有下雨了</em><br>
+		<em style="width:500px;">今天没有下雨了</em>
 		<strong>今天没有下雨了</strong><br>
 		<del>今天没有下雨了</del><br>
 		<ins>今天没有下雨了</ins><br>
 	</div>
+	<!-- 列表 -->
 	<div>
 		<h1>列表</h1>
-	<!-- 
-	无序列表
-		ul>li*5 
-		<ul>
-			<li></li>
-			<li></li>
-			<li></li>
+		<!-- 
+		无序列表
+			ul>li*5 
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		有序列表
+			ol>li+5
+			<ol reversed type="A">
+			 start type reverse有些快被摒弃了
+				<li></li>
+				<li></li>
+				<li></li>
+			</ol>
+		定义列表
+			dl>(dd+dt)*3
+			<dl>
+				<dd>定义项目</dd>
+				<dt>描述项目内容</dt>
+				<dd></dd>
+				<dt></dt>
+				<dd></dd>
+				<dt></dt>
+			</dl>
+		-->
+		<!-- ul>li*5 -->
+		<!-- ul>(li>img+p>a[herf="#"]*5 -->
+		<ul style="list-style:none;text-align:center;width:50px;">
+			<li><img src="img/mao1.jpg" alt=""><br>猫1</li>
+			<li><img src="img/mao2.jpg" alt=""><br>猫2</li>
+			<li><img src="img/mao3.jpg" alt=""><br>猫3</li>
+			<li><img src="img/mao4.jpg" alt=""><br>猫4</li>
+			<li><img src="img/mao5.jpg" alt=""><br>猫5</li>
 		</ul>
-	有序列表
-		ol>li+5
-		<ol reversed type="A">
-			<li></li>
-			<li></li>
-			<li></li>
-		</ol>
-	定义列表
-		dl>(dd+dt)*3
-		<dl>
-			<dd>定义项目</dd>
-			<dt>描述项目内容</dt>
-			<dd></dd>
-			<dt></dt>
-			<dd></dd>
-			<dt></dt>
-		</dl>
-	-->
-	<!-- ul>li*5 -->
-	<!-- ul>(li>img#p>a[herf="#"]*5 -->
-	<ul style="list-style:none;text-align:center;width:50px;">
-		<li><img src="img/mao1.jpg" alt=""><br>猫1</li>
-		<li><img src="img/mao2.jpg" alt=""><br>猫2</li>
-		<li><img src="img/mao3.jpg" alt=""><br>猫3</li>
-		<li><img src="img/mao4.jpg" alt=""><br>猫4</li>
-		<li><img src="img/mao5.jpg" alt=""><br>猫5</li>
-	</ul>
-	
-	<!-- ul>(li>img+p>a[herf="#"])*5 -->
-	<!-- <ul>
-		<li>
-			<img src="" alt="">
-			<p><a href="" herf="#"></a></p>
-		</li>
-		<li>
-			<img src="" alt="">
-			<p><a href="" herf="#"></a></p>
-		</li>
-		<li>
-			<img src="" alt="">
-			<p><a href="" herf="#"></a></p>
-		</li>
-		<li>
-			<img src="" alt="">
-			<p><a href="" herf="#"></a></p>
-		</li>
-		<li>
-			<img src="" alt="">
-			<p><a href="" herf="#"></a></p>
-		</li>
-	</ul> -->
+		
+		<!-- ul>(li>img+p>a[herf="#"])*5 -->
+		<!-- <ul>
+			<li>
+				<img src="" alt="">
+				<p><a href="" herf="#"></a></p>
+			</li>
+			<li>
+				<img src="" alt="">
+				<p><a href="" herf="#"></a></p>
+			</li>
+			<li>
+				<img src="" alt="">
+				<p><a href="" herf="#"></a></p>
+			</li>
+			<li>
+				<img src="" alt="">
+				<p><a href="" herf="#"></a></p>
+			</li>
+			<li>
+				<img src="" alt="">
+				<p><a href="" herf="#"></a></p>
+			</li>
+		</ul> -->
 		<ol type="a" reversed start="2">
-	<!-- recersed 倒序 start 规定有序列表的起始值。type:规定在列表中使用的标记类型1AaIi
-	在 HTML 4.01 中，ol 元素的 "compact"、"start" 以及 "type" 属性是不被赞成使用的。reversed start="2"一起用时会出现0的序号，这可能是某个冲突不管。-->
+		<!-- recersed 倒序 start 规定有序列表的起始值。type:规定在列表中使用的标记类型如1AaIi
+		在 HTML 4.01 中，ol 元素的 "compact"、"start" 以及 "type" 属性是不被赞成使用的。reversed start="2"一起用时会出现0的序号，这可能是某个未被修复的bug，不必理会。-->
 		<li>第一名</li>
 		<li>第二名</li>
 		<li>第三名</li>
@@ -119,41 +119,43 @@
 		<dd>白菜，大白菜，小白菜</dd>
 		</dl>
 	</div>
+	<!-- 表单 -->
 	<div>
 		<h1>表单</h1>
 		<!--
-		 	form 表单 用于数据提交 块级元素
-
+		form 表单 用于数据提交 块级元素
 		 	input
 		 		type
 		 			text 输入框
 		 				value默认值 用得少
-		 				placeholder 提示，文本不可编辑
+		 				placeholder  提示，文本不可编辑，与value同时使用时value优先级高
 		 			password 密码框
 		 			button 按钮
 		 				value
 		 			radio 单选按钮
 		 				相同的name为一组
+		 				用label括起来，扩大选区范围
 		 			checkbox 多选框
+
 		 			hideen 隐藏域
 		 			image 图标按钮
 		 			file 文件提交
 		 			submit 提交按钮
-		 			reset 重置按钮
-		默认选中：
-			单选框和多选框 用checked默认选中
-
+		 			reset 重置按钮	 		
+		 		disabled 值为disabled,所以直接写disabled也是可以的，因为值只有一个
+		  默认选中：
+			单选按钮和多选框 用checked默认选中
 			单选或多选下拉菜单
 			<select name="" id="">
 				<option value=""></option>
 				<option value=""></option>
 				<option value=""></option>
 			</select>
-			默认选中 selected disabled
+			默认选中 selected 值selected
 			textarea 文本域
+				resize:none;禁止调整大小
+				outline:none;去掉外部修饰的蓝色线
 			button 按钮
-
-
 		 -->
 		<form action="1.php">
 			昵称：<input type="text" placeholder="这是提示信息"><br>
@@ -161,8 +163,7 @@
 			<input type="button" value="确定"><br>
 			性别：
 			<!-- 用label括起来，扩大选区范围 -->
-			<label for=""><input type="radio"name="sex" checked>男</
-			label>
+			<label for=""><input type="radio"name="sex" checked>男</label>
 			<!-- 默认值只有一个的，如checked="checked"所以直接用checked就行 -->
 			<!-- 或者使用下面的方式 label：for：规定 label 绑定到哪个表单元素。-->
 			<input type="radio"name="sex" id="girl"><label for="girl">女</label>
@@ -188,10 +189,18 @@
 		<button>按钮</button>
 		<!--  少用，而是用HTML 表单中使用 input 元素来创建按钮。 -->
 	</div>
+	<!-- 表格 -->
 	<div>
+		<h1>表格</h1>
 		<!--
 		表格
 		<table>
+		 border 数值
+		 合并边框：
+		 	style:border-collapse:collapse;合并，细
+		 	cellspacing="0" 线合并，粗，
+		 cellspacing 规定单元格之间的空白
+		 cellpading 表格单元内间距,即每格内容与线的距离
 		 width
 		 <caption>
 		 <tr>
@@ -203,9 +212,9 @@
 		 -->
 		<!-- <table border="1" cellspacing="0" > -->
 		
-		<!--cellspacing="0"似的列表项边框与table合在一起  -->
-		<table border="1" style="border-collapse:collapse;width:500px;" >
-		<!-- width="500" width="500px" 都是对的，但是style="width:500"不对 style="width:500px"->
+		<!--cellspacing="0"使得列表项边框与table合在一起  -->
+		<table border="1" style="border-collapse:collapse;" width="500px">
+		<!-- 标签本身的属性：width="500" width="500px" 都是对的，但是style中 style="width:500"不对 style="width:500px"才对->
 			<caption>期末成绩</caption>
 			<!-- <thead> -->
 			<!-- thead tbody浏览器会自动加，我们写不写都行 -->

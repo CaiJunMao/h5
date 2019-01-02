@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<mata charset="UTF-8">
+<style type="text/css">
+	body{
+		font-size: 13px;
+		font-family: arial;
+	}
+	#list{
+		z-index: 2;
+		color: #fff;
+		position: absolute;
+		right: 0;
+		top: 0;
+		margin: 19px 0 5px;
+		padding: 0 96px 0 0;
+	}
+	#list a{    
+		float: left;
+		color: #333;
+		font-weight: 700;
+		line-height: 24px;
+		margin-left: 20px;
+		
+	}
+	#list a:hover{color: #00c;}
+	#list .login{font-weight: 400;}
+	#list .set{font-weight: 400;}
+	#list .more{
+		border-bottom: 1px solid;
+		margin-left: 19px;
+		margin-right: 2px;
+		position: absolute;
+		right:10px;
+		background: #38f;
+		color: #fff;
+		width: 60px;
+		text-align: center;
+		font-weight: 400;
+		text-decoration: none;
+	}
+	#contain{
+		
+		text-align: center;
+		height: 132px;
+	}
+	#contain img{
+		position: relative;
+    	top: 44px;
+		height: 129px;
+		width:270px;
+	}
+	#contain #put{
+		position: relative;
+		top:66px;
+		height: 34px;
+		width: 640px;
+		border: 1px solid #b6b6b6;
+		display: inline-block;/*span ？默认不是块级元素，所以要使其包含其他块元素，加这句*/
+	}
+	#contain #put #input{
+		height: 22px;
+		width: 500px;
+		margin: 6px 0 0 7px;
+		float: left;/*仍在父容器中，但是会盖住兄弟元素*/
+		border: 0px;
+    	outline: 0px;/*隐藏输入框，注意用0而不是none*/
+	}
+	
+	#contain #put .soutu-btn{
+		height: 16px;
+		width: 18px;
+		background: #fff url(camera_new_5606e8f.png) no-repeat;
+		float: left;/**//*浮动会影响相对布局的内容，两者都是脱离原来的层，如果原来的父容器也是相对的，则还是在父容器里面*/
+		/*position: relative;*/
+		margin-top:9px;
+		margin-left: 4px;
+		/*border: 1px solid blue;*/
+	}
+	#contain #put #sub{
+		float: right;
+		border: 0px ;
+		width: 100px;
+		height:34px;
+		background: #0086FF;
+		border-bottom: 2px solid #3496F9;
+		color: white;
+		font-size: 15px;
+		letter-spacing: 1px;
+		}
+	#foot{
+		text-align: center;
+		/*border:red 1px solid;*/
+		position: absolute;/*为什么边框会缩水*/
+		top:435px;
+		left: 13px;
+		/*display: inline-block;*/
+	}
+	#foot #qrcode{
+		/*border:red 1px solid;*/
+		text-align: center;
+		position: relative;/*相对于原来位置,父容器仍为其保留位置，绝对布局则不保留*/
+		left:400px;/*相对和绝对布局的高度位置仍是原来的位置，不是相对于最外层容器html*/
+	}
+	#foot #qrcode .qrcodeimg{
+		    
+	}
+	#foot #qrcode span{
+		color: #666;
+   		font-weight: 700;
+   		font-size: 12px;
+		/*border:red 1px solid;*/
+	}
+	#foot #ftCon{
+		font-size: 12px;
+		font-weight: 400;
+		/*border:blue 1px solid;*/
+		position: relative;
+		left: 400px;
+		color:#999;
+		margin-top: 18px;
+	}
+	#foot #ftCon a{
+		color:#999;
+	}
+	#foot #ftCon .icrlogo{
+		background: url(icons_5859e57.png) no-repeat;
+		background-position: -600px -96px;
+		/*border:blue 1px solid;*/
+		width: 14px;
+    	height: 17px;
+    	display: inline-block;/*设为块元素，否则因为i内无内容背景无法体现*/
+    	position: relative;
+    	top:3px;
+
+	}
+	#foot #ftCon .jgwablogo{
+		
+		background: url(icons_5859e57.png) no-repeat;
+		background-position: -623px -96px;/*。因为是顺序执行下来的*/
+		width: 14px;
+    	height: 17px;
+    	display: inline-block;
+    	position: relative;
+    	top:3px;
+    	/*border:blue 1px solid;*/
+	}
+	#foot #ftCon p{
+		margin-top: 0px;
+		margin-bottom: 5px;
+	}
+
+	</style>
+	<title>百度一下 你就知道</title>
+</head>
+
+<body>
+	<div id="head">
+		<div id="list">
+			<a href="http://news.baidu.com" >新闻</a>
+			<a href="https://www.hao123.com" >hao123</a>
+			<a href="http://map.baidu.com" >地图</a>
+			<a href="http://v.baidu.com" >视频</a>
+			<a href="http://tieba.baidu.com" >贴吧</a>
+			<a href="http://xueshu.baidu.com" >学术</a>
+			<a  class="login" href="https://passport.baidu.com/v2/?login&amp;tpl=mn&amp;u=http%3A%2F%2Fwww.baidu.com%2F&amp;sms=5" >登录</a>
+			<a  class="set" href="http://www.baidu.com/gaoji/preferences.html" >设置</a>
+			<a class="more" href="http://www.baidu.com/more/" >更多产品</a>
+		</div>
+	</div>
+	<div id="contain">
+		<div id="img"><img src="bd_logo1.png" alt="无法加载"></div>
+		<form>
+			<div id="put">
+				<input id="input">
+				<div class="soutu-btn"></div>
+				<input id="sub" type="submit" value="百度一下" >
+			</div>
+			<span></span>
+		</form>
+	</div>
+	<div id="foot">
+		<div id="qrcode">
+			<div class="qrcodeimg">
+				<img src="zbios_efde696.png"></div>
+			<span>百度</span>
+		</div>
+		<div id="ftCon">
+			<div id="ftConW">
+				<p>
+					<a href="//www.baidu.com/cache/sethelp/help.html" onmousedown="return ns_c({'fm':'behs','tab':'favorites','pos':0})" target="_blank">把百度设为主页</a>
+					<a onmousedown="return ns_c({'fm':'behs','tab':'tj_about'})" href="http://home.baidu.com">关于百度</a>
+					<a onmousedown="return ns_c({'fm':'behs','tab':'tj_about_en'})" href="http://ir.baidu.com">About&nbsp;&nbsp;Baidu</a>
+					<a onmousedown="return ns_c({'fm':'behs','tab':'tj_tuiguang'})" href="http://e.baidu.com/?refer=888">百度推广</a>
+				</p>
+				<p>
+					©2018&nbsp;Baidu&nbsp;
+				<a href="http://www.baidu.com/duty/" onmousedown="return ns_c({'fm':'behs','tab':'tj_duty'})">使用百度前必读</a>
+				&nbsp;
+				<a href="http://jianyi.baidu.com/" class="cp-feedback" onmousedown="return ns_c({'fm':'behs','tab':'tj_homefb'})">意见反馈</a>
+				&nbsp;京ICP证030173号&nbsp;
+				<i class="icrlogo"></i>
+				&nbsp;
+				<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002000001">京公网安备11000002000001号</a>
+				&nbsp;
+				<i class="jgwablogo"></i>
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
