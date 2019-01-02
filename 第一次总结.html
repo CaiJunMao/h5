@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>第一次总结</title>
+	<style>
+		.tittleF{
+			font-size:25px;
+			color:#2196f3;
+		}
+		.tittleS{
+			font-size:20px;
+			color:#2196f3;
+		}
+		nav{
+			widows: 980px;
+		}
+		#nav ul{
+			list-style: none;		
+		}
+		a{
+			text-decoration: none;
+			color:#2196f3;
+		}
+		a:hover{
+			background: orange;
+		}
+		ul.nav-list{
+
+		}
+		ul.nav-list>li{
+			float: left;
+		}
+		ul.nav-list ul.nav-item{
+			padding-left: 0;
+		}
+		ul.nav-list ul.nav-item>li{
+			float: left;
+			margin-right: 20px;
+		}
+		
+		.clearfix:after{
+			content:"";
+			display:block;
+			clear:both;
+		}
+		.clearfix{
+			zoom:1
+		}
+		#gotoTop{
+			position: fixed;
+			right:50px;
+			bottom: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div id="nav" class="clearfix">
+		<ul class="nav-list">
+			<li ><a href="#html" style="font-size:25px;">html</a>
+				<ul class="nav-item">
+					<li><a href="#head">head</a></li>
+					<li><a href="#bq">标签</a></li>
+					<li><a href="#p">p</a></li>
+					<li><a href="#div">div</a></li>
+					<li><a href="#a">a</a></li>
+					<li><a href="#br">br</a></li>
+					<li><a href="#hr">hr</a></li>
+					<li><a href="#img">img</a></li>
+					<li><a href="#pre">pre</a></li>
+					<li><a href="#font">文本元素</a></li>
+					<li><a href="#ul">列表</a></li>
+					<li><a href="#form">表单</a></li>
+					<li><a href="#table">表格</a></li>
+				</ul>
+			</li>
+			<li><a href="#css" style="font-size:25px;">CSS</a>
+				<ul class="nav-item">
+					<li><a href="#use">css样式应用方法</a></li>
+					<li><a href="#sxyxj">属性优先级</a></li>
+					<li><a href="#xzq">选择器</a></li>
+					<li><a href="#zt">字体</a></li>
+					<li><a href="#wb">文本</a></li>
+					<li><a href="#display">display</a></li>
+					<li><a href="#display2">元素隐藏/显示</a></li>
+					<li><a href="#border">border</a></li>
+					<li><a href="#border-radius">border-radius</a></li>
+					<li><a href="#border-image">border-image</a></li>
+					<li><a href="#background">background</a></li>
+					<li><a href="#jjkx">解决空隙</a></li>
+					<li><a href="#sztm">设置元素透明度</a></li>
+					<li><a href="#cccl">超出处理</a></li>
+					<li><a href="#nwbj">内外边距</a></li>
+					<li><a href="#hzmx">盒子模型</a></li>
+					<li><a href="#float">浮动：float</a></li>
+					<li><a href="#position">定位：position</a></li>
+					<li><a href="#z-index">层级</a></li>
+				</ul>
+			</li>
+			<li><a href="#kjj"style="font-size:25px;">快捷键</a></li>
+		</ul>
+	</div>
+	<pre style="font-size:16px;font-family:normal;">
+<span class="tittleF" id="html"><a  href="">     html</a></span>
+	html 超文本标记语言
+		根元素 lang 规定元素内容的语言代码,声明主要语言
+	声明头 <!doctype html> 面试题：声明该页面是以html5标准书写的
+	<span class="tittleS" id="head">head头部</span>多用于设置一些语言信息给浏览器解析
+		meta charset="UTF-8" charset设置字符集 gbk gb2312
+			贴合SEO 方便百度排名
+				一般要写meta的 name的keywords和description，如
+				meta name="keywords" content="搜索，搜索引擎"
+				meta name="description" content="百度是一个"
+			刷新 
+				meta http-equiv="refresh" content="2,http://www.baidu.com"		
+		<span class="tittleS">网页小图标</span>
+			如：link rel="shortcut icon" href="baidu.ico" type="image/x-icon" sizes="16x16 32x32"
+			rel 属性规定当前文档与被链接文档之间的关系,rel 属性的 "stylesheet" 值得到了所有浏览器的支持
+				shortcut icon,特指浏览器中地址栏左侧显示的图标，一般大小为16x16，后缀名为.ico；
+				icon，指的是图标，格式可为PNG\GIF\JPEG，尺寸一般为16x16、24x24、36x36等
+			href 规定被链接文档的位置（URL）
+			type 属性规定被链接文档的 MIME 类型。该属性最常见的 MIME 类型是 "text/css"，该类型描述样式表。
+				image/x-icon MIME 类型
+				(Multipurpose Internet Mail Extensions) 是描述消息内容类型的因特网标准
+				类型/子类型  	扩展名
+				image/x-icon	.ico
+			sizes 规定被链接资源的尺寸。仅适用于 rel="icon"，值可写多个。
+			在比特虫网站可转ico:16*16或32*32 png:16*16
+	<span class="tittleS" id="bq">标签</span> 
+		HTML 标签对大小写不敏感 但是提倡小写
+		双标签 开始标记 结束标记,未闭合会影响后面的标签
+		如 h1-h6 加粗加大 自动换行 p自动换行
+		单标签 br mata
+		属性名 属性值，如width：200px;	
+	<span class="tittleS" id="p">p</span>  段落标签，属于语义标签（em\strong……等也是语义标签），会换行，有上下外间距
+		p不能嵌套p，浏览器会解析为并列多个p，p也不能包裹div，会解析为两个p，中间一个div,总之p别嵌套块级元素就好了,span可以放在 p中
+	<span class="tittleS" id="div">div</span> 无语义标签 容器 会换行
+	语义化 合适标签包合适内容 有利于排名
+	换行，多行，多个空格都将被解析为一个空格
+	<span class="tittleS" id="a">a</span> 超链接标签 下划线 默认蓝色字体 一定要有href属性
+		href 
+			网址 
+			本地地址				
+			跳转到相应路径 herf="#top" ,top是相应位置的id
+			下载 a href="1.zip" download="new"></a>download值来规定下载文件的名称。所允许的值没有限制，浏览器将自动检测正确的文件扩展名并添加到文件 (.img, .pdf, .txt, .html, 等等)，故对txt、zip文件download的值不加后缀“.txt”也能自动识别是txt文件，但是要注意rar文件不行，需要加上文件后缀名“rar”,否则下载的文件为无格式文件。由此可见，除常用的简单后缀名可不加，其他的最好加上以防下载后不知文件格式。。
+		targget a href="" target=""></a>
+	<span class="tittleS" id="br">br</span> 换行 强行换行
+	<span class="tittleS" id="hr">hr</span> 分割线 特点居中，
+	<span class="tittleS" id="img">img</span> 
+		src 绝对路径：H:\Users\junmao cai\Desktop\h5\12-23\img/1.jpg
+			注意最后一个是/
+			相对路径：
+				当前目录：img
+				上一级目录 ../ 再上一级 ../../
+			网址
+		alt当图片不存在或无法显示时出现的说明文字
+		width
+		height 宽高属性只设置一个时，另一个会自适应，也就是等比缩放
+		title 鼠标悬停时显示的说明文字
+	由显示方式不同，有以下三种划分：
+		span:行内元素，多个span显示在同一行,（a也是行内元素）宽高无效，设置了也没用。宽高由内容决定
+		div 块级元素（又如p，h1-h6），占领一行，默认宽度100%,默认高度由内容决定，但是有定义高度由自己的宽度决定高，这意味着，内容可能会溢出。后面会说到css处理溢出的overflow属性
+		img 行内块级元素 可以显示在同一行，也可以设置宽高
+	<span class="tittleS" id="pre">pre</span> 定义预格式化的文本。被包围在 pre 中文本的保留空格和换行符，即怎么写怎么输出，但是标签的话要用字符实体写，因为会被浏览器解析为标签	
+	<span class="tittleS" id="font">文本元素</span>
+		无语义标签 不会自动换行，宽高无效，行内元素,
+			不建议使用,因为违反了语义化，用如下的css样式可以代替。
+			常用作小图标，即写成空元素设置背景
+			i 倾斜 font-style：italic；
+			b 加粗 font-width：bold;
+			s 删除线 text-decoration:line-through;
+			u 下划线 text-decoration:underline/line-through ;
+		有语义标签 短语元素 不会换行 宽高无效，行内元素
+			不要为了其视觉效果而用，而是因为其语义而使用
+			em 倾斜
+			strong 加粗
+			del 删除线
+			ins 下划线
+	<span class="tittleS" id="ul">列表</span>
+		无序列表 ul>li*5
+		有序列表 ol>li+5
+			属性 recersed 倒序 start 规定有序列表的起始值。type:规定在列表中使用的标记类型如1/A/a/I/i
+			ol 元素的 "compact"、"start" 以及 "type" 属性是不被赞成使用的。
+			reversed start="2"一起用时会出现0的序号，这可能是某个未被修复的bug，不必理会。
+		定义列表 dl>(dd+dt)*3
+	<span class="tittleS" id="form">表单 form</span> 用于数据提交 块级元素
+		input
+	 		type
+	 			text 输入框
+	 				value默认值 用得少
+	 				placeholder  提示，文本不可编辑，与value同时使用时value优先级高
+	 			password 密码框
+	 			button 按钮
+	 				value
+	 			radio 单选按钮
+	 				相同的name为一组
+	 				用label括起来，扩大选区范围
+	 				技巧：用label括起来，扩大选区范围；或者label：for（for规定 label 绑定到哪个表单元素）
+	 			checkbox 多选框
+
+	 			hideen 隐藏域
+	 			image 图标按钮
+	 			file 文件提交
+	 			submit 提交按钮
+	 			reset 重置按钮	 		
+			默认选中：单选按钮和多选框 用checked默认选中；默认值只有一个的，如checked="checked"所以直接用checked就行
+		下拉菜单 单选或多选
+			select
+				option
+					value定义送往服务器的选项值。	
+			默认选中 selected 值selected
+		textarea 文本域
+			resize:none;禁止调整大小
+			outline:none;去掉外部修饰的蓝色线
+		button 按钮
+			少用，而是用HTML 表单中使用 input 元素来创建按钮
+	<span class="tittleS">表格</span>
+		table>
+			border 数值
+			合并边框：
+			style:border-collapse:collapse;合并，细
+			cellspacing="0" 线合并，粗，
+			cellspacing 规定单元格之间的空白
+			cellpading 表格单元内间距,即每格内容与线的距离
+		width
+		 	注意:标签本身的属性：width="500" width="500px" 都是对的，但是style中 style="width:500"不对 style="width:500px"才对
+		caption
+		thead
+			tr>
+				th>
+		tbody
+			tr>
+				td>
+		  			colspan所占列数
+		  			rowspan所占行数
+		thead tbody浏览器会自动加，我们写不写都行
+<span class="tittleF" id="css"><a href="">     CSS 层叠式样式表</a></span>
+	<span class="tittleS" id="use">css样式应用方法</span>
+		行内样式 标签加styles属性div style="border:10px;">/div>
+		内联样式 head内style
+			style>
+				div{border:10px;}
+			/style>
+		外联样式/引用样式 link css文件中 div{……}
+	<span class="tittleS" id="sxyxj">属性优先级</span>
+		同个样式里属性设置依次往下执行，行内>内联>引入，其实也是从上往下，因为一般link先写，再放内联，再写行内的style;
+		!important>行内>id>类名>标签>通配符选择器>继承
+		属性,(如字体颜色color?还有哪些
+		a自身的颜色优先级高于继承的)可被继承，继承来的属性优先级最低
+		属性后加！important表示属性优先级最高 如border：red !important;一般用来规定绝对不能改的属性，但是不能滥用
+	<span class="tittleS" id="xzq">选择器</span>
+		基本选择器：
+			通配符 匹配页面上所有元素
+				*{}
+			标签选择器 
+				标签名：{} 匹配页面上所有元素 
+			类名选择器
+				.class名{} 一类的属性
+				对于既有共同又有不同的属性这种情况，可以设置class="a b" class="a c",用.a{共同}，.b{b不同} .c{c不同}
+			id选择器
+				#id名{}属性值具有唯一性，常用在js中
+		 元素之间关系：嵌套，并列
+		组合（复杂）选择器
+
+			后代选择器 a b{} 所有a的b后代
+			子选择器 
+				a>b{} 只对a直接后代b起作用，例如b的后代还有b则不起作用
+			
+			普通兄弟选择器 a~b{}选中a的后面的兄弟元素b，可有多个兄弟b
+			相邻兄弟选择器 a+b{}选中a的后面紧邻的第一个兄弟元素b，再有b不起作用
+			
+			并集选择器 a,b{}选中a和b
+			标签.类名 a.lieming{}选中标签为a且类名为lieming
+		伪类选择器：
+			a:link{}针对超链接 只管链接未被访问前的字体颜色和背景色
+			a:visited{}针对链接访问之后的字体颜色和背景色，下划线无法修改，只能让a去改
+				?注意：link、visited只能a标签使用,不能用a的id来调用,用id调用很奇怪，一直都是visited的效果，即使改回了a
+			a:hover{}鼠标悬浮在上的样式，可改变的样式就很多,hover 不只链接可用
+			a:active{} 鼠标按下的效果，同样不只a可用
+			:first-letter p元素的第一个字符，也算是伪元素 
+			？伪元素与伪类选择器区别？有点难说，不纠结，会用就行
+			:first-line p元素的第一行
+			:enabled 选择启用的input元素 对于input默认是enable
+			:disabled 选择禁用的input元素
+			:checked 选择被选中的input元素 但是对于radio是改变不了背景色的
+			:focus 选择获得焦点的 input 元素
+		伪元素选择器
+			:after 在每个 p 元素的内容之后插入内容。必须要有content，即使值为空,值为空也要写“”
+			:before 在每个 p 元素的内容之前插入内容。必须要有content
+			伪类选择器的这些元素和伪元素不一定要放在选择器之后，也可以在中间，实现其他元素的改变 li:hover div{}这实现了鼠标在li上面时，li的后代div被应用样式。
+		google 检查界面：user agent stylesheet表示代理默认样式 
+		inherited 表示继承样式
+	<span class="tittleS" id="zt">字体</span>
+		font-style 是否倾斜 italic normal
+		font-weight 是否加粗 
+			lighter细的
+			正常nornal=400 
+		 	加粗bold =700
+		 	更粗bolder
+		 	
+		 	数值：100-900整百  不加px
+		font-size px %以父元素为基数
+		font-family:字体，有空格的字体类型要加引号，多种字体，逗号隔开
+		fond连写 
+		 	font:italic 700 50px 黑体;
+		 	按这样的顺序写，后两个必选
+		color 字体颜色 
+			16进制 0-9 a-f A-f,如#fffff；
+			red green pink black purple skyblue;
+			rgb(255,255,255)
+			rgba(255,255,255,0.1),最后一个是透明度，1是完全不透明，0可以省略，也可以用.1表示0.1
+	<span class="tittleS" id="wb">文本</span>
+		list-style  简写属性（list-style-type list-style-position list-style-image 按这个顺序设置）在一个声明中设置所有的列表属性 
+		常用来设置列表ul的点的样式
+			list-style-type 如none disc默认实心圆 circle空心圆
+			list-style-position 
+				inside 点在li中的最左边 outside（默认）点在li外左边 inherit
+			list-style-image url 图像路径 none（默认） 
+			一般只这样：list-style:none;这时其他的都选默认值
+		text-decoration 添加到文本的修饰 常用于修改下划线
+			none underline下划线 
+			overline上划线 
+			line-through贯穿线 
+			blink闪烁 
+			inherit继承父元素 
+		text-align 文本位置
+			left right center居中 justify两端对齐（不用）
+			注：text-align设置给父元素，作用在其内容上。
+			如div内内容如果是行内元素如span的话，span会居中，但是如果是块级元素如p，p中放文本，文本不会在div中居中，
+		text-indent:首行缩进 px % em以body？ */
+		line-height 行高 基线到基线的距离 有继承性
+			上间距 文本高度 下间距
+			单行文本在自身的行高中居中 在div中=div的height时实现垂直居中
+			number font-size为基准
+			px 
+			em font-size为基准
+			% font-size为基准
+		letter-spacing 字符间距 也对空格起作用
+		word-spacing 只对空格起作用
+		word-break:break-all;
+			英文和数字默认是一个单词不会换行，所以在一个宽高固定的div中有时会超出，而中文则会自动换到另一行显示	
+		vertical-align:设置对齐的四格线的哪一条
+			行内块对齐基线，即底下倒数第二条，所以img底下一般有空白，为了消除空白：
+			1.vertical-align:bottom，2.display:block.
+	<span class="tittleS" id="display">display</span>	元素应该生成的框的类型
+			block 块级 前后自动换行
+			inline 行内 宽高无效
+			inline-block 行内块级 宽高有效，放一行
+			none 不显示 在页面上不占位置
+			i标签这些要用来做小图标就需要display
+	<span class="tittleS" id="display2">元素隐藏/显示</span>
+		display:none/(block,inline-block,inline... 元素在页面消失时，不占位置
+		visibltity:hidden/visible 元素在页面隐藏时，占位置
+	<span class="tittleS" id="border">border</span> 边框 简写属性
+		一般包括border-width border-style border-color这三方面值
+		还可以细分为border-top，border-buttom,boder-left,border-right
+		每个边框线都能有厚度，颜色，类型三种属性，所以亦可以再细分为border-top-color:red;这么细的。
+		不过一般都是直接用border,除非有需要。
+		数值的数量：
+			1个表示上下左右都用，如：border-width:5px;
+			4个：上下左右 顺时针
+			2个：上下 左右，如：border-width:5px 10px;
+			3个：上 左右 下，如：border-width:5px 10px 20px;
+		border-width 
+			thin	定义细的边框。
+			medium	默认。定义中等的边框。
+			thick	定义粗的边框。
+			length	允许您自定义边框的宽度。px
+			inherit
+			不过一般只用px				
+		border-style 默认为none，当设置none时，border-width重置为0
+			none	如input的边框不需要,=设置0px
+			hidden 同none,应用于表示除外，可解决边框冲突
+			dotted	点状边框。在大多数浏览器中呈现为实线。
+			dashed	虚线。在大多数浏览器中呈现为实线。
+			solid	实线。
+			double	双线。双线的宽度等于 border-width 的值。
+			groove	3D 凹槽边框。其效果取决于 border-color 的值。
+			ridge	3D 垄状边框。其效果取决于 border-color 的值。
+			inset	3D inset 边框。其效果取决于 border-color 的值。
+			outset	3D outset 边框。其效果取决于 border-color 的值。
+		border-color 边框颜色。默认黑色
+			transparent:透明色
+	<span class="tittleS" id="border-radius">border-radius</span>:简写属性，
+		设置所有四个 border-*-radius 属性。
+		如border-top-left-radius	定义边框左上角的形状。 px或% 如果两个值则是水平半径和垂直半径
+	<span class="tittleS" id="border-image">border-image</span>:简写属性，设置所有 border-image-* 属性。
+		border-image-outset	规定边框图像区域超出边框的量。	
+		border-image-repeat	图像边框是否应平铺(repeated)、铺满(rounded)或拉伸(stretched)。	
+		border-image-slice	规定图像边框的向内偏移。	
+		border-image-source	规定用作边框的图片。	
+		border-image-width	规定图片边框的宽度。
+	<span class="tittleS" id="background">background</span>	连写设置所有的背景属性。
+		连写时注意：背景位置/大小如background:pink url(...) no-repead 200px 20px/200px 200px;其次如果设置两个background,有时会后面的覆盖前面，所以尽量用一个写，实在要用两个，就先写background，再写background-*；
+		分开写image要在position之前?连写时也要？试了下好像都不用
+		background-color	背景颜色
+		background-image	背景图像 在背景颜色上面
+		background-size		背景图片的尺寸 
+			单位：%以元素为基准 px
+			第一个值为x方向 第二个值为y方向 只写一个默认为为宽，则高等比缩放
+			cover 覆盖整个元素，保持突变宽高比例
+			contain 水平或垂直有一方盖满则停止拉伸或缩小，所以不一定会完全覆盖元素
+		background-position	开始位置。
+			单词：left right top buttom center
+				两个值 如left top 左上角
+				只写一个第二个默认center
+				没有规定先写x方向还是y方向
+			单位：
+				% px 
+			两个值 水平位置 垂直位置 
+			右下角是 100% 100% 左上角是 0% 0%
+				0 -20px往左走0，往上移20 一般都是取负值	
+				正值也能出来是因为平铺了，设置no-repeated就不行了
+		background-repeat	repeat no-repeat
+		background-attachment	scroll：背景随内容滚动 fixed 固定
+		background-clip		规定背景的绘制区域。
+			border-box 包含边框 默认
+			padding-box 不包含边框，只包含到内间距
+			content-box 不包含内间距
+		background-origin	规定背景图片的定位区域。同background-clip差不多，取值相同，效果区别就是clip用来规定背景色，这个用来规定背景图，cilp无法移动背景图
+	<span class="tittleS" id="jjkx">解决空隙</span>
+		1、对于元素换行或空格浏览器解析为一个空格，在元素中，空格也是一个文本；
+		解决方法：不换行
+		2、inline或inline-block元素编辑器中换行会导致显示时中间有空白
+		解决方法：可以给父元素设置font-size:0来解决(因为空格也是文本，把该文本设置为0就可以不显示);但是要注意font-size有继承性，所以后面子元素也要设置如fond-size：20px;
+	<span class="tittleS" id="sztm">设置元素透明度</span>
+		background:rgba(255,0,0,0.2):背景有透明度 不会影响元素内容
+		opacity：0.2属性:整个元素有透明度 会影响元素内容		
+	<span class="tittleS" id="cccl">超出处理</span>
+		overflow
+			visible 可见 默认值
+			hidden 超出部分不可见
+			scroll 一定出现滚动条
+			auto 超出则有滚动条 不超出则无
+	<span class="tittleS" id="nwbj">内外边距：padding/margin</span>
+		padding 内填充/内边距/内间距 简写属性 可以细分为padding-left,padding-right,padding-top,padding-bottom
+			px cm %基于父元素的宽度 inherit从父元素继承
+		margin 外填充/外边距/外间距
+			body有默认的margin:8
+			允许指定负的外边距值 但要慎用
+		间距合并
+				块级元素的垂直相邻外边距会合并
+				行内元素上下外边距不起作用 左右外边距不会合并而是相加
+				上下padding和margin撑不开父元素垂直高度
+				浮动元素的外边距也不会合并。
+		margin的塌陷现象：父元素（如div）中的第一个子元素（如div）设置如magin-top:100;会带动父元素也往下移
+				解决方法：
+					1、设置父div设置上边框，可以设为透明但是要存在
+					2、用父元素的padding-top代替子元素的margin-top
+					3、给父元素设置over-flow属性除外了visible之外的值
+					4、浮动
+		居中 
+			保证块级元素如div p等的margin左右值为auto，常用：margin：0 auto;
+	<span class="tittleS" id="hzmx">盒子模型</span>
+		content+padding+border+margin
+		单说盒子宽高是不把margin加进去的，另外height只是属于content
+	<span class="tittleS" id="float">浮动：float</span>
+			none right left
+			脱离普通/标准文档流，即在原来的容器中不占位置，下方的普通文档流元素会挤上来
+			浮动到父元素的框或同样浮动的兄弟元素的框
+			如果块级浮动元素的上一个元素是标准流元素，则浮动元素的垂直位置不变
+			清除浮动影响：
+				描述：父元素内只有浮动元素，未设置高度的父元素会丧失高度，父元素下方的元素会顶上来
+				方法：
+				1、如果父元素高度确定，直接设置父元素高度
+				2、不能确定的话 父元素设置overflow除visiable
+					创建块级的格式化上下文（BFC）
+				3、给浮动元素后加一个有clear:both属性的块级元素，清除浮动带来的影响
+				4、给父div加一个类
+				.clearfix:after{
+					content:"";
+					display:block;
+					clear:both;
+				}
+				后面这在IE浏览器中要加，为了兼容它
+				.clearfix{
+					zoom:1
+				}
+			浮动元素可能会被浮动元素卡住
+			文本不会被float挡住
+			浮动元素表现形式display像行内块元素
+	<span class="tittleS" id="position">定位：position</span>
+			absolute 绝对定位 不占位置（脱离标准流） 后面元素顶上来 
+				同浮动不同的是文字也会被盖住
+				top left bottom right =margin 这些值更改不会影响后面的元素
+				相对第一个position属性不为static的，父或父级以上的元素进行定位。父或父级以上的元素没定位，则相对body
+			relative 相对定位 占位置（不脱离标准流） 后面元素无法顶上来 
+				top left bottom right ！=margin 后者会带动后面的元素
+				相对原来位置移动
+			fixed 同绝对定位，不过相对于浏览器窗口本身移动，常见的网页上的狗屁膏药的广告就是这样
+	<span class="tittleS" id="z-index">层级</span>
+	 		定位元素的层级比非定位元素高
+	 		相对=绝对>非定位 
+	 		与与普通文档流的元素一样，后写的元素如果和先写的元素重合在一起（如通过margin移动），后写的显示
+	 		z-index 定位元素才有这个属性，
+			设置在非定位之下,设置负值如z-index:-1;
+	 		定位元素设置z-index越大层级更高 
+<span class="tittleF" id="kjj"><a href="">     快捷键</a></span>
+	为了不显示错误，以下设计标签的都去掉开始的尖括号
+	标签名+tab 
+	div>/div>
+	.类名+tab
+	div class="a">/div>
+	#ID名  +tab
+	div id="ID">/div>
+	div class="id">/div>
+	标签名.类名+tab
+	input type="text" class="a">
+	标签名#ID名  +tab
+	input type="text" id="id">
+	ul>li*5
+	h500+tab 快速设置height:500px;
+	w50+tab 快速设置width:50px;
+	.a>.b+tab
+	.a>.b
+	div class="a">
+		div class="b">/div>
+	/div>
+
+	格式化快捷键 { "keys": ["ctrl+alt+l"], "command": "reindent" },  注释里无法体现使用该快捷键
+	复制一行cart shift+d
+	cart f，查找
+	shift f12 或右键检查  谷歌浏览器检查页面
+	自己用到的：
+	Ctrl+D 选中光标所占的文本，继续操作则会选中下一个相同的文本。在文本中则选中一段连续的文本。
+	Ctrl+L 选中整行，继续操作则继续选择下一行
+	Shift+← 向左选中文本。
+	Shift+→ 向右选中文本。
+	Ctrl+← 向左单位性地移动光标，快速移动光标。
+	Alt+F3 选中文本按下快捷键，即可一次性选择全部的相同文本进行同时编辑。举个栗子：快速选中并更改所有相同的变量名、函数名等。
+	Ctrl+Shift+L 先选中多行，再按下快捷键，会在每行行尾插入光标，即可同时编辑这些行。
+	Ctrl+Shift+M 选择括号内的内容（继续选择父括号）。举个栗子：快速选中删除函数中的代码，重写函数体代码或重写括号内里的内容。
+	Ctrl+Enter 在下一行插入新行。举个栗子：即使光标不在行尾，也能快速向下插入一行。不用每次都跑行尾换行
+	Ctrl+Shift+[ 选中代码，按下快捷键，折叠代码。
+	Shift+Tab 向左缩进。
+	Ctrl+Shift+K 删除整行。
+	Ctrl+x,选中是剪切，在一行是删除整行
+	
+	Ctrl+Y 恢复撤销
+	
+	Ctrl+PageDown 向左切换当前窗口的标签页。
+	Ctrl+PageUp 向右切换当前窗口的标签页。
+	Alt+Shift+1 窗口分屏，恢复默认1屏（非小键盘的数字）
+	Alt+Shift+2 左右分屏-2列
+	Alt+Shift+8 垂直分屏-2屏
+	Ctrl+K+B 开启/关闭侧边栏。
+
+	cart+鼠标滚轮，改变字体大小	
+
+</pre>
+	<div id="gotoTop"><a href="#top">回到顶上</a></div>
+	
+
+</body>
+</html>
