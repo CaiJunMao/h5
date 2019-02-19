@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>三大循环结构</title>
+	</head>
+	<body>
+		<h1>三大循环结构</h1>
+		<pre>
+		for循环：
+			for(表达式1; 表达式2; 表达式3){
+	  			//循环体
+			}
+			表达式1在整个for循环执行期间只会执行一次
+			<span id=""style="color: red;">表达式1执行完毕后开始执行表达式2</span>
+			表达式3一般是对循环做自增或自减的操作
+			<span id=""style="color: red;">3个表达式的都可以省略但是分号不可省略</span>
+			表达式2不可省略，无穷不会执行for循环？不会，无穷也会执行
+			
+		//for循环中的语句1
+		while(条件condition){
+		 	// 循环体  
+		 	//for循环中的语句3
+		 	}
+			 先判断条件再次判断condition是true还是false，<span id=""style="color: red;">如果是true，则执行循环体</span>，循环体执行完毕，再次判断condition
+			 condition不能省略。如果省略为语法错误
+			 for可完全转为while循环，
+		do{
+			//循环体
+		}while(condition);
+			循环体执行结束后，去判断condition			
+		比较：
+			for 循环次数知道的
+			while 循环次数不确定的
+			do...while 不确定循环次数，但是至少执行一次的			
+			超级for循环 for in 和for of.后面讲
+		
+		</pre>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * Math.radom() 产生[0,1)范围内的小数
+		 * var radomNum = parseInt(Math.radom() * 100)
+		 */
+		for (var i = 1; i <=7; i++) {
+			
+			if (i == 4) {
+				console.log("今天想泡妞，不想上班")
+				continue;
+				
+			}
+			if (i == 6 || i == 7) {
+				//强制跳出循环
+				console.log("今天周末，老子睡觉!")
+				break;
+			}
+			console.log('今天是星期' + i + "正常上班")
+		}
+	</script>
+</html>

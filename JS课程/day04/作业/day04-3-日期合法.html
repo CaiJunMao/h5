@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		请输入日期：<input type="text" id="data" />
+		
+		<input type="button" name="btn" id="btn" value="判断" onclick="isRight()"/>
+	</body>
+	<script type="text/javascript">
+		//日期合法
+		function isRight(iData){
+			//需要先取出字符串中的年月日
+			//var num= iData.replace(/[^0-9]/ig,"");//201526
+			var numStr=iData.match(/\d+/g);//提取字符串中数字，分别存入数组
+			console.log(numStr)//数组，放了三个数字
+			var year = parseInt(numStr[0]);//获取年
+			var month  = parseInt(numStr[1]);
+			var day = parseInt(numStr[2]);
+			console.log(year);//
+			//首先都是整数
+			if(parseInt(year)=== year && parseInt(month)=== month && parseInt(day)=== day){
+				//判断年月日是否正常
+				if(year > 0 && month > 0 && month <=12 && isDay(day,month,year) ){
+					return true;
+					
+				}else{
+					return false;
+				}
+			}
+			
+			
+		}
+		//判断日
+		function isDay(getDay,getMonth,getYear){
+			var nowDay;
+			//console.log("switch之前当前年："+getYear)
+			switch (getMonth){
+				case 1:
+//					nowDay = 31;//省略？最后一个写
+				case 3:
+					nowDay = 31;
+				case 5:
+					nowDay = 31;
+				case 7:
+					nowDay = 31;
+				case 8:
+					//console.log("case当前年："+getYear);
+					nowDay = 31;
+					//console.log("case当前天："+nowDay)
+				case 10:
+					nowDay = 31;
+				case 12:
+					nowDay = 31;
+					break;
+				case 2:
+					if (isRunyear(getYear)) {
+						console.log("case当前闰年："+getYear)
+						nowDay = 29;
+						break;
+					} else{
+						console.log("case当前平年："+getYear)
+						nowDay = 28;
+						break;
+					}
+				default:
+					nowDay = 30;
+					break;
+			}
+			if(getDay <= nowDay){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		//判断闰年
+		function isRunyear(getYear){
+			if((getYear % 4 == 0 && getYear % 100 !==0) || getYear % 400 ===0){
+				//alert(getYear+"是闰年")
+				return true
+			}else{
+				//alert(getYear+"不是闰年")
+				//console.log(getYear%400)
+				return false
+			}	
+		}
+		btn.onclick=function(){
+			//变量名尽量不要与标签id的名相同,两者相当于局部变量与全局变量定义了同名，故取值时会有冲突。
+			var getData = data.value;
+			
+			if(isRight(getData)){//传进去的是字符串
+				alert("日期合法")
+			}else{
+				alert("日期不合法")
+			}
+		}
+	</script>
+</html>

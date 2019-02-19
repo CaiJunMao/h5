@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var inputVal = Number(prompt("请输入一个四位数字"));
+			//限制位数  >999 且<10000,且是整数parseInt(x)===x
+			//整数判断：parseInt(x)===Number(x)
+			var isFour =(
+				parseInt(inputVal/1000) > 0 &&
+				parseInt(inputVal/10000) == 0 && 				
+				parseInt(inputVal)===inputVal)
+			
+			console.log(isFour);
+			console.log(parseInt(inputVal/1000) > 0);
+			console.log(parseInt(inputVal/10000) == 0);
+			console.log(parseInt(inputVal)===inputVal)
+			//var typeVal = typeof(inputVal);
+			if(isFour){
+				alert("OK")
+			}else{
+				alert("输入不正确")
+			}
+		</script>
+	</body>
+</html>

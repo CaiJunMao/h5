@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>day02homework</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var chinese=parseFloat(prompt("请输入语文成绩"));
+			console.log(chinese);
+			var mathCode=parseFloat(prompt("请输入数学成绩"));
+			var engligshCode=parseFloat(prompt("请输入英语成绩"));
+			//进行比较时会有隐式转换
+			//先判断输入值是否合法
+			if(chinese>100 || mathCode>100 ||engligshCode>100 ||chinese<0 || mathCode<0 ||engligshCode<0){
+				alert(输入有误)
+			}else if(chinese>=90 && mathCode>=90 && engligshCode>=90){
+				alert("恭喜你，成绩都在90分以上，妈妈将奖励你一架钢琴");
+			}else{
+				alert("你惨啦，妈妈要打你一顿！");
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="">
+			请输入消费金额：
+			<input type="text" placeholder="金额" id="money"/><br />
+			是否参加优惠换购活动：<br/>
+			1：满50元，加2元换购百事可乐饮料一瓶<br/>
+			2：满100元，加3元换购500ml可乐一瓶<br/>
+			3：满100元，加10元换购5公斤面粉<br/>
+			4：满200元，加10元换购一个苏泊尔炒菜锅<br/>
+			5：满200元，加20元可换购欧莱雅爽肤水一瓶<br/>
+			0：不换购<br/>
+			请选择：<input type="text" value="" id="type"/><br/>
+			<input type="button" id="btn" value="结算"/>
+			
+		</form>
+		<script type="text/javascript">
+			//找标签可以这样找
+			//var inputs =document.getElementsByTagName("input");
+			//var consuMoney =parseFloat(inputs[0].value)
+			//返回的是数组，但是如果是getElementsById这个返回的是惟一的，不是数组
+			btn.onclick = function(){
+				var costMoney=money.value;//输入的消费金额
+				var addMoney;//优惠附加费
+				var needMoney;//优惠资格界限
+				var info;//优惠信息
+				var chosType=parseFloat(type.value)//优惠种类
+				
+				var allMoney;//总金额
+				console.log(costMoney+","+chosType)
+				switch(chosType){
+					case 0:
+						addMoney = 0;
+						needMoney = 0;
+						info="没有选择任何换购活动";
+						break;
+					case 1:
+						addMoney = 2;
+						needMoney = 50;
+						info="成功换购百事可乐饮料一瓶";
+						break;
+					case 2:
+						addMoney = 3;
+						needMoney = 100;
+						info="成功换购50ml可乐一瓶";
+						break;
+					case 3:
+						addMoney = 10;
+						needMoney = 100;
+						info="成功换购5公斤面粉";
+						break;
+					case 4:
+						addMoney = 10;
+						needMoney = 200;
+						info="成功换购一个苏泊尔炒菜锅";
+						break;
+					case 5:
+						addMoney = 20;
+						needMoney = 200;
+						info="成功换购百事可乐饮料一瓶欧莱雅爽肤水一瓶";
+						break;
+				}
+				//console.log(costMoney+"类型："+(typeof(costMoney)))//string
+				//console.log(addMoney+"类型："+(typeof(addMoney)))//number
+				//string+number会成为字符串，需要转为number再加
+				allMoney = addMoney + parseFloat(costMoney);
+				//console.log(allMoney)
+				if(parseFloat(costMoney)!== Number(costMoney) || 
+				parseInt(chosType)!== Number(chosType)){
+					//对消费金额判断数值，对选择优惠类型判断整数
+					alert("输入不合法，请输入数字")
+				}else if(costMoney >= needMoney){
+					alert("本次消费总金额："+allMoney+"\n"+info);//'/n'换行 '\n'空格
+				}else{
+					alert("不好意思，您的消费金额不足，请选择合适的优惠");
+				}
+			}
+		</script>
+	</body>
+</html>

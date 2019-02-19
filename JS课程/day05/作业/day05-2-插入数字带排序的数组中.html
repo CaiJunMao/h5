@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" placeholder="请输入数字" id="numInput"/>
+		<input type="button" name="" id="btn" value="插入" />
+		<!--输入id时，按shist最后键入，会使name也改为该名?-->
+	</body>
+	<script type="text/javascript">		
+		var arr = [99,85,82,63,60]
+		btn.onclick = function(){
+			var numInputValue = numInput,value
+			var numValue = parseInt(numInputValue)
+			for (var i = 0,len = arr.length; i < len;i++) {
+				if (arr[i] < numValue) {
+					arr.splice(i,0,numValue)
+					break
+				}
+				//如果插入是最小的
+				if (i === len -1) {
+					arr.push(numValue)
+					//加进去长度会变，所以for那里不能用i<arr.lengtn,否则无限执行，所以死循环了
+					//所以建议用len 先取得length，这样也节省了每次for时去取arr.length
+					break//为什么不加break会蹦
+				}
+			}
+		}
+		
+	</script>
+</html>

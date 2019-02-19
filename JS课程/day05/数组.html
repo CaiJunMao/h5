@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数组</title>
+	</head>
+	<body>
+		<pre>
+			<h1>数组</h1>
+			基本理解：	
+				数组是指的数据的有序列
+				数组中每个值称之为数组的一个元素，数组的索引是从 0 开始
+				数组中的元素可以是另外一个数组(构成多维数组)
+			进阶理解：arr实际是是数组的引用
+				对于：var arr = ["a", 5, "b"];
+						变量   		数组对象
+			  * 		栈区   		堆区
+			  * 【栈区和堆区】
+			  * 内存中，实际分为很多区域，用来保存不同的数据
+			  * 栈区：基本数据类型保存在这
+			  * 会根据函数结束，自动释放内存
+			  * 堆区：非基本类型（对象）保存在堆区
+			  * 需要程序员手动开启，手动释放
+			  * 
+			  * arr是数组的引用，通过堆区的？
+			特点：
+				数组长度可以动态改变，c语言中数组长度固定，不可改变 int num[10]
+				同一个数组中可以存储不同的数据类型；c语言只能同类型
+				每个数组都有一个**length**属性，java也有length但是c没有
+			数组创建：
+				字面量的方式：var arr = ["a", 5, "b"];					
+				构造函数的方式：var colors = new Array(数组长度);//数组长度可写可不写，反正长度可改变
+					使用构造函数如果只传入了一个Number值，会误认为这个值是长度。则这个值必须 >= 0, 否则会报错
+					new 关键字是可以省略的。  如：Array(5) 
+				注意var colors = [5, 6, 7,]不要在最后一个元素的后面添加逗号，添加逗号虽然语法没有问题，但是在不同的浏览器可能得到不同的结果，标准浏览器中数组的长度为3，ie为4	
+			修改数组长度：
+				通过设置length的值直接修改数组的长度到指定的数值，arr.length = 6; // 修改数组的长度为 6 
+				通过给最后一个元素赋值来动态修改元素的长度，arr[10] = 100;
+				注意：
+					没有赋值的元素默认都为 undefined。
+					缩短数组的长度 ，则下标为 >= 的元素被自动从数组移除
+			
+			数组遍历:
+				for循环（推荐）
+					for(var i = 0; i < arr.length; i++){
+						console.log(arr[i]);
+						}
+				for... in
+					for(var index in arrB){
+					 	console.log(arrB[index]);//10 20 30 40
+					 	console.log(index);//0 1 2 3
+					 }
+					 var可省略，但是不建议
+				for each ( ES5 新增)
+					arrB.forEach( 
+						function(element, index) {
+					 	 	console.log(element);//10 20 30 40
+					 })
+					 调用数组的forEach方法，传入一个匿名函数
+					 参数1--迭代遍历的那个元素  参数2：迭代遍历的那个元素的下标
+			数组常用方法:
+				toString()转换方法 ,arr.toString()//  50,20,10,5,15,6
+					toString()返回由数组中每个值的字符串形式拼接而成的一个以逗号分隔的字符串,用alert（arr）和alert(arr.toString())输出相同
+				join() 方法,arr.join("=")//  50=20=10=5=15=6
+					toString() 方法只能使用逗号连接，而 join() 方法可以使用指定的连接符连接
+				栈方法:入栈(push),出栈(pop) FILO (先进后出)
+					入栈其实就是把新的元素添加到数组的后面，一次可入栈多个 ,返回添加成功后的数组的长度
+						var len = arr.push("志玲");//
+					出栈其实就是把数组中的最后一个元素从数组中移，一次只能出一个,返回移除的这个元素
+						var item = arr.pop();
+					注意:console打印是耗时操作，浏览器执行到console操作时,会先放到后面执行,先去执行后面的不耗时操作，如入栈，出栈等，这导致了打印出来的数组元素可能和本来的不大一样，但是标记的数组长度还是原来的长度，只是打印的长度为出入栈之后的
+				队列方法:添加unshift 移除shift FIFO(先进先出)
+					向队列头部添加元素(unshift) 返回添加成功后队列(数组)的长度
+						var len = arr.unshift("志玲");
+					从队列头部移除元素(shift) 并返回移除的这个元素
+						var firstItem = arr.shift();
+						
+					实际上,栈方法就是对数组尾进行操作,队列方法就是对数组头进行操作
+				数组倒置 arr.reverse(); 
+					倒置操作是对原数组本身做了操作，返回的也是原数组对象，并不是一个新创建的数组
+				查找索引	
+					indexOf(item): 从前面开始向后查找 item 第一次出现的位置,如果找不到元素，则返回 -1
+					indexOf(item, fromBack): 从第二个参数的位置开向后始查找 item 
+					lastIndexOf(item): 从尾部开始向前查找 item 第一次出现的位置
+					lastIndexOf(item, fromForward): 从第二个参数的位置开始向前查找
+				【获取新数组】生成新数组，concat()、slice()对原数组没影响，splice()会影响
+				   * concat():连接两个或多个数组，至少一个参数，参数可以是数组或元素
+				   * 	arr.concat(arrayX,arrayX,......,arrayX)//将arr与其他参数连接起来
+				   * 	var arr =[1,2]
+				   * 	newArr=arr.concat("a","b"+["c"+"d"])//新数组newArr为[1,2,"a","b","c"."d"]
+				   * slice()：截取数组
+				   * 	arr.slice(start,end)
+				   * 	start:必选，开始位置（包含该位置的元素），负数表示从末尾开始，如-1位最后一个元素
+				   * 	end:可选，指定位置（不包含该位置的元素），不写默认到末尾
+				   * 注意：end要大于start，否则截取不到元素
+				   * splice()：添加或删除元素,对原数组产生影响
+				   * 	arr.splice(index,howmany,item1,...,itemN)
+				   * 	index:必写，规定添加、删除的元素下标 ，为0表示不会删除，表示添加也是为0
+				   * 	item:可选，向数组添加新元素
+				   * 	添加：如：arr1.splice(1, 0, "m", "n")、在1位置加m和n
+				   * 	删除：如：arr1.splice(1, 2)//删除2个，1位置开始（包括）
+				   * 	替换：如：arr1.splice(2, 1,"m")//1表示删除一个，后面又有m表示删除后放m在该位置
+				【系统关键字修改数组元素】
+				   * delete 删除内容，但是不影响数组长度,返回true或false
+				   
+				    var result = delete arr5[1]
+		  			console.log("arr5："+arr5)//arr5：1,,3
+		  			console.log(result)//true
+				   * 第一次会报错，刷新就好了?但是我的谷歌不报错
+				【数组排序】
+					arr.shor(sortby)
+					sortby 可选，函数
+					不写时，把每个元素转换成string，按照编码表中的升序顺序排序的，所以是数字时会不按数值排序
+					arr2.sort(sortAsc);传比较函数，让其按照数值大小排序
+					//升序函数
+					function sortAsc(num1, num2){
+					  	return num1 - num2;   //num1 > num2 就返回正数
+					}
+					// 降序函数
+					function sortDesc(num1, num2){
+					  	return num2 - num1; //num1 > num2 就返回负数
+					}
+				【判断数组对象】
+					 * 使用instanceof运算符   alert(arr instanceof Array); //true
+					 * 使用Array.isArray(arr) 方法   alert(Array.isArray(arr));
+		</pre>
+	</body>
+	<script type="text/javascript">
+		var arr =new Array();
+		console.log(arr[0])//undefide
+		var arr2 =new Array(2);
+		console.log(arr2[0])//undefide
+		console.log(arr2)//(2) [empty × 2],表示长度为2，但是元素为空，具体输出元素为undefided
+		//console.log(arr.length)//0
+		arr[0] = 1 ;//
+		//console.log(arr[0])//1
+		//console.log(arr.length)//1
+		//如果只传入了一个Number值
+		var arr3 =new Array(0);
+		console.log(arr3[0])//undefided
+		//var arr4 =new Array(0.1);//报错：Uncaught RangeError: Invalid array length
+		
+		/**
+		  * 变量   数组对象
+		  * 栈区   堆区
+		  * 【栈区和堆区】
+		  * 内存中，实际分为很多区域，用来保存不同的数据
+		  * 栈区：基本数据类型保存在这
+		  * 会根据函数结束，自动释放内存
+		  * 堆区：非基本类型（对象）保存在堆区
+		  * 需要程序员手动开启，手动释放
+		  * 
+		  * arr是数组的引用，通过堆区的？
+		  */
+		 var arrB = [10,20,30,40];
+//		 for(var index in arrB){
+//		 	console.log(arrB[index]);//10 20 30 40
+//		 	console.log(index);//0 1 2 3
+//		 }
+		/**
+		 * for ...each遍历数组
+		 * 调用数组的forEach方法，传入一个匿名函数
+		 * 参数1--迭代遍历的那个元素  参数2：迭代遍历的那个元素的下标,还可以有参数3，表示调用foreach方法的数组本身
+		 */
+		arrB.forEach( function(element, index) {
+			console.log(element);//10 20 30 40
+		})
+		  	
+		 
+		  /**
+		   * 【获取新数组】生成新数组，concat()、slice()对原数组没影响，splice()会影响
+		   * concat():连接两个或多个数组，至少一个参数，参数可以是数组或元素
+		   * 	arr.concat(arrayX,arrayX,......,arrayX)//将arr与其他参数连接起来
+		   * 	var arr =[1,2]
+		   * 	newArr=arr.concat("a","b"+["c"+"d"])//新数组newArr为[1,2,"a","b","c"."d"]
+		   * slice()：截取数组
+		   * 	arr.slice(start,end)
+		   * 	start:必选，开始位置（包含该位置的元素），负数表示从末尾开始，如-1位最后一个元素
+		   * 	end:可选，指定位置（不包含该位置的元素），不写默认到末尾
+		   * 注意：end要大于start，否则截取不到元素
+		   * splice()：添加或删除元素,对原数组产生影响
+		   * 	arr.splice(index,howmany,item1,...,itemN)
+		   * 	index:必写，规定添加、删除的元素下标 ，为0表示不会删除，表示添加也是为0
+		   * 	item:可选，向数组添加新元素
+		   * 	添加：如：arr1.splice(1, 0, "m", "n")、在1位置加m和n
+		   * 	删除：如：arr1.splice(1, 2)//删除2个，1位置开始（包括）
+		   * 	替换：如：arr1.splice(2, 1,"m")//1表示删除一个，后面又有m表示删除后放m在该位置
+		   * 
+		   * 【系统关键字修改数组元素】
+		   * delete 删除内容，但是不影响数组长度
+		   * arr[2].delete//用法错误
+		   * delete arr[2];
+		   * 第一次会报错，刷新就好了
+		   */
+		  var arr5 = [1,2,3]
+		  //var result = arr[2].delete;错误用法
+		  //Uncaught TypeError: Cannot read property 'delete' of undefined
+		  var result = delete arr5[1]//
+		  console.log("arr5："+arr5)//arr5：1,,3
+		  console.log(result)//true
+		   /** 【数组排序】
+		   * 	arr.shor(sortby)
+		   * 	sortby 可选，函数
+		   * 	不写时，把每个元素转换成string，按照编码表中的升序顺序排序的，所以是数字时会不按数值排序
+		   * 	arr2.sort(sortAsc);传比较函数，让其按照数值大小排序
+		   * 	
+		   */
+		  
+		  	//升序函数
+			function sortAsc(num1, num2){
+			  	return num1 - num2;   //num1 > num2 就返回正数
+			}
+			// 降序函数
+			function sortDesc(num1, num2){
+			  	return num2 - num1; //num1 > num2 就返回负数
+			}
+					
+			/**
+			 * 【判断数组对象】
+			 * 使用instanceof运算符   alert(arr instanceof Array); //true
+			 * 使用Array.isArray(arr) 方法   alert(Array.isArray(arr));
+			 */
+	</script>
+</html>

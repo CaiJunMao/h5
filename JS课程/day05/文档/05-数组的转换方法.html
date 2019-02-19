@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数组的转换方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【数组的转换方法】
+		 * 1、toString()
+		 * 2、join()
+		 */
+		var arr = [50, 40, 30, 90]
+		alert(arr) // 50,40,30,90
+		alert(arr.toString()) // 说明arr.toString和直接打印arr效果相同
+		console.log(typeof arr.toString()) //string
+		
+		//=============
+		// toString()只能用逗号链接
+		// join()方法能够使用指定的符号进行连接
+		alert(arr.join("->"))
+		alert(arr.join("$$$"))
+	</script>
+</html>

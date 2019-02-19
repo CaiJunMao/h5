@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="">
+			<input type="text" name="" id="yearVal" value="" placeholder="随机年份"/>
+			<input type="button" name="" id="" value="判断"  onclick="whichYear()"/>
+		</form>
+		<script type="text/javascript">
+			function whichYear(){
+				var year = document.getElementById("yearVal").value;
+				console.log(year);
+				//优先级，老师代码用===，比较严密点
+				if ((year%4==0 && year%100!=0 )|| year % 400 == 0){
+					alert("这一年是闰年")
+				}else{
+					alert("这一年不是闰年")
+				}
+			}
+		</script>
+	</body>
+</html>

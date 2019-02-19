@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		请输入时间：
+		<input type="text" name="" id="iHour" />：
+		<input type="text" name="" id="iMin" />：
+		<input type="text" name="" id="iSec" /><br />
+		点击<input type="button" id="btn" value="点击我"/>显示下一秒时间：<br />
+		<input type="text" name="" id="oHour" />：
+		<input type="text" name="" id="oMin" />：
+		<input type="text" name="" id="oSec" />
+		
+	</body>
+	<script type="text/javascript">
+		btn.onclick=function(){
+			//var inputs document.getElementsByTagName("input")
+			//这样不用执行3次getElementsById("xx")
+			var hour=Number(iHour.value);
+			var min=Number(iMin.value);
+			var sec=Number(iSec.value);
+			console.log(hour+","+min+","+sec+"类型"+typeof(hour))
+			//先判整数，再判范围
+			//因为范围只有0-24，感觉换种判断比较好
+			//用3元运算符纠正用户错误
+			//hour = hour > 23? 23 : hour//当超出23时纠正为23
+			if(parseInt(hour)!==hour ||
+			parseInt(min)!==min ||
+			parseInt(sec)!==sec ||
+			hour>24 || min>59 || sec>59 
+			){
+				alert("请输入合法的整数")
+			}
+			/*
+			else{
+				//秒数自增
+				if(++sec<60){//
+					nSec = sec;
+					nMin = min;
+					nHour = hour;
+					//console.log("执行到这"+nSec+","+nMin+","+nHour+"类型"+typeof(nSec))
+				}else{
+					nSec = 0;
+					if(++min<60){
+						nMin = min;
+						nHour = hour;	
+						//console.log("执行到这"+nSec+","+nMin+","+nHour+"类型"+typeof(nSec))
+					}else{
+						nMin = 0;
+						if(++hour<24){
+							nHour = hour;
+							//console.log("执行到这"+nSec+","+nMin+","+nHour+"类型"+typeof(nSec))
+						}else{
+							nHour=0;
+							//console.log("执行到这"+nSec+","+nMin+","+nHour+"类型"+typeof(nSec))
+						}						
+					}				
+				}				
+			}
+			*/
+			//试试更简洁点
+			else{
+				//不破坏传进来的sec等，而是对nSec等进行操作
+				nSec = sec;
+				nMin = min;
+				nHour = hour;
+				
+				nSec++;
+				if(nSec === 60){
+					nSec = 0;
+					nMin++;
+					if (nMin === 60) {
+						nMin = 0;
+						nHour ++;
+						if (nHour === 24) {
+							nHour = 0
+						}
+					}
+				}
+			}
+			console.log("执行到这"+nSec+","+nMin+","+nHour+"类型"+typeof(nSec))
+			oHour.value=nHour;
+			oMin.value=nMin;
+			oSec.value=nSec;			
+		}
+		//innerHTML html元素内部元素 可以用下面的方式添加新html元素
+		//nextSecond.innerHTML=hour+":"+minute+":"+secsond
+	</script>
+</html>

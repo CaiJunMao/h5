@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	<script type="text/javascript">
+		var hNum=35;//头
+		var fNum=94;//脚
+		var flag=1;
+		//for(;chicken < 35; chicken++)//如果checken已经在前面定义，表达式一可不写
+		for(var i = 1;i <= hNum;i++){
+			//鸡数量设为i，根据问题描述至少有一只
+			if((hNum-i)*4 == (fNum-i*2)){
+				alert("第"+flag+"种可能："+"鸡："+i+"兔子："+(hNum-i))
+				flag++;
+				
+			}
+		}
+	</script>
+		
+	</body>
+</html>

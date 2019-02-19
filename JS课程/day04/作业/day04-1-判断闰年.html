@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" id="year" />
+		<input type="button" name="btn" id="btn" value="判断" onclick="isRunyear()"/>
+	</body>
+	<script type="text/javascript">
+		function isRunyear(){
+			var getYear =Number(year.value);//不输入为0？
+			if (parseInt(getYear)===getYear) {//是整数
+				if((getYear % 4 == 0 && getYear % 100 ===0) || getYear % 400 ===0){
+					alert(getYear+"是闰年")
+				}else{
+					alert(getYear+"不是闰年")
+					console.log(getYear%400)
+				}
+				
+			}else{
+				alert("请输入整数")
+			}
+		}
+	</script>
+</html>

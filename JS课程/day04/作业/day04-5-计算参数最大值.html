@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//产生0--9的随机数  99.99  ceil有小数就进1为整数
+		var ranNum = parseInt(Math.ceil(Math.random( ) * 100 ) % 10)
+		var contNum = 0
+		var arrNum = []
+		do{
+			var num = parseInt(prompt("请输入参数"))
+			contNum++;
+			arrNum.push(num)
+		}while(ranNum != contNum)
+		
+		function contArguments(arrNum){
+			//展开运算符 arguments为函数创建时自动建立的，保存了全部参数值
+			var maxNum = Math.max(...arguments);
+			/**
+			 * 常见的Math函数 ：
+			 * random：  获取随机数
+			 * ceil:  向上取整
+			 * floor:  向下取整
+			 * max:  最大值
+			 * Math没有sum函数
+			 */
+			
+			return maxNum;
+			
+		}
+		//
+		console.log("参数最大值"+contArguments(...arrNum))
+	</script>
+</html>

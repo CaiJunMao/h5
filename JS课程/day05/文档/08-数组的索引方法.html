@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数组的索引方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * indexOf(item): 从前面开始向后查找 item 第一次出现的位置
+			lastIndexOf(item): 从尾部开始向前查找 item 第一次出现的位置
+		 */
+		var arr = ["张三", "李四", "小生养", "王二", "李四", "王二", "赵柳", "小生养"]
+		console.log(arr.indexOf("小生养")) //4
+		console.log(arr.lastIndexOf("王二")) // 2
+		
+		//===================
+		/**
+		 * indexOf(item, fromBack): 从第二个参数的位置开向后始查找 item 第一次出现的位置
+			lastIndexOf(item, fromForward): 从第二个参数的位置开始向前查找 item 第一次出现的位置
+		 */
+		console.log(arr.indexOf("李四", 2)) //4
+		console.log(arr.lastIndexOf("李四", 2)) //1
+	</script>
+</html>

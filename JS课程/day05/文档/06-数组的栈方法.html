@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数组的栈方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var arr = ["张三", "李四", "王二", "麦子", "刘能", "谢广坤"]
+		var len = arr.push("谢大脚") // 入栈
+		console.log(len)
+		//console.log(arr[0])
+		console.log(arr[6])
+		//=================
+		arr.push("刘大脑袋", "赵本山")
+		console.log(arr)
+		//===============
+		// pop()出栈操作，一次只能出栈一个元素
+		var item = arr.pop()
+		//console.log(item)
+		console.log(arr)
+	</script>
+</html>

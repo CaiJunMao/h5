@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数组的长度</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【数组的长度】如何获取数组的长度？
+		 * 数组自带一个叫length的属性。即数组的长度，或者叫
+		 * 数组元素的个数。访问方式：数组名.length
+		 */
+		var arr = [10,20,30,40,50]
+		console.log("数组的长度为" + arr.length)
+		//===============
+		/**
+		 * 【如何修改数组的长度】？
+		 * 一般强类型语言中呢，比如C  数组的长度是固定的
+		 * 一旦创建成功，则不能修改数组的长度
+		 * 但是JS是一种弱类型的语言，数组的长度可以在程序运行期间
+		 * 根据需要冬天地发生改变。也就是说数组的length属性不仅
+		 * 可读，还可以修改。
+		 */
+		var arr = ["asd", 5, "ruew"]
+		console.log(arr.length)
+		arr.length = 6
+		console.log(arr.length)
+		console.log(arr)
+		console.log(arr[5])
+		//==============
+		arr.length = 2
+		console.log(arr.length)
+		console.log(arr)
+		// 【🐷】修改长度为2时候，则下标大于等于数组长度的内容
+		// 会被直接移除
+		//===============
+		// 通过给最后元素赋值的方式来动态修改数组长度
+		var arr = [4,5,6]
+		console.log(arr.length)
+		arr[11] = 67
+		console.log(arr.length)
+		console.log(arr)
+		// 没有初始值的元素默认为undefined
+		console.log(arr[6])
+	</script>
+</html>

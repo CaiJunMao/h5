@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" name="" id="" value="" placeholder="请输入a的值" />
+		<input type="text" name="" id="" value="" placeholder="请输入b的值" />
+		<input type="button" name="" id="submit" value="计算" />
+		<input type="text" name="" id="" value="" placeholder="最大公约数" />
+		<input type="text" name="" id="" value="" placeholder="最小公倍数" />
+	</body>
+	<script type="text/javascript">
+		var inputs = document.getElementsByTagName("input")
+		var submit = document.getElementById("submit")
+		submit.onclick=function(){
+			//获取a和b的值
+			var a = parseInt(inputs[0])
+			var b = parseInt(inputs[1])
+			console.log(a+"和"+b)
+			
+			//调用，求最大公约数
+			var maxVal = maxDivisor(a,b)
+			inputs[3].value = maxVal
+			
+			//调用，求最小公倍数
+			var minVal = minMultiple(a,b)
+			inputs[4].value = minVal
+		}
+		
+		//求最大公约数
+		function maxDivisor(a,b){
+			//辗转相除法
+			var temp 
+			while(b != 0){
+				temp = a % b //余数作为新的b值
+				a = b //b值覆盖前要
+				b = temp 
+			}
+			return a
+		}
+		//求最小公倍数的函数
+		function minMultiple(a,b){
+			//思路： a* b /最大公倍数
+			var temp = maxDivisor(a , b )
+			return a * b /temp
+		}
+	</script>
+</html>

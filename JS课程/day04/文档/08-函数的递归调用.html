@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【函数的递归调用】
+		 * 1、从前有座山   2、镜子里面的镜子  
+		 * 递归是指在函数的内部调用当前函数  
+		 * 自己调用自己
+		 * 使用递归的时候，要满足以下条件：
+		 * 1、一定要有结束条件
+		 * 2、随着递归的进行，应该逐步靠近结束条件
+		 */
+		//递归案例：计算一个数的阶乘
+		// 计算10！= 10 * 9 * 8...* 2 * 1
+		/**
+		 * 10! = 10 * 9!
+		 * 9! = 9 * 8!
+		 * 8! = 8 * 7!
+		 * ....
+		 * 2! = 2 * 1!
+		 * 1! = 1
+		 * @param {Object} num
+		 */
+		function factorial(num){
+			if(num == 1){
+				return 1
+			}
+			return num * factorial(num - 1)
+		}
+		alert("5的阶乘是" + factorial(5))
+	</script>
+</html>

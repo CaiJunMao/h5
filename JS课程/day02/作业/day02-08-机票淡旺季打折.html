@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" name="" id="month" placeholder="月份"/>
+		<select name="" id="roomType">
+			<option value="firRoom">头等舱</option>
+			<option value="secRoom">经济舱</option>
+		</select>
+		<input type="text" name="realCost" id="reaCost" placeholder="机票价" disabled/>
+		<input type="button" name="" id="btn" value="计算" />
+	</body>
+	<script type="text/javascript">
+		var price=4000;
+		var realCost;//实际票价
+//		var isWelcome;//旺、淡季标识
+		btn.onclick=function(){
+			var cosMonth = parseInt(month.value)
+			var cosType = roomType.value;//string
+			if(cosMonth>12 || cosMonth<0 ||parseInt(cosMonth)!==cosMonth){
+				//非法输入,不在1-12之间，或不是整数
+				alert("月份不正确，请重新输入")
+			}
+			else if(cosMonth>=4 && cosMonth<=10){//旺季
+				if(cosType==="firRoom"){
+					realCost = price*0.9;
+					//复合赋值 price *= 0.9;这样可以少定义一个变量
+				}else{
+					realCost = price*0.75;
+				}
+			}
+			else{//淡季
+				//isWelcome=true;
+				if(cosType==="firRoom"){
+					realCost = price*0.6;
+				}else{
+					realCost = price*0.3;
+				}
+			}
+			reaCost.value=realCost;
+		}
+	</script>
+</html>

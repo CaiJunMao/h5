@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	<script type="text/javascript">
+		var flag=0;//获取个数标识.数组下标
+		var num=new Array();
+		for(var i=1;i<=100;i++){//100之间
+			if(i%3==0 && i%5==0){
+				num[flag]=i;
+				flag++;
+				//alert("第"+flag+"种可能："+i);
+			}
+		}
+		//console.log(num);没办法完全输出数组
+		for(var a=0;a<num.length;a++){//?只能<最后一个是什么
+			document.write(num[a]+"\n")
+		}
+	</script>
+		
+	</body>
+</html>

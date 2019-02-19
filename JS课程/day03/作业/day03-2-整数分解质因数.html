@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		请输入要分解为质因数的整数：<input type="text" name="iNum" id="iNum" value="" placeholder="整数"/>
+		<br /><input type="button" name="btn" id="btn" value="分解" />
+	</body>
+	<script type="text/javascript">
+		btn.onclick = function(){
+			var getNum = Number(iNum.value);
+			var flag = 0;//获取个数标识.数组下标
+			var zNum=new Array();
+			var tem = getNum;//中间值，初始值为getNum，之后为getNum整除i后的值
+			if (parseInt(getNum) === getNum) {
+				for (var i = 2; i <= tem; i++) {
+					//console.log(i)
+					//如果能被i整除，将i放进数组中，i--看能不能被剩余的值getNum / i整除，看来需要一个中间值tem
+					if (tem % i === 0) {
+						zNum[flag] = i;
+						tem = tem / i;
+						console.log("数组值"+i+","+zNum[flag])
+						flag ++;
+						
+						i--;//i退一位，看i能否被剩下的数整除，因为后面还会++
+//						
+					}
+				}
+				document.write(getNum+"=")
+				for(var i = 0; i < zNum.length; i++){
+					document.write(zNum[i])
+				}
+			}else{
+				alert("请输入合法的整数")
+			}
+		}
+	</script>
+</html>

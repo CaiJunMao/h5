@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="">
+			<input type="text" name="" id="che" value="" placeholder="语文"/>
+			<input type="text" name="" id="mat" value="" placeholder="数学"/>
+			<input type="text" name="" id="eng" value="" placeholder="英语"/>
+			<input type="button" name="" id="" value="提交"  onclick="countCode()"/>
+			<input type="text" name="" id="allCode" value="" placeholder="总分"/>
+			<input type="text" name="" id="eveCode" value="" placeholder="平均分"/>
+		</form>
+		<script type="text/javascript">
+			//在这里定义的是window对象 如var che
+			function countCode(){
+				//应该在点击事件里去获取文本框的值而不是一开始就获取，不然那样是获取空的
+				var che = document.getElementById("che").value;
+				var mat = document.getElementById("mat").value;
+				var eng = document.getElementById("eng").value;
+				
+				console.log(che+","+mat+","+eng);
+				//这里应该先判断取到的直对不对，再去执行事务
+				//字符串相加不会隐式转换为数字
+				//换行的话符号放后面，提示这里是换行而不是已经写完，如+
+				var allC=parseInt(che)+parseInt(mat)+
+				parseInt(eng);
+				var evrC=allC/3;
+				document.getElementById("allCode").value=allC;
+				document.getElementById("eveCode").value=evrC;
+				
+			}
+		</script>
+	</body>
+</html>

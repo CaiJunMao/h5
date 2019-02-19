@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var aSum = 0;		
+		for (var i = 1; i <= 10; i++) {
+			var sSum = 1;//初始化sSum为1
+			for (var s = 1; s <= i; s++) {
+				//var s = i; s > 1; s--效果相同
+				//sSum = sSum*s;
+				sSum *=s;
+				//注意使用*=要保证定义的值已经赋值，否则会返回NaN
+				
+				console.log(sSum);
+				
+			}
+			aSum += sSum;
+			//console.log(aSum)
+		}
+		document.write("阶乘和为:"+aSum);
+		
+		//？用一层for如何写
+	</script>
+</html>

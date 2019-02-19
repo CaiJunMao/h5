@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function isRunyear(getYear){
+			//var getYear =Number(year.value);//不输入为0？
+			if (parseInt(getYear)===getYear) {//是整数
+				if((getYear % 4 == 0 && getYear % 100 !==0) || getYear % 400 ===0){
+					//alert(getYear+"是闰年")
+					return true
+				}else{
+					//alert(getYear+"不是闰年")
+					//console.log(getYear%400)
+					return false
+				}
+				
+			}else{
+				alert("请输入整数")
+			}
+		}
+		function printRunyear(){
+			for (var i = 1999; i <= 2050; i++) {
+				if(isRunyear(i)){
+					document.write(i+"&nbsp;")
+					console.log(i)
+				};
+				
+				
+				
+			}
+		}
+		printRunyear();
+	</script>
+	
+</html>

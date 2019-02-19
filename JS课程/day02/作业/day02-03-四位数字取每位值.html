@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var inputVal = prompt("请输入一个四位会员号");
+			//参照hw2，先判断是整数和四位数
+			//parseInt(x)!==Number(x) 判断整数
+			//比较符有隐式转换
+			var isFour =(
+				inputVal>= 1000 &&
+				inputVal < 10000 && 				parseInt(inputVal)===Number(inputVal)
+			);
+			console.log(isFour);
+			//var typeVal = typeof(inputVal);
+			if(isFour){
+				//1002 以下是取各位值的一般方法
+				var furthVal = inputVal%10;//个位 2
+				var thirdVal = parseInt((inputVal/10)%10);//0
+				var secondVal = parseInt((inputVal/100)%10);//0
+				var firstVal = parseInt(inputVal/1000);//1
+				console.log(furthVal+"和"+thirdVal+"和"+secondVal+"和"+firstVal)
+				if((furthVal+thirdVal+secondVal+firstVal)>=20){
+					alert("您是幸运会员")
+				}else{
+					alert("您不是幸运会员")
+				}
+				
+				
+			}else{
+				alert("输入的数字不是4位数")
+			}
+		</script>
+	</body>
+</html>

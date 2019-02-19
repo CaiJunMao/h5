@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 1、匿名函数就是一个没有名字的函数，匿名函数除了没有函数名
+		 * 以外，和普通函数没有任何区别
+		 * 2、如果想要在其他地方调用匿名函数，则应该声明一个变量
+		 * 并将这个匿名函数赋值给这个变量。在其他地方就可以把变量名
+		 * 作为函数名来使用。
+		 * 3、可以将这个变量名作为函数名来调用，传递参数、方法返回值
+		 	和普通函数是一样的。
+		 * */
+		function fun1(fun){
+			if(typeof fun == 'function'){
+				fun()
+			}
+		}
+		// 调用函数
+		fun1(function(){
+			alert("我是一个匿名函数！")
+		})
+		//==========
+		var ret = function(){
+			console.log("我还是一个匿名函数")
+		}
+		ret();
+		//============
+		(function() {
+			alert("匿名函数立即执行")
+		})();
+	</script>
+</html>

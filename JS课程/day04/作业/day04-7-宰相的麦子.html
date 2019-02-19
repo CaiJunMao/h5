@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var begin = 1;//格数
+		var sum = 0;
+		var wheat = 1;//麦子数
+		var result = function(){
+			if(begin > 64){
+				alert("宰相的麦子数一共："+sum)
+				return;
+			}
+			//当前格麦子数
+			sum = sum + wheat
+			wheat *= 2//每次麦子数翻倍
+			//计算下一格麦子数
+			begin++;
+			result(begin);
+		}
+		result();
+	</script>
+</html>

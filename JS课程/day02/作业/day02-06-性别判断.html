@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="">
+			<input type="text" placeholder="性别" id="sex"/>
+			<input type="button" value="判断" onclick="whichSex()"/>
+		</form>
+		<script type="text/javascript">
+			function whichSex(){
+				var sex=document.getElementById("sex").value;
+				if(sex==="男"){
+					alert("性别为男")
+				}else if(sex==="女"){
+					alert("性别为女")
+				}else{
+					alert("请输入男或女")
+				}
+			}
+		</script>
+	</body>
+</html>

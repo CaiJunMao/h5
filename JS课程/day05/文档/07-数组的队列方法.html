@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数组的队列方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var arr = ["张三","李四", "王二","麻子"]
+		// 队列的头部：张三
+		// 队列的尾部：麻子
+		
+		// unshift()方法是向队首添加元素
+		// shift()方法是将队首元素删除、移除
+		var firstItem = arr.shift()
+		console.log(firstItem)
+		//===============
+		var len = arr.unshift("王小蒙")
+		console.log(len)
+		console.log(arr)
+		//==============
+		// 数组的倒置方法
+		var arr2 = ["张三","李四", "王二","麻子"]
+		/**
+		 * 【数组的倒置方法】倒置操作其实是对原数组本身进行操作
+		 * 返回的也是原数组对象，并不是一个新建数组
+		 */
+		arr2.reverse()
+		console.log("数组倒置后：" + arr2)
+	</script>
+</html>

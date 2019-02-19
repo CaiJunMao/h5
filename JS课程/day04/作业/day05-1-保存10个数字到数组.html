@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" placeholder="请输入数字"/>
+		<input type="button" name="" id="save" value="保存" />
+		<!--输入id时，按shist最后键入，会使name也改为该名?-->
+	</body>
+	<script type="text/javascript">		
+		var inputs = document.getElementsByTagName("input");
+		var num;
+		var numArr = new Array();
+		//for(var i = 0; i < 10; i++ ){
+		var ocFlag = 0 ;	
+		//点击一次，执行保存一次到数组
+		save.onclick = function saveNum(){	
+			//点击函数放在for循环里，不会等你点击一次再进行下次for
+			//每点击一次，获取一次输入框的值
+			//num = inputs[0];
+			//console.log(inputs[0])//输出标签，我们要拿的是值
+			num = inputs[0].value;
+			//console.log(inputs[0].value)//1
+			//numArr[ocFlag] = num;
+			//使用push也可以，每次在数组头加一个，这样
+			numArr.push(num);
+			inputs[0].value =""//清空输入框
+			ocFlag++;
+			printNum(ocFlag,numArr);
+			//console.log(i)
+			//console.log("for循环中："+numArr[0]);
+		}
+		//10次，输出数组
+		function printNum(flag,num){//需要声明这是数组？num[]会报错
+			console.log(num);
+			if(flag == 10){
+				alert("已经到十个了")
+//				for(var i = 0;i < flag; i++){
+//					document.write(num[i]+"&nbsp;&nbsp;")
+//				}
+				num.forEach(function(element, index){
+					document.write(element+"&nbsp;&nbsp;")})
+			}
+		}
+		//}
+		//console.log(numArr);
+		
+	</script>
+</html>

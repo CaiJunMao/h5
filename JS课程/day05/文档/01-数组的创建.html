@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数组的创建</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//【字面量的形式创建数组】
+		// 创建了一个长度为4的字面量数组，初始化了4个元素的值
+		var colors = ["red", "blue", "green", "yellow"]
+		//alert("数组的长度为" + colors.length)
+		// 定义一个空数组
+		var colors = []
+		//alert("数组的长度为" + colors.length)
+		var colors = ["red", "green", "blue",]
+		//alert("数组的长度为" + colors.length)
+		// 标准浏览器中数组长度为3
+		// IE当中解析出来是4
+		//==============
+		// 【构造方法的形式创建数组】
+		// 创建一个长度为0的数组
+		var colors = new Array()
+		alert(colors.length)
+		// 创建一个长度为5的数组
+		var colors = new Array(5)
+		var colors = Array(6)
+		var colors = new Array("red", "green", "blue",)
+		//================
+		var arr = new Array()
+		// 变量     数组对象
+		// 栈区      堆区
+		/**
+		 * 【栈区和堆区的关系】
+		 * 内存当中，实际上分为很多个区域，分别用来保存不同的数据
+		 * 其中非常重要的两个区域：堆区和栈区
+		 * 栈区： 基本数据类型都保存在栈区
+		 * 会根据函数的结束，而自动释放内存
+		 * 堆区：非基本数据类型(对象)保存在堆区
+		 * 需要程序猿手动开辟，手动释放。
+		 * new 其实就是在堆区开辟一块内存空间，用来存储对象
+		 * arr是数组的引用，通过栈区的一般用来访问堆区的对象
+		 * 因此，new是返回堆区对象的引用
+		 */
+	</script>
+</html>
