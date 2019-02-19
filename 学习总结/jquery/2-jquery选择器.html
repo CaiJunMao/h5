@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery选择器</title>
+	</head>
+	<body>
+		<h1>jQuery选择器</h1>
+		<pre>
+			jquery选择器：
+			 	其实就是css选择器，加双引号放进$()中， 注意返回的是jquery对象
+			 	简单选择器
+			 		id选择器 var $box = $("#box");
+			 			var $a = $("a#contemt")//content为id名
+			 		类选择器：var $link = $(".myLink");
+			 		标签：var $a = $('a');
+			 			var $a = $("a.contemt")//content为类名
+			 	进阶选择器
+			 		群组选择器(或者叫并集选择器) ,
+			 			var $elements = $(".box,#toBaidu,h1");
+			 		后代选择器  空格
+			 		 	var $as = $("p a")
+			 		通配符选择器 * 获取的是元素节点，文本节点和注释节点不算
+			 			var $all = $("*");
+			 	高级选择器
+			 		【后代选择器（空格）】和【find方法】 儿子孙子一起找
+			 			var $allLi1 = $(".box li");
+			 			var $allLi2 = $(".box").find("li"); 
+			 			可以用链式写法
+			 			var $allLi2 = $(".box").find("li").find("a")
+			 			相当于
+			 			var $allLi1 = $(".box li a");
+			 			更改
+			 			var $allLi2 = $(".box").find("li").find("a").html("改a中文字")
+			 			加参数，表示指定找某种后代，不加表示全部后代
+			 		【子元素选择器（>）】和【children方法】只找直接儿子（不找孙子）
+			 			var $divs = $(".box>div"); 
+			 			var $children = $(".box").children();
+			 			加参数，表示指定找某种孩子，不加表示全部孩子
+			 			
+			 		Next选择器( + )和next方法（紧邻的下一个（参数）兄弟：弟弟）
+			 			var $nextDiv1 = $(".box .item2 + .item3");
+			 			var $nextDiv2 = $(".box .item2").next(".item3");
+			 			有参数，则这个指定参数元素必须要存在，否则找出来为空，如这里.box .item2 + .item3，假如实际紧挨着的是p，则，返回为空
+			 			
+			 			如果不指定参数，则找紧挨的下一个兄弟
+			 			var $nextDiv1 = $(".box .item2 + );
+			 			var $nextDiv2 = $(".box .item2").next();
+			 		nextAll选择器( ~ )和nextAll方法（所有（参数）兄弟：弟弟）
+			 			var $divs = $(".item2~div");
+			 			var $divss = $(".item2").nextAll("div");
+			 			有参数，找指定的兄弟
+			 			无参数，表示后面的所有兄弟元素
+						var $divs = $(".item2~");
+						var $divss = $(".item2").nextAll();
+			 		prev方法（上一个兄弟）和prevAll方法（之前的全部兄弟：哥哥）
+			 			var $prev = $(".item2").prev("div");
+			 			
+			 			var $prevAll = $(".item5").prevAll("div");
+			 			同样可以加参数和不加参数。
+			 		
+			 		【siblings方法】所有兄弟：哥哥加弟弟
+			 			var $sibling = $(".item2").siblings();
+			 	
+			 	属性选择器 用[]
+			 		有id属性的所有元素
+						var $ids1 = $("[id]")
+					id为id4的元素，这里id4不用再用双引号括起来
+						var $ids3 = $("[id=id4]");
+					id不是box的，没有id属性的也算
+						var $ids4 = $("[id!=box]");
+					id以b开头的(正则表达式中有这个^符号，行首匹配)
+						var $ids5 = $("[id^=b]");
+					id以c结尾的(正则表达式中有这个$符号，行尾匹配)
+						var $ids5 = $("[id$=c]");
+					id包含b的(*号表示包含的意思)
+						var $ids6 = $("[id*=b]");
+					class包含单词bb的(~) (针对class可能有多个类名的情况)
+						var $ids6 = $("[id~=bb]");//abbc不算，只有bb作为一整个名字的才算
+				过滤选择器
+					语法和css中的伪类的写法一样，都是用：开头	
+					基本过滤选择器：
+						//第一个div
+						var $first = $("div:first");
+						// 最后一个div
+						var $last = $("div:last");
+						// 索引是0的div
+						$("div:eq(0)");  // equal
+						//索引(下标index)大于0的div
+						$("div:gt(0)"); // great than
+						//索引小于3的div
+						$("div:lt(3)"); // little than
+						//索引是偶数的div
+						$("div:even");
+						// 索引是奇数的div
+						$("div:odd");
+						//class属性不是box的div
+						$("div:not(.box)";
+						//获取所有的标题元素   h1 h2 ...
+						$(":header");
+						//获取【当前取得焦点的元素】
+						$(":focus");
+					内容过滤选择器
+						:contains(text) 含有文本内容为text的元素
+							$("div:contains(选我)");
+							//选取包含文本 "选我" 的div元素。
+							//如果div的子元素满足，那么这个div也算。
+						:empty 不包含子元素或文本的元素
+							$("div:empty")
+							//对于单标签p,br这些，肯定是能找到的
+						:parent 含有子元素或文本的元素
+							$(":parent")
+						:has(selector) 含有指定selector的元素
+							$("div:has(.item2)")
+							//选取后代 中有.item2的div元素
+					可见性选择过滤器
+						:hidden 
+							选取所有不可见的元素，有以下几种情况：
+								设置为 display:none
+								input的type="hidden" 的表单元素
+								Width 和 height 设置为 0
+								隐藏的父元素（同时隐藏所有子元素
+								head,meta,title,style,script这些默认不可见
+						:visible 
+							注意：visibility:hidden，属于:visible,
+							但是div hidden="hidden">2/div>这样相当于display="none"(hidden是h5新增的全局属性)
+							选取所有可见的元素
+					子元素过滤选择器   
+						都需要满足两个条件：在父元素的子元素中，指定的标签
+						:nth-child(index/even/odd/equation)//下标，奇偶数，倍数（3n,表示3的倍数的下标）
+							对n的理解：n >= 0，
+								对nth-child(-n+2)中，因为下标最小为1，且n为正数，所以实际(-n+2)<=2,即表示下标1或2
+								对nth-child(n+3)，同理因n>=0，n+3 >= 3,所以表示第三个到后面所有的下标
+							匹配其父元素下的第N个子或奇偶元素，
+							//匹配下标，从1开始
+							$("p:nth-child(2)")
+								//从p元素的父元素的所有子元素中查找。如果第2个元素是p，则返回这个p元素，
+								//如果不是p则不返回
+								和 基本过滤选择器eq很像,但是eq索引从0开始，而它从1开始
+							//正数3的倍数
+							$("li:nth-last-child(3n)").css({
+								backgroundColor: "red"
+							})
+								// 选中正数3的倍数的元素
+							//前两个-n+2
+							$("li:nth-child(-n+2)").css({
+								backgroundColor: "red"
+							})
+								// 选中li的父元素的子元素中,前两个元素,标签名为li的元素,即：前两个中哪个不是li就哪个不选
+							//不选前两个，第三个开始往后选n+3
+							$("li:nth-child(n+3)").css({
+								backgroundColor: "red"
+							})
+								// 不选li的父元素的子元素的前两个元素，从第三个开始选，且标签名必须为li
+								
+						:nth-last-child(...)	类似:nth-child，只是都从后面开始往前算
+							//倒数3的倍数
+							$("li:nth-last-child(3n)").css({
+								backgroundColor: "red"
+							})
+								// 选中倒数3的倍数的元素
+							//倒数第2
+							$("li:nth-last-child(2)").css({
+								backgroundColor: "deeppink"
+							})	
+								// 匹配li的父元素中倒数第2个名为li的子元素
+							//末尾两个-n+2
+							$("li:nth-last-child(-n+2)").css({
+								backgroundColor: "red"
+							})
+								//选中li的父元素的子元素中末尾两个元素中的标签名为li的元素
+						:first-child
+							匹配li的父元素的第一个孩子，要求它的标签名必须为li，
+							如果第一个儿子的标签名不为li，那么不匹配
+							$("li:first-child").css({
+								backgroundColor: "pink"
+							})
+						:last-child
+							类似:first-child
+						:only-child
+							类似：first-child，只有父元素仅这么一个指定元素才匹配
+							父类元素仅仅有一个子元素，而且该子元素的标签名为li才能匹配；
+							如果有其他的元素存在，即便不是li元素，那么也不算是独生子。匹配不到任何的元素
+							$("li:only-child").css({
+								backgroundColor: "red"
+							})
+					
+					表单选择器
+						//获取所有的input、button、select、textarea
+						$(":input");
+						//选取所有的单行文本框 (type=text)
+						$(":text");
+						//以下都是同:text，选取对应的
+						$(":password");
+						$(":radio");
+						$(":checkbox");
+						$(":submit");
+						$(":button");
+		</pre>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js引入</title>
+		<!--1外部引入js -->
+		<!--sc 选第三个-->
+		<!--<script src="first.js" type="text/javascript" >
+			alert("加了也不会执行");
+			//注意引入的js，这对script标签内部加了js代码也不会执行
+		</script>-->
+		<!--script标签内部type必写，
+			推荐使用：text/javascript 传统写法，兼容性好
+			type其他可写属性：
+			application/javascript 标准写法，存在兼容性问题
+			type="text/x-javascript"：x前缀表示这是实验性的，不是标准的类型。 
+			其中x就是experiment的简写，代表实验阶段。
+			我们以后的代码统一用：type="text/javascript"
+			
+		-->
+	</head>
+	<body>
+		<h1>js三种引入方法</h1>
+		<pre>
+			1、外部引入js
+				script src="first.js" type="text/javascript" >
+					alert("加了也不会执行");
+					//注意引入的js，这对script标签内部加了js代码也不会执行
+				/script>
+			2、内部使用js
+				script type="text/javascript">
+					alert("内部执行js");
+				/script>
+			3、html标签内部使用js
+				a href="javascript:alert('欢迎你')">点击说欢迎/a>
+		</pre>
+		<!--2、内部使用js-->
+		<script type="text/javascript">
+			//alert("内部执行js");
+		</script>
+		<!--3、html标签内部使用js-->
+		
+		<!--<a href="javascript:alert('欢迎你')">点击说欢迎</a>-->
+		<!--注：双引号内部要用单引号，否则执行不了-->
+		<!---->
+	</body>
+</html>

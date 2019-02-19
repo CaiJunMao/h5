@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>正则表达式</h1>
+		<pre>
+			正则表达式的创建
+				1、var reg = new RegExp("box","gi")
+				 * 参数1：模式 字符串形式
+				 * 参数2：模式修饰符 JavaScript中共有3种模式修饰符：g i m
+				 	g: global 全局匹配 
+				 		每次匹配后，下次匹配在匹配到的位置之后向后匹配
+				 		如果匹配不到，则下次匹配从头匹配
+				 		如果不写g则只匹配一次，一旦匹配成功，则不会再次匹配
+				 	i：不区分大小写
+				 	m：多行匹配
+				2、直接量 var reg2 = /box/gi
+			正则表达式方法
+				test（）方法
+					 * 返回true或false
+					 注意：test（）会影响下次test,因为lastindex变化了，一般都是一次test一个
+					var reg = new RegExp("box","gi")
+					var str = "aBoxb"
+					//进行匹配
+					var result = reg.test(str)
+				exec()方法
+					 * 返回一个含index(源字符串中的索引)和input(源字符串)的特殊数组,
+					 但是一次只含一个匹配到的字段
+					 * 只有对有捕获组（加括号那种，以后讲）才会含多个字段
+					 * var pa = /girl(Girl)/gi;
+					 * ()内的内容就是第1组(Girl)。完整整个表达式可以看成第0组girlGirl。将来对应着匹配结果数组的下标
+					 * 循环输出 每次返回的都是新数组，里面放一个box
+					 * while(result = reg.exec(str)){
+						console.log(result[0])
+					}
+				常用正则表达式：
+					电话检测 * 1[345782]\d{9}$/g
+					 邮箱检测 
+					 	/^([a-zA-Z0-9_\.\-]+)@([a-zA-Z0-9_\.\-]+)\.([a-zA-Z]{2,4})$/
+					 	/^([\w\.\-]+)@([\w\.\-]+)\.([\w]{2,4})$/
+				对一些规则的理解：
+					^表示行首，后面的小括号内容置于行首
+					$表示行首
+					|表示或者
+					小括号表示捕获组，也可以用作对括号内一整个定义规则，比如([\w]{2,4})$，这里规定了[\w]{2,4}必须作为行尾
+					中括号表示匹配括号内字符
+					大括号表示最少几个最多几个
+					\.表示转义.的含义，因为点本来表示匹配除换行符外的任意字符，这里只是想拿这个点来匹配
+					+表示多个
+				支持正则表达式的字符串方法
+				  * search
+					  * 返回第一个匹配项的索引
+				  * match
+					  * 返回匹配的字符串数组
+					  * 注意虽然支持正则表达式，但是对捕获组，也就是加括号那种无效
+					  exec()方法的作用是一样的，但是match会一次性把所有的匹配放在一个数组中，全部返回
+				  * replace 替换
+					  * 参数一为正则表达式，第二个参数为将替代入的字符
+				  * split
+					  * 返回切割好的字符串数组
+					例：
+						var reg = /\d/gi//数字
+						var s = "131asa133asg"
+						alert(s.search(reg)); 
+						alert(s.match(/abc/gi));	// Abc,aBc
+						alert(s.replace(/[ab]/gi, "x"));/把a或b替换成x
+						var ss = s.split(/[0-9]+/gi);	//用1个或多个数字切割。   Abc,a
+		</pre>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 正则表达式的创建
+		 * 1、new
+		 * 参数1：模式 字符串形式
+		 * 参数2：模式修饰符
+		 * g:global 全局配偶 i不区分大小写 m：多行匹配
+		 * g:每次匹配后，下次匹配在匹配到的位置之后向后匹配
+		 * 如果匹配不到，则下次匹配从头匹配
+		 * 如果不写g则只匹配一次，一旦匹配成功，则不会再次匹配
+		 */
+		var reg = new RegExp("box","gi")
+		var str = "aBoxb"
+		//进行匹配
+		var result = reg.test(str)
+		console.log(result)//
+		console.log(reg)///box/gi
+		
+		/**
+		 * 2、直接量
+		 * 
+		 */
+		var reg2 = /box/gi
+		/**
+		 * test（）方法
+		 * 返回true或false
+		 */
+		var reg3 = /girl/g
+		var s = "dsfagirlajkgs"
+		//reg.lastIndex属性用于规定下匹配的起始位置
+		console.log(reg3.lastIndex)//0
+		console.log(reg3.test(s))//true
+		console.log(reg3.lastIndex)//8 找到了下一次从第9个开始找
+		console.log(reg3.test(s))//false
+		console.log(reg3.lastIndex)//0 找不到变为0，表示下次从第一个开始找
+		reg3.lastIndex =8
+		console.log(reg3.lastIndex)//8说明可手动改检索位置
+		/**
+		 * exec()方法
+		 * 返回一个含index(源字符串中的索引)和input(源字符串)的特殊数组,但是一次只含一个匹配到的字段
+		 * 只有对有捕获组（加括号那种，以后讲）才会含多个字段
+		 * var pa = /girl(Girl)/gi;
+		 * ()内的内容就是第1组(Girl)。完整整个表达式可以看成第0组girlGirl。将来对应着匹配结果数组的下标
+		 * 循环输出
+		 * while(result = reg.exec(str)){
+			console.log(result[0])
+		}
+		
+		 */
+		var reg = /box/gi
+		var str = "boxsbOXadBOXAFagbox"
+		var result = reg.exec(str)
+		console.log(result)//Array实例
+		//判断ins
+		//console.log(result.instanceof Array)
+		//每次返回的都是新数组，里面放一个box
+		console.log(reg.exec(str))
+		console.log(reg.exec(str))
+		console.log(reg.exec(str))
+		console.log(reg.exec(str))//null
+		console.log()
+		//捕获组
+		var pa = /girl(Girl)/gi;	
+		var test = "girlGirl abdfjla Girlgirl fal girl";
+		var girls;
+		while(girls = pa.exec(test)){
+	      //匹配之后，数组的第0个元素对应的这第0组的匹配结果，第1个元素对应着第1组的匹配结果
+			for (var i = 0; i < girls.length; i++) {
+				console.log(girls[i]);
+			}
+			console.log("-------------");
+		}
+		/**
+		 * 电话检测
+		 * 1[345782]\d{9}$/g
+		 * 邮箱检测
+		 */
+		var reg = /1[345782]\d{9}$/g/
+		console.log(reg.test("189288312"))//false
+		//lichaozheng.g@163.com
+		var reg = /\w+@.+[.](com|cn)/gi
+		console.log(reg.test("aaaaaaa@abc.com.cn"))//true
+		var reg = /\w+@.+[.](com|cn)$/gi
+		console.log(reg.test("aaaaaaa.g@163.com"))//true
+		//第一个点表示匹配除换行符外的任意字符，第二个点写在中括号里表示具体的字符
+		//|表示或者，两个都有也是对的
+		//\w 匹配字母和数字及_ 和？点
+		//test（）会影响下次test,因为lastindex变化了，一般都是一次test一个
+		var reg = /\w+@.+[.](com|cn)$/gi
+		console.log(reg.test("aaa#￥%……aaaa.g@163.com"))//true
+		//简单邮箱
+		//^表示行首，后面的小括号内容置于行首
+		//\.表示转义.的含义，因为点本来表示匹配除换行符外的任意字符，这里只是想拿这个点来匹配
+		//中括号表示匹配括号内字符
+		//大括号表示最少几个最多几个
+		var pattern = /^([a-zA-Z0-9_\.\-]+)@([a-zA-Z0-9_\.\-]+)\.([a-zA-Z]{2,4})$/;
+		var pattern = /^([\w\.\-]+)@([\w\.\-]+)\.([\w]{2,4})$/;
+		/**
+		  *支持正则表达式的字符串方法
+		  * search
+		  * 返回第一个匹配项的索引
+		  * match
+		  * 返回匹配的字符串数组
+		  * 注意虽然支持正则表达式，但是对捕获组，也就是加括号那种无效
+		  * replace 替换
+		  * 参数一为正则表达式，第二个参数为将替代入的字符
+		  * split
+		  * 返回切割好的字符串数组
+		  */
+		 var reg = /\d/gi//数字
+		 var str = "131asa133asg"
+		 console.log(str.replace(reg,"*"))//遇到的数字替换为*
+		 console.log(str.replace(reg,""))//遇到的数字替换为空字符串，使其隐藏
+		 //\1表示匹配两个重复的字符，\1+表示匹配重复两次以上的字符
+		 //$1表示保留一次，即匹配到的符合reg的每一段中的重复字符替换为单个字符,$2无效，就当是replace的特殊用法吧
+		 var str2 ="我我我爱爱你"
+		 var reg = /(.)\1+/gi
+		 console.log(str2.match(reg))//我我我  爱爱
+		 console.log(str2.replace(reg,"$1"))//我爱你
+		 
+		 var reg = /(.)\1/gi
+		 console.log(str2.match(reg))//我我 爱爱
+		 console.log(str2.replace(reg,"$1"))//我我爱你
+		 
+		  var reg = /(.)/gi
+		   console.log(str2.match(reg))//我  我  我  爱  爱  你，匹配到的是单个我，所以每次拿我去$1（保留一次），导致保留了每一个我
+		   console.log(str2.replace(reg,"$1"))//我我我爱爱你
+	</script>
+</html>

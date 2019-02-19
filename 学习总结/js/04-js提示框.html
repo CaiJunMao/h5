@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js提示框</title>
+	</head>
+	<body>
+		<!--考试会出现，包括说明他们的区别-->
+		<h1>js提示框,调试输出的常用API</h1>
+		<pre>
+			考试会出现，包括说明他们的区别
+			1、alert("警告框");
+				警告框经常用于确保用户可以得到某些信息。
+				警告框出现后，用户需要点击确定按钮才能继续进行操作
+			2、confirm("确认框");
+				 确认框用于使用户可以验证或者接受某些信息
+				 当确认框出现后，用户需要点击确定或者取消按钮才能继续进行操作。
+				如果用户点击确认，那么返回值为 true。如果用户点击取消，那么返回值为 false  
+			3、prompt("提示框/输入框");
+				提示框经常用于提示用户在进入页面前输入某个值
+				 当提示框出现后，用户需要输入某个值，然后点击确认或取消按钮才能继续操纵 
+				 如果用户点击确认，那么返回值为输入的值。如果用户点击取消，那么返回值为 null
+				 Number(null)->0，但是用parseInt(null)->NaN
+				 
+		</pre>
+	<script type="text/javascript">
+		//alert("警告框");
+		/*
+		警告框经常用于确保用户可以得到某些信息。
+		警告框出现后，用户需要点击确定按钮才能继续进行操作
+
+		  */
+		// var checkRetVal=confirm("确认框");
+		 //确认框有返回值 false true
+		 /*
+		  确认框用于使用户可以验证或者接受某些信息
+		  当确认框出现后，用户需要点击确定或者取消按钮才能继续进行操作。
+		如果用户点击确认，那么返回值为 true。如果用户点击取消，那么返回值为 false  
+		  * */
+		 
+		 //console.log(checkRetVal);
+		 //var tShiKuang=prompt("提示框");
+		 console.log(tShiKuang);//null
+		 console.log(parseInt(tShiKuang));//null用parseInt转为NaN
+		 console.log(Number(tShiKuang));//用Nuber转为0
+		 //取消为null，确认为输入的值
+		 /*
+		  提示框经常用于提示用户在进入页面前输入某个值
+		 当提示框出现后，用户需要输入某个值，然后点击确认或取消按钮才能继续操纵 
+		 如果用户点击确认，那么返回值为输入的值。如果用户点击取消，那么返回值为 null
+		  * */
+		 console.log("正在向控制台打印数据：哈哈哈");
+		 //注释：/**加回车
+		 /**
+		  * 
+		  */
+	</script>
+	</body>
+</html>

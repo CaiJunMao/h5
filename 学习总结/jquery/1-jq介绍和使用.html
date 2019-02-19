@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jq介绍和使用</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" ></script>
+	</head>
+	<body>
+		<h1>介绍和使用</h1>
+		<pre>
+			基本认识：
+				jQuery是一个快速、简洁的【JavaScript框架】，
+				是继【Prototype框架】之后又一个优秀的JavaScript代码库（*或JavaScript框架*）说成库比较准确
+				宗旨是“write Less，Do More”
+				封装JavaScript常用的功能代码，提供一种简便的JavaScript设计模式
+				核心特性：
+					链式语法和短小清晰的多功能接口
+					高效灵活的css选择器
+					便捷的插件 扩展机制和丰富的插件
+					兼容各种主流浏览器
+				jquery官网		http://jquery.com/
+				目前最新的是3.3.1版本。有【压缩版本】（带min）和【不压缩版本】。不压缩版本一般用于开发阶段，压缩版本用于生产环境
+			使用：
+				1、先导入jquery库
+					本质还是js文件，像外部js一样导入即可，一般放在head中，注意路径一般别手打
+				 script src="./libs/jquery-3.1.1.js" type="text/javascript">/script>
+				2、入口：相当于js的onlaod
+					写js代码一般等到整个页面加载完成之后，才去执行js操作，尤其涉及到对dom的操作
+					 原生的js的入口：
+					 	document.onload / window.onload = function(){xxx}
+					 jquery入口：
+						 $(document).ready(function () {
+							//jquery代码
+						});
+						可以再简写：
+						$(function () {
+							
+						});
+						onload和JQuery中ready方法的区别，必考
+						1. 执行时机：onload事件必须等页面完全加载完毕后才能执行，加载包括图片、视频等各种资源；
+							ready当页面节点加载完毕后就可以执行。比onload要早一点。
+						2. 添加个数：onload事件只能添加一个，如果添加了多个，则最后执行的onload事件会覆盖前边的事件;
+							ready事件可以添加多个，且互相之间不会覆盖。（onload事件和ready时间之间也不会互相覆盖）
+						3. 简化写法：onload没有简化写法；ready事件可以简化为:$(function(){});
+				3、在入口内写jquery语句
+					$ 是【 jQuery 对象】的简称。$ === jQuery  $()  === jQuery() 
+					 使用JQuery获得的是JQuery对象，使用原生js获得的是DOM对象
+					 Jquery对象的变量一般用$开头的写法来表示
+					 jquery对象返回的是对象集合,但并不是Array的子类
+					 jquery和dom对象互转：
+						 1、jquert->dom
+						 	(1)a对象.get(index)//jquery对象返回的是对象集合
+						 	(2)a对象[i]
+						 2、dom->Jquery
+						 	$(元素dom对象)	
+		</pre>
+	</body>
+</html>

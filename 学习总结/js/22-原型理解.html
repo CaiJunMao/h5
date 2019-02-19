@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>原型理解</h1>
+		<pre>
+			基本认识：
+				任何函数，只要声明就有默认的prototype属性，表示函数的原型（指向该函数的对象原型，
+				这个原型在函数声明时创建）,通过构造函数.prototype可以修改原型对象
+				对于构造函数（使用new来调用，以创建对象的这种函数），
+				创建对象时，该对象会有一个不可访问的属性[prototype],指向构造函数的原型对象
+				通过变量只能只能访问原型中的属性值，不能去修改原型中的属性值，
+			 	实际上我理解的是这样的：
+				 	 准确来说，通过对象，
+				 	 对原型中是基本类型的属性值，只能访问不能修改，如上面的name属性
+					是当原型对象的属性值为引用类型的数据值时，
+					通过实例对象修改属性值就可能引起原型对象的属性值发生变化，如上面的girls数组
+					基本类型的数据值有5种：null、undefined、number、boolean和string
+					引用类型的数据值往大的说就1种，即Object类型。
+					往细的说有：Object类型、Array类型、Date类型、Regexp类型、Function类型等
+				个别浏览器中，如在谷歌浏览器中通过p.__proto__访问该原型对象，并对原型对象的属性进行修改
+			相关属性与方法：
+				prototype
+				constructor
+				__proto__
+				hasOwnProperty()  判断一个属性是否来自对象本身，不会去原型中找
+					p1.hasOwnProperty("sex")
+				in操作符  只要对象和原型中有一个地方存在这个属性，就返回true
+					alert("sex" in p1);
+			原型模型和构造函数模型创建对象的局限性：
+				原型模型：
+					原型中的所有的属性都是共享的，构造函数对原型的属性进行了修改，
+					则会反映到所有的对象上面，这个共享特性对方法是很好的，但是不适用属性
+				构造函数：
+					在构造函数中添加的属性和方法，每个对象都有自己独有的一份，
+					大家不会共享。这个特性对属性比较合适，但是对方法又不太合适，
+					每人一份会造成内存的浪费和性能的低下
+			组合模式：
+				原型模式适合封装方法，构造方法模式适合封装属性
+				在构造方法内部封装属性，在原型对象内封装方法
+				仍然有缺陷：把构造方法和原型分开写，封装性也不是太好总让人感觉不舒
+				function Person(name, age) {
+				    this.name = name;
+				    this.age = age;
+				}
+				//在原型对象内封装方法
+				Person.prototype.eat = function (food) {
+					alert(this.name + "爱吃" + food);
+				}
+				Person.prototype.play = function (playName) {
+					alert(this.name + "爱玩" + playName);
+				}
+			    
+				var p1 = new Person("李四", 20);
+				var p2 = new Person("张三", 30);
+			动态原型：
+				把所有的属性和方法都封装在构造方法中，而仅仅在需要的时候才去在构造方法中初始化原型
+				构造方法内部封装属性，对方法加以判断：
+					如判断this.eat这个属性是不是function，
+					如果不是function则证明是第一次 创建对象，则把这个funcion添加到原型中
+				//构造方法内部封装属性
+				function Person(name, age) {
+					//每个对象都添加自己的属性
+				    this.name = name;
+				    this.age = age;
+				    /*
+				    	判断this.eat这个属性是不是function，如果不是function则证明是第一次 创建对象，则把这个funcion添加到原型中。
+				    	如果是function，则代表原型中已经有了这个方法，则不需要再添加。
+				    	
+				    */
+			      	
+				    if(typeof this.eat !== "function"){
+				    	Person.prototype.eat = function () {
+				    		alert(this.name + " 在吃");
+				    	}
+				    }
+				}	
+		</pre>
+	</body>
+	 <script type="text/javascript">
+	 	/**
+	 	 * 一切皆对象
+	 	 * 任何函数，只要声明就有默认的prototype属性，表示函数的原型（指向该函数的对象原型，这个原型在函数声明时创建）,通过构造函数.prototype可以修改原型对象
+	 	 * 对于构造函数（使用new来调用，以创建对象的这种函数），创建对象时，该对象会有一个不可访问的属性[prototype],指向构造函数的原型对象，
+	 	 * 通过变量只能只能访问原型中的属性值，不能去修改原型中的属性值，
+	 	 * 实际上我理解的是这样的：
+	 	 准确来说，通过对象，对原型中是基本类型的属性值，只能访问不能修改，个别浏览器可以通过p1.__proto__访问到原型，并可以由此对原型的属性进行更改，如上面的name属性
+		基本类型的数据值有5种：null、undefined、number、boolean和string
+		引用类型的数据值往大的说就1种，即Object类型。往细的说有：Object类型、Array类型、Date类型、Regexp类型、Function类型等
+		但是当原型对象的属性值为引用类型的数据值时，通过实例对象修改属性值就可能引起原型对象的属性值发生变化，如上面的girls数组
+	 	 
+	 	 * 个别浏览器中，如在谷歌浏览器中通过p.__proto__访问该原型对象
+	 	 */
+	    function Person () {    	
+	    }
+      	// 可以使用Person.prototype 直接访问到原型对象
+	    //给Person函数的原型对象中添加一个属性 name并且值是 "张三"
+	    Person.prototype.name = "张三";
+	    Person.prototype.age = 20;
+
+	   	var p1 = new Person();
+	   	/*
+	   		访问p1对象的属性name，虽然在p1对象中我们并没有明确的添加属性name，但是
+	   		p1的 [[prototype]] 属性指向的原型中有name属性，所以这个地方可以访问到属性name
+	   		的值。
+	   		注意：这个时候不能通过p1对象删除name属性，因为只能删除在p1中添加的对象。
+	   	*/
+	   	//alert(p1.name);  // 张三
+
+	   	var p2 = new Person();
+	   	//alert(p2.name);  // 张三  都是从原型中找到的，所以一样。
+
+	   	//alert(p1.name === p2.name);  // true
+
+	   	// 由于不能修改原型中的值，则这种方法就直接在p1中添加了一个新的属性name，然后在p1中无法再访问到
+	   	//原型中的属性。
+	   	p1.name = "李四";
+	   	//alert("p1：" + p1.name);
+	   	// 由于p2中没有name属性，则对p2来说仍然是访问的原型中的属性。	
+	   	//alert("p2:" + p2.name);  // 张三  
+	   	
+	   	//虽然p1对象的[prototype]不可见，但是在谷歌浏览器中可以用__proto__访问到，能console出来
+	   	console.log((Person.prototype === p1.__proto__))//true
+	   	console.log(p1.__proto__)//object
+	   	
+	   	/**
+	   	 * 如果更快构造函数的原型对象，则一般让原型对象的constructor属性重新指向这个构造函数
+	   	 */
+	   	
+	   	/**
+	   	 * 判断属性存在自身
+	   	 * 判断属性 存在原型链（包含自身）
+	   	 * 判断属性来源位置
+	   	 * 0 
+	   	 * 1
+	   	 * 2
+	   	 */
+	   	/**
+	   	 * for in可以遍历到对象本身和原型链上的属性，不可见的属性遍历不到[]
+	   	 */
+    </script>
+</html>
