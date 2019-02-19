@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>作用域链和闭包</title>
+	</head>
+	<body>
+		<h1>作用域链和闭包</h1>
+		<pre>
+			基本了解：
+				执行环境（ execution context）执行环境定义了变量或函数有权访问的其他数据
+				每个执行环境都有一个与之关联的 变量对象
+				全局执行环境是最外围的一个执行环境，也就是window 对象
+				对全局执行环境变量来说，变量对象就是window对象
+				对函数（局部执行环境）来说，变量对象就是这个函数的  活动对象 
+				作用域链中存储的是与每个执行环境相关的 变量对象(如果是函数内部就是活动对象)
+				当创建一个函数( 声明一个函数 )后，那么会创建这个函数的作用域链
+				这个函数的作用域链在这个时候只包含一个变量对象(window)
+				当调用 sum 函数时，会首先创建一个 “执行环境”
+				这个 执行环境 的作用域链存储了在这个函数中定义的所有参数、变量和函数。把自己的 变量对象 存储在作用域中的顶端
+				作用域链
+					实际就是先放全局作用域，如果有函数，则函数内部变量的作用域再放进去，
+					函数内部再有函数，就再放，以此类推，构成一条作用域链。
+					这样每次执行到某个函数时，则把自己的活动对象添加到了这个作用域的顶端
+				闭包：函数执行结束了，由于作用域链的存在，他的局部变量在匿名函数中仍然可以使用，这个匿名函数就是闭包
+				闭包是一个函数，这个函数【有权访问另一个外层函数作用域中的变量】
+			闭包的应用：
+				1、返回外部函数的局部变量 ，闭包中使用的局部变量的值，一定是局部变量的最后的值
+					function outer () {
+						var num = 5;
+				      	//定义一个内部函数
+						function inner () {
+				          	//内部函数的返回值是外部函数的一个局部变量
+							return num;
+						}
+				      	//把局部变量的值++
+						num++;
+				      	// 返回内部函数
+						return inner;
+					}
+				  	var num = outer()();  
+				  	alert(num);  // 6
+				 2、使用【函数自执行】和【闭包】封装对象
+				 	var person = (function () {
+			      	//声明一个对象，增删改查均是针对这个对象
+					var personInfo = {
+						name : "李四",
+						age : 20
+					};
+			      	//返回一个对象，这个对象中封装了一些对personInfor操作的方法
+					return {
+			          	//根据给定的属性获取这个属性的值
+						getInfo : function (property) {
+							return personInfo[property];
+						},
+			          	//修改一个属性值
+						modifyInfo : function (property, newValue) {
+							personInfo[property] = newValue;
+						},
+			          	//添加新的属性
+						addInfo : function (property, value) {
+							personInfo[property] = value;
+						},
+			          	 //删除指定的属性
+						delInfo : function (property) {
+							delete personInfo[property];
+						}
+					}
+				})();
+				alert(person.getInfo("name"));
+				person.addInfo("sex", "男");
+				alert(person.getInfo("sex"));
+			解决for循环的闭包问题：
+				1、给每个按钮添加一个属性，来保存 每次 i 的临时值
+					var btns = document.getElementsByTagName("input");
+					for (var i = 0; i < 3; i++) {
+			          	//把i的值绑定到按钮的一个属性上，那么以后i的值就和index的值没有关系了。
+						btns[i].index = i;
+						btns[i].onclick = function () {
+							alert("我是第" + (this.index + 1) + "个按钮");
+						};
+					}
+				2、使用匿名函数的自执行
+					var btns = document.getElementsByTagName("input");
+					for (var i = 0; i < 3; i++) {	
+			          	//因为匿名函数已经执行了，所以会把 i 的值传入到num中，注意是i的值，所以num
+						(function (num) {
+							btns[i].onclick = function () {
+								alert("我是第" + (num + 1) + "个按钮");
+							}
+						})(i);
+					}
+				3、var改为let,es6将
+		</pre>
+	</body>
+	<script type="text/javascript">
+		//console.log(a)//报错，说明函数内部的局部变量
+		function test(){
+			console.log(a)//不报错，undefined
+			
+			//alert(a)//不报错，undefined
+			var a = 20
+			console.log(a)//20
+		}
+		test()
+		//总结，局部变量也会在函数内部声明提前，但是由于作用域影响，函数外部不能访问会报错
+	</script>
+</html>

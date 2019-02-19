@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>对象入门</h1>
+		<pre>
+			基本理解：
+				面向过程：分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候一个一个依次调用就可以了
+				面向对象：面向对象是把构成问题事务分解成各个对象，建立对象的目的不是为了完成一个步骤，而是为了描述某个事物在整个解决问题的步骤中的行为
+				面向对象的三大特征：封装、继承、多态
+				两种实现：【基于类的面向对象】和【基于原型的面向对象】
+				JavaScript 基于原型的面向对象
+				对象定义为：“无序属性的集合，其属性可以包含基本值、对象或者函数
+			访问对象的属性：
+				 1、对象.属性名 person.name，name不能是变量，必须是已知的属性名
+				 2、对象[属性名] person["name"]
+			给对象添加属性
+				JavaScript是一种【动态语言】，可以在代码执行过程中，动态去添加和修改对象的属性
+			删除对象属性
+				delete person.age;
+			修改：person.sex = "女";
+			遍历对象的属性
+				for (pn in person) {
+				  	alert(pn + " " + person[pn]);//注意中括号符号的用法
+				}
+			创建对象的方式：
+				1、字面量形式 注意，
+					var p = {
+						age: 20,
+						sex: "男",
+						eat:function(){
+							alert("很能吃！")
+						}
+					}
+					属性的 值是函数，这时候更多地叫其为方法，在面向对象语言中，方法=函数
+					p是普通变量（实际上是一个变量,只是存了对象的地址，
+					不是对象本身 ，称之为对象的引用），内存在栈中
+					{}表示字面量的对象  对象的内存在堆中
+				2、new 如var obj = new Object()
+				3、工厂模式创建，省去重复代码，例如创建一百个对象每个都要new和设置属性
+					function createPerson(name,age,sex){
+						var p ={}
+						p.name = name
+						p.age = age
+						p.sex = sex
+						p.sayHellow = function(){
+							alert("我的名字是" + this.name)
+						}
+						return p
+					}
+					var p1 = createPerson("张三",30,"男")
+					var p2 = createPerson("李四",20,"男")
+				4、使用构造函数(加new调用才叫构造函数、方法)创建对象,构造函数名首字母大写
+					构造函数和普通函数仅仅也仅仅是调用方式的不同。
+					也就是说，随便一个函数你如果用new 的方式去使用，那么他就是一个【构造函数】
+					与工厂模式不同的是，构造函数中因为变量名未知，所以用this代替
+		
+					this:谁调用谁就是this,如p =new Person(),this就是p
+					this的三种用法
+						1、对象.方法()  方法中的this指的是前面的对象
+						2、new 构造方法(): 构造函数中的this指的是新创建的那个对象
+						3、方法()：方法中的this指的是window
+				5、组合模式
+				6、动态原型
+			对象的比较:
+				两个对象比较， ==或===，他们比较的是地址，所以永远不等
+				 * 对象和不是对象的比较，会先把对象转化为字符串，即会用toString方法，
+				 {} 转为[Object Object],类似数组[] == false,
+				 因为先转为null = 0 = false,{} == false
+				 等价于[Object Object] == false,比较结果当然为false
+		</pre>
+	</body>
+	<script type="text/javascript">
+		//字面量形式创建对象,js中声明对象最简单最直接的方法
+		var p = {
+			age: 20,
+			sex: "男",
+			name: "list",
+			//属性的 值是函数，这时候更多地叫其为方法，在面向对象语言中，方法=函数
+			eat:function(){
+				alert("很能吃！")
+			}
+			
+		}
+		//p是普通变量（实际上是一个变量,只是存了对象的地址，不是对象本身 ，称之为对象的引用），内存在栈中。
+		//{}表示字面量的对象  对象的内存在堆中
+		//访问对象的属性，用点语法（对象.属性名）或中括号 (对象["属性名"])，点语法比较常用
+		console.log(p.name)
+		console.log(p.age)
+		//[]
+		console.log(p["sex"])
+		//js可以动态添加属性；给对象添加属性  对象.新属性名 = "属性值" 一定要赋值,如果存在则重复赋值？
+		
+		p.haha = "haha"
+		console.log(p.haha)
+		p.noVlaue 
+		console.log(p.noVlaue)//undefind
+		console.log(p)//没有noValue属性
+		p.play = function(){//这样不会弹出
+			alert("high 起来")
+		}
+		p.haha = "hahaha"
+		p["haha"] = "hahaha"
+		console.log(p.haha)
+		//修改属性值 对象.属性名 = "属性值"，p[]可以？可以
+		
+		//删除对象属性，delect 对象.属性名，
+		//delete是操作符，不是方法，所以不用加括号
+		delete p.haha
+		delete p.eat//删除方法，方法不用（）
+		console.log(p)//没有haha属性,也没有eat方法，应该是删除了属性，不单单是属性值
+		console.log("方法能输出？"+p.eat)//undefined
+		//console.log("方法能输出？"+p.eat())//报错，应该是因为方法不存在，加括号=去调用这个方法，所以不存当然调用不了所以报错
+		//使用for in遍历对象，类似于遍历数组att为下标，对象中得到的是att属性名，
+		for(var att in p ){
+			//console.log(att)
+			// att是对象p的属性的名
+			console.log(p[att])
+		}
+		//使用for in遍历数组，得到的是数组的每个元素，其实数组也是用键值对的
+		//arr = [a:a,b:b,c:c],数组也是对象，遍历出来的其实也是属性名
+		//for of遍历数组
+		//for(var clazz of clazzs){
+			//clazz为一个clazzs数组中的元素
+		//}
+		//数组可以copy?可以直接copy
+		var arr1 = []
+		var arr2 = [2,3,4]
+		arr1 = arr2
+		console.log(arr1)//(3) [2, 3, 4]
+		//对象呢?也可以直接copy
+		var p2 = p
+		console.log(p2)//对象
+		
+		//对象的比较
+		console.log([] == false) // true
+		console.log({} == false) // false
+		/**
+		 * 两个对象比较， ==或===，他们比较的是地址，所以永远不等
+		 * 对象和不是对象的比较，会先把对象转化为字符串，即会用toString方法，{} 转为[Object Object],类似数组[] == false,因为先转为null = 0 = false,{} == false等价于[Object Object] == false,比较结果当然为false
+		 * ?
+		 */
+		
+		/**
+		 * 其他方式创建对象
+		 * 1、new
+		 * var obj = new Object()
+		 * 2、工厂模式创建，省去重复代码，例如创建一百个对象每个都要new和设置属性
+		 */
+		function createPerson(name,age,sex){
+			var p ={}
+			p.name = name
+			p.age = age
+			p.sex = sex
+			p.sayHellow = function(){
+				alert("我的名字是" + this.name)
+			}
+			return p
+		}
+		var p1 = createPerson("张三",30,"男")
+		var p2 = createPerson("李四",20,"男")
+		/**
+		 * 使用构造函数(加new调用才叫构造函数、方法)创建对象,构造函数名首字母大写
+		 * 构造函数和普通函数仅仅也仅仅是调用方式的不同。也就是说，随便一个函数你如果用new 的方式去使用，那么他就是一个【构造函数】
+		 * 为了区别，如果一个函数想作为构造函数，作为国际惯例，最好把这个构造函数的首字母大写
+		 */
+		function Person(){
+			this.name = "lisi"
+			this.age = 20
+			this.sayName = function(){
+				alert(this.name)
+			}
+			//return this//隐式返回这句
+			//return 111 // 显式地返回基本数据类型
+			//return {} //显式地返回对象
+		}
+		//使用new创建对象，会自动把创建的对象返回,
+		//创建的对象具有类型 如Preson,
+		//可用instanceof判断类型  console.log(p instanceof Person)
+		//与工厂模式不同的是，构造函数中因为变量名未知，所以用this代替
+		//this:谁调用谁就是this,如p =new Person(),this就是p
+		var p = new Person()
+		console.log(p)
+		p.sayName()
+		//注意，不带new，不会自动返回，this也指代的是window
+		var p2 = Person()
+		console.log(p2)//undefind,因为函数Person没有返回值
+		//面试中可能出现，在不同调用下清楚this指代什么
+		//如果在构造函数(用new调用该函数的时候)中，没有添加return，构造函数自动把新创建的对象返回
+		//如果在构造函数内部return 一个简单数据类型，如number string等，仍然返回this
+		//只有在构造函数中写了return 对象，该函数才会返回对象，而不是返回this
+		
+		//？this的三种用法
+		//1、对象.方法()  方法中的this指的是前面的对象
+		//2、new 构造方法(): 构造函数中的this指的是新创建的那个对象
+		//3、方法()：方法中的this指的是window
+	</script>
+</html>

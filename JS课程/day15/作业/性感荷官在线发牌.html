@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#firPalyer,#secPalyer,#thirPlayer{
+				height: 124px;
+				width: 900px;
+				margin: 0 auto;
+				border: solid 1px green;
+				margin-bottom: 10px;
+			}
+			#secPalyer{
+				border: solid 1px yellow;
+			}
+			#thirPlayer{
+				border: solid 1px deepskyblue;
+			}
+			span{
+				height: 20px;
+				width: 900px;
+				display: inline-block;
+				text-align: center;
+			}
+			.cards{
+				width: 50px;
+				height: 100px;
+				/*float: left;*/
+				border: solid 1px hotpink;
+				font-size: small;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="firPalyer"><span>第一位玩家</span>
+			<!--<div class="cards">红桃 10</div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>
+			<div class="cards"></div>-->
+		</div>
+		<div id="secPalyer"><span>第二位玩家</span></div>
+		<div id="thirPlayer"><span>第三位玩家</span></div>
+	</body>
+	<script type="text/javascript">
+
+		//游戏
+		function Game(){
+			this.gameName = "斗地主"
+			//玩家属性，有三名玩家，每个玩家都是一个对象，在游戏开始时实例化
+			this.players = [new Player(),new Player(),new Player()]
+			//牌属性，值为牌对象
+			this.cards = new Cards()
+			//console.log(this.cards.allCards())
+			//动态原型模式，使方法共享
+			//发牌属性
+			if(!Game.prototype.giveCards){
+				Game.prototype.giveCards = function(){
+					//开始发牌
+					//随机函数,返回m-n的随机数
+					var getRandomIndex = function(m,n){
+						return parseInt(Math.random() * (n - m) + m)
+						
+					}
+					//console.log(this)//Game
+					var thisObject  = this
+					//var randomIndex = getRandomIndex(0,this.cards.cardNumber-1)//(0,53)
+					//抽剩下牌的一张
+					var flag= 0
+					var outOneCard =function(){
+						//console.log(thisObject)//Game
+						//随机下标
+						//console.log(this)//window
+						var randomIndex = getRandomIndex(0,thisObject.cards.allCards().length-1)//(0,53)(0,52)……
+						//把这张从一副牌cards里移除
+						//this.cards.allCards().splice(randomIndex,1)
+						//console.log(this.cards.allCards())//不起作用
+						//delete this.cards.allCards()[randomIndex]
+						//console.log(this.cards.allCards())//不起作用
+						//console.log(otherCards)//起作用了，说明不能直接改动用this.cards
+						var otherCards = thisObject.cards.allCards()
+						//var temp = thisObject.cards.allCards()
+						var nowCard = thisObject.cards.allCards()[randomIndex]
+						//删除对应下标的数组元素
+						otherCards.splice(randomIndex,1)
+						//console.log(otherCards)
+						var result = function(){return otherCards}
+						thisObject.cards.allCards = result//函数才能 = 函数
+						//console.log(thisObject.cards.allCards())//起作用
+						//返回抽出的牌
+						//console.log("第几次抽："+ ++flag + "随机数当前随机数为："+randomIndex)
+						//console.log(temp[randomIndex])
+						//return temp[randomIndex]//temp只是个指针，指向牌数组thisObject.cards.allCards()
+						//当执行thisObject.cards.allCards = result后，temp实际也发生改变，return temp[randomIndex]返回的不是抽出来的那张牌。而是同个位置的另一张牌
+						console.log(nowCard)
+						return nowCard
+						
+					}
+					//抽三张作为底牌
+					var specialCards = []
+					for(var i = 0; i < 3; i++){
+						//console.log(outOneCard())
+						specialCards.push(outOneCard())
+						
+					}
+					//将牌一张一张发给玩家，
+					var giveOneCard = function(){
+						//console.log(thisObject.cards.cardNumber)
+						//3人一次发一张,共17轮
+						for(var i = 0; i < 17; i++){
+							for(var j = 0; j < 3; j++){
+								thisObject.players[j].cards.push(outOneCard())
+								//console.log(outOneCard())
+							}
+						}
+					}
+					giveOneCard()
+					//console.log("底牌：")
+					//console.log(specialCards)
+					//console.log(this)
+				}
+			}
+			//放置牌到界面上
+			if(!Game.prototype.dispayCards){
+				Game.prototype.dispayCards = function(){
+					var $id = function(id){
+						return document.getElementById(id)
+					}
+					//遍历players的cards
+					console.log( this.players)
+					for(var j = 0; j < 3; j++){
+						for(var i = 0; i < this.players[j].cards.length; i++){
+							//创建新的span节点
+							var spanNode = document.createElement("span")
+							spanNode.className = "cards"
+							spanNode.innerHTML = this.players[j].cards[i].color+this.players[j].cards[i].cardNumber
+							if(j == 0 ){
+								$id("firPalyer").appendChild(spanNode)
+							}else if(j == 1){
+								$id("secPalyer").appendChild(spanNode)
+							}else if(j == 2){
+								$id("thirPlayer").appendChild(spanNode)
+							}
+							
+						}
+					}
+					
+					
+				}
+			}
+		}
+		//一副牌 牌对象
+		function Cards(){
+			//牌的数量
+			this.cardNumber = 54
+			//全部牌，数组，存牌对象?然而下面这样写时函数
+			this.allCards = function getCard(){
+				var color =["红桃","黑桃","方块","梅花"]
+				var cards = []
+				//1-10
+				for (var i = 1 ; i <= 10; i++) {
+					for(var j = 0; j < 4; j++){
+						cards.push(new Card(color[j],i))
+					}
+				}
+				//J Q K
+				var renGong =["J","Q","K"]
+				for (var i = 0 ; i < 3; i++) {
+					for(var j = 0; j < 4; j++){
+							cards.push(new Card(color[j],renGong[i]))
+						}
+				}
+				cards.push(new Card("","小王"))
+				cards.push(new Card("","大王"))
+				return cards
+			}
+		}
+		//一张牌对象
+		function Card(color,cardNumber){
+			//花色
+			this.color = color
+			//点数
+			this.cardNumber = cardNumber
+		}
+		//玩家对象
+		function Player(){
+			//有名字属性，但是是由游戏开始时录入的
+			//this.playName = prompt("请输入玩家名")
+			this.playName = "暂时都一样名"
+			//是个存牌对象的数组，但是游戏洗牌后才能有牌
+			this.cards = []//玩家的牌肯定是游戏发给他的,怎么规定这里必须是Card类型呢？
+		}
+		//游戏流程
+		//开启一个游戏，这个游戏有名字，3个玩家，扑克牌和发牌功能
+		var game = new Game()
+		//游戏要有找到三名玩家的方法
+		//console.log(game.gameName)
+		//console.log(game.players)
+		//console.log(game.cards.allCards())
+		//发牌
+		game.giveCards()
+		console.log(game.players)
+		game.dispayCards()
+	</script>
+	<script>
+		//征哥方法
+		/**
+		 * 整场游戏是一个游戏对象，可以写成字面量的形式？因为只用了一次，不需要使用构造函数来创建
+		 * 1、这个游戏有个游戏名
+		 * 2、有3个玩家players，存放在一个数组中
+		 * 3、有一副牌：是个牌对象
+		 * 4、有个发牌的方法
+		 */
+			//注意字面量方式别忘了在每个键值对后加逗号
+		var game = {
+			gameName:"斗地主",
+			players: [new Player("冠希"),new Player("柏芝"),new Player("马蓉")],
+			poker: new Poker(),//
+			//发牌,洗牌是牌对象自己有的
+			sendPoker : function(){
+				//先洗牌，
+				this.poker.shuffle()
+				//开始发牌
+				for(var i = 0; i < 51; i ++){
+					var card = this.poker.cards[i]
+					this.players[i % 3].cards.push(card)
+					
+				}
+			},
+			//游戏入门
+			startGame: function(){
+				//先发牌
+				this.sendPoker()
+				//
+			}
+		}
+		// 启动游戏
+		game.startGame()
+		/**
+		 * 可以创建玩家对象的构造函数
+		 * 1、游戏玩家有名字
+		 * 2、游戏玩家有存储牌的容器(数组)
+		 */
+		function Player(playerName){
+			this.playerName = playerName
+			//玩家手中 的牌，只有游戏开始才会有值，使用一个数组
+			this.cards = []
+		}
+		/**
+		 * 扑克牌
+		 */
+		function Poker(){
+			this.cardCount = 54;
+			//代表一副扑克牌中有的card,暂时没有，new出来才有
+			this.cards = [];
+			//用一个临时变量存储，表示扑克中的card数组
+			var tempCards = this.cards;//为什么不写在自执行函数中？因为他要将card最终放进this.cards中
+			//？tempCards是数组还是指针？指针
+			//为什么不用this.card直接去压栈，this避免this指代不明，出错的情况
+			//写一个只执行的函数，给扑克牌初始化每张card
+			//也就是说调用new Poker()时，会自动执行该函数
+			//函数自执行
+			(function(){
+				var huases = ["♠","♥","♣","♦"]
+				var points = ["A", "2", "3", "4", "5", "6", "7", "8", "9",
+		"10", "J", "Q", "K"]
+				//用一个临时变量存储，表示扑克中的card数组
+				//var tempCards = []//
+				//遍历4种花色
+				for(var i = 0; i < 4; i++){
+					//遍历每种花色的13张牌
+					for(var j = 0; j < 13; j++){
+						var card = new Card(huases[i],points[j])//先写card对象
+						//该创建好的扑克牌压栈到扑克牌数组中，所以要去给牌加个tempCards属性
+						tempCards.push(card)
+					}
+				}
+				//单独
+				tempCards.push(new Card("","大王"))
+				tempCards.push(new Card("","小王"))
+			})()
+			//自洗牌功能
+			this.shuffle = function(){
+				//每次生成2个随机的0-53的随机整数，然后交换
+					//我是直接随机抽
+//				for(var i = 0; i <= 100; i++){
+//					//生成两个随机的0-53的整数，表示poker中cards的下标
+//					var num1 = parseInt(Math.random() * 54)
+//					var num2 = parseInt(Math.random() * 54)
+//					//中间变量法交换
+//					var card = this.cardS[num1]
+//					this.cards[num1] = this.cards[num2]
+//					this.cards[num2 = card]
+//				}
+				//大神的超级简单的随机打乱数组中元素的代码
+				this.cards.sort(function(a,b){
+					return Math.random() > 0.5 ? 1 : -1
+				})
+			}
+		}
+		//每张牌的构造方法
+		function Card (huase,point){
+			//花色
+			this.huase = huase;
+			this.point = point;
+			//当直接输出这个构造方法创建的对象时就会调用toString
+			this.toString = function(){
+				return this.huase + this.point
+			}
+		}
+		//先明确最终输入什么
+		console.log(game.players)
+		console.log(game.poker)
+		console.log(game.players[0].playerName+"的牌：" + game.players[0].cards)
+		console.log(game.players[1].playerName+"的牌：" + game.players[1].cards)
+		console.log(game.players[2].playerName+"的牌：" + game.players[2].cards)
+		
+	</script>
+</html>

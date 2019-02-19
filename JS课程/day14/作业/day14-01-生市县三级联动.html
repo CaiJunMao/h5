@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 600px;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<select name="" id="province">
+				<option value="">请选择省份</option>
+
+			</select>
+			<select name="" id="city">
+				<option value="" >请选择市区</option>
+			</select>
+			<select name="" id="county">
+				<option value="">请选择县城</option>
+			</select>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/AjaxUtil.js"></script>
+	<script type="text/javascript" src="js/city_code.js"></script>
+	<script type="text/javascript" >
+		//console.log(selectorObj.provinceList.length)
+		 //Ajax.load('get','js/city_code.js',"北京市",function success(s){alert("s")},function fail(s){alert(s)})
+	</script>
+	<!--//征哥的方法-->
+	<script type="text/javascript">
+		var $id = function(id){return document.getElementById(id)}
+		
+		var ProID = 0
+		var CityID = 0
+		var currentCityName
+		var currenrProRemark
+		/**
+		 * 先把能够添加的省市县添加到option中
+		 * 
+		 * 
+		 */
+		function addProRemark(){
+			//找到省份所在的selectbq
+			var proRemark = $id("province")
+			//准备一个数组，存数据
+			var arr = []
+			//获取省份的数目
+			var len = selectorObj.provinceList.length
+			console.log(len)
+			//遍历省数组，得到每一个元素都是省对象
+			for(var province of selectorObj.provinceList){
+				//遍历得到selector.province.length个变量i
+				for(var i= 1;i<= len ;i ++){
+					//如果遍历到的省的顺序等于遍历到的变量i
+					if(province.ProSort === i){
+						//则将该省份的ProName存到数组元素中
+						arr[i - 1 ]= province.ProName
+						//下一个省
+						break
+					}
+				}
+				
+			}
+			//把数组元素逐个追加为proRemork的孩子
+			console.log(arr)
+			console.log(len)
+			for (var i = 0;i < len; i++){
+				var optionNode = document.createElement("option")
+				//给节点赋值
+				optionNode.innerHTML = arr[i]
+				optionNode.value = arr[i]
+				console.log(optionNode)
+				//给省份select追加孩子
+				proRemark.appendChild(optionNode)
+				
+			}
+		}
+		//执行省份添加
+		addProRemark()
+		//当选择某个省份时
+		$id("province").onchange = function(){
+			currenrProRemark = this.value
+			for (var province of selectorObj.provinceList){
+				if (province.ProName === currenrProRemark) {
+					//获取当前省份的id
+					ProID = province.ProID
+					
+					break
+					
+				}
+			}
+			//添加proid对应的city
+			addcityList()
+		}
+		function addcityList(){
+			var cityName = $id("city")
+			cityName.innerHTML =""
+			/**
+			 * 遍历城市数组
+			 */
+			for(var city of selectorObj.cityList){
+				//如果城市自带的ProID与city.ProID相同，则该城市属于该省份
+				if(city.ProID == ProID){
+					//创建city的option节点
+					var optionNode = document.createElement("option")
+					//
+					optionNode.innerHTML = city.CityName
+					optionNode.value = city.CityName
+					cityName.appendChild(optionNode)
+					
+				}
+			}
+			
+		}
+		//当监听到城市有变化
+		$id("city").onchange = function(){
+			//得到当前城市的值
+			currentCityName = this.value
+			for(var city of selectorObj.cityList){
+				if (city.CityName === currentCityName){
+					CityID = city.CityID
+					break
+				}
+				
+			}
+			addcountyList()
+			
+		}
+		//添加县区
+		function addcountyList(){
+			var disName = $id("county")
+			disName.innerHTML = ""
+			
+			for(var county of selectorObj.countyList){
+				//如果城市自带的ProID与city.ProID相同，则该城市属于该省份
+				if(county.CityID == CityID){
+					//创建county的option节点
+					var optionNode = document.createElement("option")
+					//
+					optionNode.innerHTML = county.CityName
+					optionNode.value = county.CityName
+					disName.appendChild(optionNode)
+					
+				}
+			}
+			
+		}
+	</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原型2</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造方法
+		function Person(){
+			this.age = 10
+			this.name = "冠希"
+		}
+		
+		Person.prototype.sex = "男"
+		Person.prototype.girls = ["柏芝", "阿娇", "凤姐"]
+		var p1 = new Person()
+		var p2 = new Person()
+		
+		console.log(p1.sex)
+		//给p1本身添加了一个sex属性，原型中的sex=”男“
+		p1.sex = "女"
+		console.log(p1.sex)
+		console.log(Person.prototype.sex)
+		p1.__proto__.sex = "女"
+		console.log(Person.prototype.sex)
+		//==============
+		// 这样写是在原型中添加一个元素【XX】
+		//p1.girls.push("马蓉")
+		p1.girls[0]="马蓉"
+		//p1.__proto__.girls[0]="马蓉"
+		console.log(p1.girls)
+		console.log(p2.girls)
+		console.log(p1.girls.length) //4
+		console.log(p2.girls.length) //4
+		console.log(p2.sex)
+		//==============
+		// 这样写就是给p1对象添加一个属性girls
+		p1.girls = []//相当于声明一个新数组，所以对原型的girls数组没有影响
+		console.log(p1.girls.length) //0
+		console.log(p2.girls.length)
+	</script>
+	<!--【归纳】通过对象只能访问原型中的属性值，不能去修改原型中的属性值-->
+	<!--实际上准确来说，通过对象，对原型中是基本类型的属性值，只能访问不能修改，个别浏览器可以通过p1.__proto__访问到原型，并可以由此对原型的属性进行更改，如上面的name属性
+		基本类型的数据值有5种：null、undefined、number、boolean和string
+		引用类型的数据值往大的说就1种，即Object类型。往细的说有：Object类型、Array类型、Date类型、Regexp类型、Function类型等
+		但是当原型对象的属性值为引用类型的数据值时，通过实例对象修改属性值就可能引起原型对象的属性值发生变化，如上面的girls数组
+	-->
+</html>

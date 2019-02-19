@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#wrap{
+				height: 35px;
+			}
+			#box{
+				height: 35px;
+				text-align: center;
+				width: 100px;
+				background-color: #cddeae;
+				border:1px solid black;
+				/*line-height: inline-block;*/
+				/*?应该是征哥写错了上面这一句不起作用的*/
+				line-height: 35px;
+				font-weight:bold;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="box">
+				
+			</div>
+		</div>
+		<a href="javascript:;" id="refresh">看不清，换一张</a>
+	</body>
+	<script type="text/javascript">
+		//征哥的方法
+		var box = document.getElementById("box")
+		var refresh = document.getElementById("refresh")
+		var arr = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e",
+		"f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w",
+		"x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O",
+		"P","Q","R","S","T","U","V","W","X","Y","Z"]
+		//拼接字符串
+		function getRandomStr(){
+			var str = ''
+			for(var i = 0; i <= 6; i++){
+				//获取随机下标
+				var index = getRandomNumber(0, arr.length)
+				str += arr[index]
+			}
+			box.innerHTML = str
+		}
+		// 调用
+		getRandomStr()
+		// 点击刷新
+		refresh.onclick = function(){
+			getRandomStr()
+		}
+		// 产生随机数
+		function getRandomNumber(m,n){
+			return parseInt(Math.random() * (n - m) + m)
+		}
+	</script>
+</html>

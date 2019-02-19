@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="#" method="get">
+			
+			姓名<input type="text" value=""/>
+			<span id=""></span><br />
+			密码<input type="password" value="" required=""/><br />
+			<input type="submit" value="提交"/>
+		</form>
+	</body>
+	<script type="text/javascript">
+		//数组
+		var inputs = document.getElementsByTagName("input")
+		//时间对象：from表单，监听sumit方法
+		document.querySelector("form").onsubmit = function(){
+			//姓名，要求5-8字符，第一个不能说数字
+			var user = inputs[0].value
+			//^行首匹配，
+			//var reg = /^[^0-9]\w{4,7}$/i
+			var reg = /^[^0-9].{4,7}$/i
+			//如果user不存在或匹配不成功
+			if(!reg.test(user)){
+				//阻止默认事件.如提交事件
+				event.preventDefault()
+				document.querySelector("span").innerHTML= "请输入5-8位字符，第一位不能是数字"
+			}
+		}
+	</script>
+</html>

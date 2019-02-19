@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var str ="the future blone"
+		var reg = /[ ]/g
+		var count =[]
+		var countIndex = 0//数组下标
+		var flag = false//数组中没有该字符标志
+		newStr = str.replace(reg,"")
+		//console.log(newStr)
+		for(var i = 0, len = newStr.length;i < len;i++){
+			var ch = newStr.charAt(i)
+			//console.log(count);
+			console.log("当前字符："+ch);
+			
+			 //遍历数组，看有没有已存在的字符
+			for(var index in count){
+			 	//console.log(count);
+			 	if(ch == count[index].character){
+			 		console.log("已有当前字符："+ch);
+			 		count[index].num ++
+			 		console.log(count[0].num);
+			 		flag = true//已有
+			 	}
+			 }
+			//没有该字符是放进数组
+			 if(!flag){
+			 	var obj = {
+			 		character:"",
+			 		num:1
+			 	}
+			 	obj.character = ch
+			 	count[countIndex] = obj
+			 	countIndex++
+			 	flag = false
+			 }
+		}
+		//查找最大的num
+		var maxIndex = 0
+		console.log("各字符出现的次数分别为：")
+		for(var index in count){
+			 	//console.log(count);
+			 	//查找最大的num
+			 	if(count[maxIndex].num < count[index].num){
+			 		maxIndex = index
+			 	}
+			 	console.log(count[index].character+"："+count[index].num)
+			 }
+		console.log("最多的字符为"+count[maxIndex].character+"次数为"+count[maxIndex].num)
+	</script>
+</html>

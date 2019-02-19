@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>日期对象</h1>
+		<pre>
+			基本了解：
+				GMT时间 Greenwich mean time 格林尼治标准时间，格林尼治平均时间
+				Coordinated Universal Time 协调世界时间
+				JavaScript中的 Date 类型 使用自 UTC 1970 年 1 月 1 日午夜（零时）开始经过的毫秒数来保存日期
+			获取日期对象：
+				直接调用Date()。返回字符串
+				var date = Date();
+				alert(date);//Sat Nov 12 2016 08:00:00 GMT+0800 (中国标准时间)
+			创建日期对象  new出来的是时间对象
+				1、默认情况下
+					var time2 = new Date()
+					console.log(time2)//和上一个date一样，但是本质是object
+				2、指定字符串日期对象
+					new Date("字符串格式日期")
+					三种支持格式
+						May 23, 2016 09:00:00
+						2016-11-11
+						2016/11/11
+				3、指定毫秒值的日期对象（1970年1月1日0:0:0开始算的毫秒值）
+					var d1 = new Date(1646464646646);
+				4、通过参数传入年月日时分秒来创建日期对象
+					new Date(年, 月[, 日, 时, 分, 秒]) 
+					年月必须有
+					月份的范围是0-11.  0表示1月份
+					月日分秒超过了范围，自动增减
+			日期继承
+				toString() 不用new创建的日期对象输出的的和用tostring输出一样
+				toLocalString() 返回符合本地习惯的日期和时间格式
+				valueOf() 
+					返回的代表这个时间的毫秒值 number类型，只能读
+					一般用用来比较两个日期的大小，就知道谁在前谁在后了
+			Date对象的常用方法
+				getTime()返回表示日期的毫秒值，与valueOf()一样
+				setTime(毫秒值)	以毫秒数设置日期，会改变整个日期
+				getFullYear() 取得4位数的年份
+					getYear函数已被废弃，只能返回2位数字，2000年以后返回3位/4位错误数字
+				getMonth()取得月份。  范围：0-11
+				setMonth(月份) 设置月份范围：0-11 
+					date.setMonth(2);	// 设置月份为3月
+				getDate() 获取一个月中的第几天(1-31)位
+				setDate(日) 设置一个月中的第几天  
+					可以设置为0来表示上个月的最后一天
+				getDay() 获取是星期几   0代表星期日  6代表星期6
+					没有setDay()的方法因为不能把某一天随便设为星期几
+				getHours()	获取小时数(0-23)
+				setHours(小时)	设置小时数	如果设置的值超过23则更改月份中的日期，小于0则减少日期数
+				getMinutes()	获取分钟数(0-59)
+				setMinutes(分钟)	设置分钟数	如果超过60或小于0则自动增加或减少小时
+				getSeconds() 获取秒数  0-59
+				setSeconds(秒数) 设置秒数  如果超过60或小于0，则自动增减分钟数
+				getMilliSeconds() 获取毫秒值 0-999 1秒 === 1000毫秒
+				setMilliSeconds(毫秒值) 设置毫秒值 
+			日期格式化方法
+				toDateString() ——以特定于实现的格式显示星期几、月、日和年；
+					time.toDateString()//Fri Feb 15 2019
+				toTimeString() ——以特定于实现的格式显示时、分、秒和时区；
+				toLocaleDateString() ——以特定于地区的格式显示星期几、月、日和年；
+				toLocaleTimeString() ——以特定于实现的格式显示时、分、秒；
+				toUTCString() ——以特定于实现的格式完整的 UTC 日期。
+		</pre>
+	</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>新用户注册页面</title>
+    <link type="text/css" rel="stylesheet" href="css/register.css" />
+</head>
+
+<body>
+<div id="header"><img src="images/register_logo.gif" alt="logo"/></div>
+<div id="main">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="bg bg_top_left"></td>
+            <td class="bg_top"></td>
+            <td class="bg bg_top_right"></td>
+        </tr>
+        <tr>
+            <td class="bg_left"></td>
+            <td class="content">
+                <form id="registerForm" action=""  name="myform"method="post">
+                    <dl>
+                        <dt>通行证用户名：</dt>
+                        <dd><input type="text" id="userName" class="inputs userWidth"/> @163.com</dd>
+                        <div id="userNameId">1、由字母、数字、下划线、点、减号组成<br>2、只能以数字、字母开头或结尾，且长度为4-18</div>
+                    </dl>
+                    <dl>
+                        <dt>登录密码：</dt>
+                        <dd><input type="password" id="pwd" class="inputs"/></dd>
+                        <div id="pwdId">密码长度为6-16</div>
+                    </dl>
+                    <dl>
+                        <dt>重复登录密码：</dt>
+                        <dd><input type="password" id="repwd" class="inputs"/></dd>
+                        <div id="repwdId"></div>
+                    </dl>
+                    <dl>
+                        <dt>性别：</dt>
+                        <dd><input name="sex" type="radio" value="" checked="checked"/>男 <input name="sex" type="radio" value="" />女 </dd>
+                    </dl>
+                    <dl>
+                        <dt>真实姓名：</dt>
+                        <dd><input type="text" id="realName" class="inputs" /></dd>
+                    </dl>
+                    <dl>
+                        <dt>昵称：</dt>
+                        <dd><input type="text" id="nickName" class="inputs"/></dd>
+                        <div id="nickNameId">1、昵称包含字母、数字、下划线以及@!$%&*特殊字符<br>2、长度为4-20个字符</div>
+                    </dl>
+                    <dl>
+                        <dt>关联手机号：</dt>
+                        <dd><input type="text" id="tel" class="inputs"/></dd>
+                        <div id="telId">1、手机号码已13、15、18开头<br>
+                        2、手机号码由11位数字组成
+                        </div>
+                    </dl>
+                    <dl>
+                        <dt>保密邮箱：</dt>
+                        <dd><input type="text" id="email" class="inputs"/></dd>
+                        <div id="emailId">请输入您的常用邮箱</div>
+                    </dl>
+                    <dl>
+                        <dt></dt>
+                        <dd><input name=" " type="image" src="images/button.gif"/></dd>
+                    </dl>
+                </form>
+            </td>
+            <td class="bg_right"></td>
+        </tr>
+        <tr>
+            <td class="bg bg_end_left"></td>
+            <td class="bg_end"></td>
+            <td class="bg bg_end_right"></td>
+        </tr>
+    </table>
+</div>
+</body>
+<script type="text/javascript">
+	var inputs = document.getElementsByTagName("input")
+	
+	var divs = document.getElementsByTagName("div")
+	//console.log(divs[7])//email
+	var formObject = document.getElementById("registerForm")
+	var btn = inputs[9]
+	
+	//获取焦点提示：
+		//因为input都有id其实直接用id.onfoucs也是能调用的
+	inputs[0].onfocus = function(){
+		divs[2].className = "import_prompt"
+		divs[2].innerHTML="1、由字母、数字、下划线、点、减号组成<br>2、只能以数字、字母开头或结尾，且长度为4-18"
+	}
+//	inputs[1].onfocus = function(){
+//		divs[3].innerHTML="密码长度为6-16"
+//	}
+//	inputs[6].onfocus = function(){
+//		divs[5].innerHTML="1、只能由字母、数字、下划线以及@!$%&*特殊字符<br>2、长度为4-20个字符"
+//	}
+	//console.log(inputs)
+	//提交时验证
+	btn.onclick= function(event){
+		//为什么上面的enent写不写event.preventDefault()都起作用？event是默认添加的，只要有事件产生？
+		//firefox里的event跟IE里的不同，IE里的是全局变量，随时可用；firefox里的要用参数引导才能用，是运行时的临时变量。
+		//可能这里firFox做了更改了，event需不需要参数引导都能用了，不用参数时也能打印出event
+		console.log(event)
+		console.log(event.target.tagName);
+		event.preventDefault()
+		var userName = inputs[0].value
+		var pwd = inputs[1].value
+		var repwd = inputs[2].value
+		//var man =  inputs[3]
+		//var women = inputs[4].value
+		var realName = inputs[5].value
+		var nickName = inputs[6].value
+		var tel = inputs[7].value
+		var email = inputs[8].value
+		//console.log(email)
+		//userName的正则表达式
+		var reg = []
+		//
+		reg[0] = /\S/g
+		reg[1] = /^([0-9a-zA-Z])[\w\.\-]{2,16}([0-9a-zA-Z])$/
+		//为什么小括号不行/^([0-9a-zA-Z])(\w\.\-){2,16}([0-9a-zA-Z])$/
+		//罗列字符要用中括号，小括号可以括起一个整体，表示整体将设置什么模式
+		//例如,下面这样写也是对的
+		reg[1]=/^([0-9a-zA-Z])([\w\.\-]){2,16}([0-9a-zA-Z])$/
+		reg[3]=/\s/g
+		// pwd的正则表达式
+		var pwdReg = []
+		pwdReg[0] = /\S/g
+		pwdReg[1] = /.{6,16}/g
+		// repwd的正则表达式
+		var repwdReg = []
+		repwdReg[0] = /\S/g
+		// realName的正则表达式
+		var realNameReg = []
+		realNameReg[0] = /\S /
+		// nickName的正则表达式
+		var nickNameReg = []
+		nickNameReg[0] = /\S/g
+		nickNameReg[1] = /.{4,20}/g
+		nickNameReg[2] = /\w|[@!$%&*]+/g
+		//asdf对/\w+@+!+$+%+&+*+/g不行，字符应该写[]中
+		///\w+[@!$%&*]+/g也不行，必须要有后面的特殊字符
+		//加或|搞定
+		// tel的正则表达式
+		var telReg = []
+		telReg[0] = /\S/g
+		telReg[1] = /1[358]\d{9}$/g
+		// email的正则表达式
+		var emailReg = []
+		emailReg[0] = /\S/g
+		emailReg[1] = /^([\w\.\-]+)@([\w\.\-]+)\.([\w]{2,4})$/
+		
+		console.log(userName)
+		//不能用\s判断,为什么？
+		if(/\S/g.test(userName)){
+			alert("用户名不为空")
+		}else if(/\s/g.test(userName)){
+			alert("用户名为空")
+		}
+		//用户名判断
+		if(!reg[0].test(userName)){
+			console.log("空")
+			divs[2].innerHTML="通行证用户名不能为空，请输入通行证用户名"
+		}else if(!reg[1].test(userName)){
+			//console.log(reg[1].exec(userName))
+			divs[2].innerHTML="1、只能以字母、数字、下划线、点、减号组成<br>2、只能以数字、字母开头或结尾，且长度为4-18"
+		}else{
+			divs[2].innerHTML= ""
+		}
+		//用户名提示
+		
+		//密码判断
+		if(!pwdReg[0].test(pwd)){
+			divs[3].innerHTML="密码不能为空，请输入密码"
+		}else if(!pwdReg[1].test(pwd)){
+			divs[3].innerHTML="密码长度为6-16"
+		}else{
+			divs[3].innerHTML= ""
+		}
+		//重复密码判断
+		//console.log(repwd)
+		if(!repwdReg[0].test(repwd)){
+			//console.log("空")
+			divs[4].innerHTML="重复密码不能为空，请重新输入"
+		}else if(repwd != pwd){
+			divs[4].innerHTML="两次密码不一致，请重新输入"
+		}else{
+			divs[4].innerHTML= ""
+		}
+		//昵称判断
+		if(!nickNameReg[0].test(nickName)){
+			divs[5].innerHTML="昵称不能为空，请重新输入"
+		}else if(!nickNameReg[1].test(nickName)){
+			divs[5].innerHTML="1、长度为4-20个字符"
+		}else if(!nickNameReg[2].test(nickName)){
+			divs[5].innerHTML="1、只能由字母、数字、下划线以及@!$%&*特殊字符"
+		}else{
+			divs[5].innerHTML= ""
+		}
+		//电话判断
+		if(!telReg[0].test(tel)){
+			divs[6].innerHTML="关联手机号码不能为空，请输入关联手机号码"
+		}else if(!telReg[1].test(tel)){
+			divs[6].innerHTML="关联手机号码格式不正确，请重新输入"
+		}else{
+			divs[6].innerHTML= ""
+		}
+		//邮箱判断
+		if(!emailReg[0].test(email)){
+			divs[7].innerHTML="保密邮箱不能为空，请重新输入保密邮箱"
+		}else if(!nickNameReg[1].test(email)){
+			divs[7].innerHTML="保密邮箱格式不正确，请重新输入"
+		}else{
+			divs[7].innerHTML= ""
+		}
+	}
+	//征哥的方法：
+	//用上述方法找inpput，当再添加了一个input时会出错
+	//观察发现都有class="inputs",用className来找比较好
+	//又考虑到后面提示div中也是都要用的，都有id，综合考虑应该采用id来找，
+	//但是每个id都需要docu...太繁琐，应该封装一个找id的函数
+	
+	//获取各个input
+		//我的方式是通过tarName找的，每个input都写成input[n]的形式，容易出错还不直观看成代表什么节点
+	var userName = $id("userName")
+	
+	//每个验证成功的标志
+	var flag1 = false
+	
+	//找到input
+	var inputs = document.getElementsByTagName("input")
+	var btn =  inputs[inputs.length-1]//这种方式学习下
+	//当获取焦点或失去焦点时的提示：
+		//我的是点击按钮时才去验证的，因为没可看到题目，按自己的理解来写的
+	var reminder
+	//当获得焦点时，提示
+	userName.onfocus = function (){
+		reminder = "1、由字母、数字、下划线、点、减号组成<br>2、只能以数字、字母开头或结尾，且长度为4-18"
+		userNameId.innerHTML = reminder
+	}
+	//失去焦点时，验证输入框
+	//从表单输入框中获取到的字符串
+		//与我的对比省去了创建好多变量，str因为好多函数都要用，所以设为全局
+	var str
+	userName.onblur = function (){
+		str = userName.value
+		//正则表达式
+			//与我的对比，正则表达式不用刻意用，像为空这种直接判断就是了
+		var reg = /^[0-9a-z][0-9a-z\_\-\.]{2,16}[0-9a-z]$/gi
+			//注意如果想匹配特殊符号$&%#@等这些，为了避免其本身本来有含义，例如$表示行位匹配，所以都在前面加\
+		if(str === ""){
+			reminder = "通行证用户名不能为空，请输入通行证用户名"
+			userNameId.innerHTML = reminder
+		}else if(reg.test(str)){
+			userNameId.innerHTML = "ok"
+		}
+		
+	}
+	//封装一个通过id找节点的方法
+	function $id(id){
+		return document.getElementById(id)
+	}
+</script>
+
+</html>
+		

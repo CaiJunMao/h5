@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var str=new Array(1,1,1,2,2,2,3,3,3,4,5,6);
+		Array.prototype.deleteRepeat=function(){
+			console.log(this);
+			var arr =this;
+			var noarray=new Array();
+			this.forEach(function(v,i,array){
+				//console.log(v)
+				if (noarray.indexOf(array[i])==-1){
+					noarray.push(array[i]);
+				}
+			});
+			return noarray;
+		};
+		console.log(str.deleteRepeat());
+	</script>
+</html>

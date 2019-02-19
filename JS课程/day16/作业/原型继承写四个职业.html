@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function Person(basicMoney){
+			this.basicMoney = basicMoney
+		}
+		function Farmer (){}
+		Farmer.prototype = new Person(1000)
+		Farmer.prototype.constructor = Farmer
+		function Attendant (){}
+		Attendant.prototype = new Person(1000)
+		Attendant.prototype.constructor =Attendant
+		function Teacher(dayMoney){
+			this.dayMoney = dayMoney
+		}
+		Teacher.prototype = new Person(1000)
+		Teacher.prototype.constructor =Teacher
+		function Scientist(ageMoney){
+			this.ageMonet = ageMoney
+		}
+		Scientist.prototype = new Person(1000)
+		Scientist.prototype.constructor =Scientist
+		var farmer = new Farmer()
+		var attendant = new Attendant()
+		var teacher = new Teacher(100)
+		var scientist = new Scientist(10000)
+		console.log(farmer.basicMoney)
+		console.log(attendant.basicMoney)
+		console.log(teacher)
+		console.log(scientist)
+	</script>
+	<!--征哥方法-->
+	<script type="text/javascript">
+		//农民
+		function Farmer(basicSalary){
+			this.basicSalary = basicSalary
+		}
+		//教师
+		function Teacher(basicSalary,classSalary){
+			//借调
+			Farmer.call(this.basicSalary)
+			this.classSalary  = classSalary
+		}
+		//将老师的原型设置为Farmer
+		Teacher.prototype = new Farmer(3000)
+		Teacher .prototype.constructor = Teacher
+		//计算老师的全部工资的方法
+		Teacher.prototype.allSalary = function(){
+			return this.basicSalary + this.classSalary
+		}
+		//创建Teacher对象
+		var t1 = new Teacher(15000,5000)
+		console.log("老师的平均月薪："+t1.allSalary())
+		//科学家
+		function Scientist(baseSalary,yearSalary){
+			//借调
+			this.yearSalary = yearSalary
+		}
+		Scientist.prototype = new Farmer(3000)
+		Scientist .prototype.constructor = Scientist
+		Scientist.prototype.allSalary = function(){
+			return this.basicSalary + this.yearSalary
+		}
+		var s3 = new Scientist(6000,1200000/12)
+		console.log("科学家的平均月薪："+t1.allSalary())
+	</script>
+</html>
