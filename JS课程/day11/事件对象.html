@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>事件对象</h1>
+		<pre>
+			基本理解：
+				在触发 DOM 上的某个事件时，会产生一个事件对象 event，包含着事件的基本信息
+				事件类型不一样，event可用的属性与方法也不一样。不过不管哪种类型的事件，都具有下面的属性和方法
+				常见属性：
+					bubbles 表明事件是否冒泡
+					target 事件的目标(事件发生的目标元素)
+					type 被触发的事件的类型
+				常见方法：preventDefault() 取消事件的默认行为
+				DOM2 级事件处理
+					addEventListener() 添加事件处理程序
+					removeEventListener() 删除事件处理程序
+					DOM 节点中都包含这两个方法，并且它们都接受 3 个参数
+						1、事件名(例如：click、focus等，注意这里写事件名字的时候 不能带on )
+						2、事件处理程序的函数
+						3、一个布尔值  true在捕获阶段调用事件处理程序；false 在冒泡阶段
+					例：
+						//定义事件处理程序。
+					    function handler (event) {
+					    	if(event.type == "click"){ // 根据事件的类型不同，进行不同的处理
+					    		console.log("你单击了我");
+					    	}else if(event.type = "dbclick"){
+					    		console.log("你双击我了我");
+					    	}
+					    }
+					    //给click事件注册监听器
+	   					btn.addEventListener("click", handler, false);
+					    //点击这个按钮把第一个按钮的单击事件移除
+					   	cancelBtn1.onclick = function () {
+					   		btn.removeEventListener("click", handler, false);
+					   	}
+				event对象的高级属性  都是event调用
+					offsetX和offsetY 光标相对于触发元素边界的X、Y坐标，把左上角的位置看做0，0
+						console.log('offsetX:' + event.offsetX + ", offsetY:" + event.offsetY)
+					screenX和screenY 光标相对于屏幕边缘的x、y坐标
+					clientX和clientY 光标相对于浏览器浏览器窗口客户区域左上角的坐标(客户区域不包括状态栏、菜单栏等。)
+					pageX和pageY 获取光标在文档中的位置 ，如页面进行的滚动，即使光标没有任何移动，那么pageY也会变化
+					扩展：对于元素本身偏移，有以下属性，只读的，不能修改
+						element.offsetParent：返回元素的偏移容器。
+							 会一直在父级容器中找，直到找到定位的父容器，否则这个就是body
+						element.offsetHeight：返回元素的高度
+						element.offsetWidth：返回元素的宽度
+						element.offsetLeft：返回元素的水平偏移位置，相对于父容器的偏移量
+						element.offsetTop：返回元素的垂直偏移位置，相对于父容器的偏移量
+					stopPropagation()
+						正常情况当把鼠标放在外部div和内部div重合的区域的时候，两个div都可以收到事件。
+						当在内部div的处理程序添加stopPropagation()方法后,
+						则鼠标放在重合区域的上方是外部div就收不到冒泡事件了
+						event.stopPropagation();
+					preventDefault() 取消事件的默认行为
+				事件代理(事件委托)
+					应用原因：
+						当一个页面中需要给比较多的元素添加事件处理程序的时候，
+						以前的做法是通过找到每个元素，然后逐一的去添加，
+						这样做耗费时间、占资源、代码不利于维护
+					处理原理：
+						点击元素时该点击事件会冒泡到上层元素，故在上层元素添加监听器，
+						通过event.target获得点击的元素，从而知道点击了哪个元素。
+					适用事件：click 、 mousedown 、 mouseup 、 keydown 、 keyup 和 keypress
+					例子：
+						ul id="myGirls">
+					        li id="zhiling">志玲/li>
+					        li id="baizhi">柏芝/li>
+					        li id="fengjie">凤姐/li>
+					        li id="yifei">亦非/li>
+					    /ul>
+					    script type="text/javascript">
+						    var myGirls = document.getElementById("myGirls");
+						    myGirls.addEventListener("click", function(event) {
+						        var tagetId = event.target.id;
+						        // alert(tagetId);
+						        switch (tagetId) {
+						            case "zhiling":
+						                alert("我是志玲，哥哥你要干吗");
+						                break;
+						            case "baizhi":
+						                alert("我是柏芝，我以后再也不找冠希了");
+						                break;
+						            case "fengjie":
+						               	alert("我是凤姐，我已经整容了，没有以前那么丑了");	
+						                break;
+						            case "yifei":
+						               	alert("我是亦非，我干爹是富豪");
+						                break;
+						            default:
+						                alert("你一个都不点是啥意思");
+						                break;
+						        }
+						    }, false);
+    					/script>
+		</pre>
+	</body>
+</html>

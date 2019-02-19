@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>随手指移动的小球</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				height: 100%;
+			}
+			div{
+				height: 100%;
+				background-color: gray;
+			}
+			div p{
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+				background-color: red;
+				position: relative;
+				left: 0;
+				top: 50px;
+			}
+			#btn{
+				width: 200px;
+				height: 50px;
+				font-size: 30px;
+				text-align: center;
+				color: blueviolet;
+				margin: 0 auto;
+				position: fixed;
+				border-radius: 15px;
+				background-color: greenyellow;
+				outline: none;
+				z-index: 100;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<button id="btn">原路返回</button>
+			<p></p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 找到p标签
+		var circle = document.querySelector("p")
+		var button = document.getElementById("btn")
+		var lefts = []
+		var tops = []
+		// 把初始位置记录下来
+		lefts.push(0)
+		tops.push(50)
+		// button监听鼠标进入事件
+		button.addEventListener("mouseover", function(){
+			//box.removeEventListener("mousemove", moveMouse)
+			box.removeEventListener("click", moveMouse)
+		}, false)
+		// button监听鼠标离开事件
+		button.addEventListener("mouseout", function(){
+			//box.addEventListener("mousemove", moveMouse, false)
+			box.addEventListener("click", moveMouse, false)
+		})
+		// 为了取消【moveMouse】事件的监听，特意给了个名字
+		var moveMouse = function(event){
+			//console.log(event.clientX + " " + event.clientY)
+			//console.log(circle.offsetWidth + " " + circle.offsetHeight)
+			var divLeft = event.clientX - circle.offsetWidth / 2
+			var divTop = event.clientY - circle.offsetHeight / 2
+			//var divTop = event.clientY -  circle.offsetHeight
+			//把divLeft压栈到lefts数组中
+			lefts.push(divLeft)
+			tops.push(divTop)
+			console.log(divLeft + " " + divTop)
+			circle.style.left = divLeft + 'px'
+			circle.style.top = divTop + 'px'
+		}
+		// 鼠标在box中移动的时候
+		//box.addEventListener("mousemove", moveMouse, false)
+		box.addEventListener("click", moveMouse, false)
+		// 点击button，原路返回
+		btn.onclick = function(){
+			/*var id = setInterval(function(){
+				if(lefts.length === 0 || tops.length === 0){
+					clearInterval(id)
+				}
+				// 在出栈的时候，会改变数组的长度
+				circle.style.left = lefts.pop() + 'px'
+				circle.style.top = tops.pop() + 'px'
+			}, 50)*/
+			asyncFunction().then(function(result){
+				// 成功
+				if(result){
+					circle.style.left = 0 + 'px'
+					circle.style.top = 50 + 'px'
+				}
+			}, function(){
+				// 失败
+			})
+		}
+		
+		// asyncFunction函数
+		function asyncFunction(){
+			//Promise对象用于处理异步事件
+			return new Promise(function(resolve, reject){
+				var id = setInterval(function(){
+					if(lefts.length === 0 || tops.length === 0){
+						clearInterval(id)
+					}
+					// 在出栈的时候，会改变数组的长度
+					circle.style.left = lefts.pop() + 'px'
+					circle.style.top = tops.pop() + 'px'
+					
+					if(lefts.length === 0 || tops.length === 0){
+						// 调用成功时的函数
+						resolve(true)
+					}
+				}, 50)
+			})
+		}
+	</script>
+</html>

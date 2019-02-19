@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>字符串变化</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//我的方法：截取加连接，忽略了首字母大写这个条件，改也不难，每段小写，而不是最后合起来再小写就行了
+		function changeStr(){
+			var inpStr = prompt("请输入单词字符串")
+			var len = inpStr.length;
+			var asciiCode;
+			var start = 0;//截取开头位置
+			var end;//截取最后一个元素的下一个位置
+			var newStr ="";
+			for ( var i = 1 ;i < len;i ++ ) {//忽略首字母，从第二个字母读取
+				asciiCode = inpStr.charCodeAt(i);
+				//console.log(asciiCode)
+				//如果遇到大写，将其改为小写，并在之前插入空格,
+				//因为没有直接插入字符串的函数，那么只能遇到大写就先将之前的截取下来，最后合起来
+				
+				if (asciiCode >=65 && asciiCode <= 90) {
+					
+					end = i//截取的最后一个元素的下一位索引，但是最后一段没大写的话怎么办，所以需要加判断
+					
+					//每截一段，加入字符串中,HelloMyWrod
+					//newStr +=inpStr.substring(start,end)+" "
+					newStr =newStr+" "+inpStr.substring(start,end)
+					console.log(inpStr+"分"+inpStr.substring(start,end))
+					//console.log(newStr)
+					//每截一段索引开始位置改变
+					start = end;
+				}
+				//判断是否到了最后一位，到了再加上这一段
+				if(i == len-1){
+						end = len//最后一位截取时不包括，所以还得往后走一位
+						newStr =newStr+" "+inpStr.substring(start,end)
+						console.log(newStr)
+						
+					}
+			}
+			//将插好空格的字符串转为小写并弹出：
+			alert("您输入的字符串为:"+inpStr+"，转化为："+newStr.toLowerCase())
+		}
+		
+		//征哥方法:找到大写字母，用“ m”代替M。“ m”可由空格+str[i].toLowerCase()得到
+		function change(str){
+			for (var i = 1; i < str.length; i++){
+				if (str[i] >= "A" && str[i] <= "Z"){
+					var newStr = " " + str[i].toLowerCase();//" m"
+					str = str.replace(str[i], newStr)//用“ m”代替M
+				}
+			}
+			return str
+		}
+		//调用
+		//alert(change("HelloMyWorld"))
+		changeStr();
+	</script>
+</html>

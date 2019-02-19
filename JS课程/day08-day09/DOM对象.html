@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>DOM对象</title>
+	</head>
+	<body>
+		<input id = "myIdName" class="myClassName" name="myInputName" >
+			
+		</input>
+		<h1>DOM对象</h1>
+		<pre>
+			基本认识：
+				DOM（文档对象模型）是针对 HTML 和 XML 文档的一个 API（应用程序编程接口）
+				DOM 描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的某一部分
+				DOM核心对象---document对象
+				W3C DOM标准分为3部分：core DOM、XML DOM 、HTML DOM
+				我们只学HTML DOM——是关于如何获取、修改、添加或删除 HTML 元素的标准，即操作HTML的元素
+				DOM Level 1:于1998年10月成为W3C的推荐标准，dom0其实不存在，把之前的称为dom0
+			节点概述：
+				document节点是每个文档的根节点，理解成整个文档抽象成的节点
+				document节点下面只有一个 html节点，即文档元素documentElement
+					文档元素是文档的最外层元素，其他元素都包含在文档元素中
+					一个文档只能有一个文档元素，在html中，文档元素永远是 《html》元素
+				在DOM树中，html文档中每一处标记都可以用树中的一个节点来表示
+					文档类型，如声明头!DOCTYPE html>(声明头：声明文档类型为html)这个声明头是文档类型节点，
+					html(元素)标签，通过元素节点表示
+					属性，通过属性节点来表示
+					注释，通过注释类型来表示，注释也是个节点
+			节点分类：
+				DOM中，共有12中节点类型：记住以下前6个的节点类型，即数字编号
+				元素类型				节点类型nodeType
+				ELEMENT_NODE元素 			1
+				ATTRIBUTE_NODE 属性			2
+				TEXT_NODE 文本				3
+				COMMENT_NODE 注释			8
+				DOCUMENT_NODE 文档			9 	 根节点
+				DOCUMENT_TYPE_NODE 			10    文档类型节点节点，每个文档类型都有它
+				CDATA_SECTION_NODE 			4 	子节点一定为TextNode
+				ENTITY_REFERENCE_NODE 		5	文档中的实体引用
+				ENTITY_NODE 				6 	无子节点
+				PROCESSING_INSTRUCTION_NODE 7	文档处理程序使用的特有指令无子节点		
+				DOCUMENT_TYPE_NODE 			10    文档节点都有一个DocumentType节点
+				DOCUMENT_FRAGMENT_NODE 		11  轻量级或者更小型的Document节点
+				NOTATION_NODE  				12  在XML文档中表示一个符号
+			节点属性（特性）：nodeName、nodeValue、nodeType
+					nodeName (节点名称)		nodeValue (节点值)   nodeType(节点类型) 
+				元素节点: 标签名			undefined 或 null 	1
+				属性节点: 属性名			属性值			2
+				文本节点: #text				文本本身		3
+				注释节点: #comment			注释里面的内容		8
+				文档节点: #document			null 			9
+			document对象
+				在浏览器中，document对象是 HTMLDocument （继承自 Document 类型）的一个实例，
+				表示整个 HTML 页面。
+				document对象是 window 对象的一个属性，因此可以将document对象作为全局对象来访问
+				document的子节点可能是一个 DocumentType （最多一个，声明头）、 
+				Element （最多一个，html）、 Processing Instruction或 Comment
+			</pre>
+		<pre>
+			获取节点的方法：
+				获取属性节点：元素.getAttributeNode(“属性名”)
+				文本节点、注释节点：元素的子节点获取
+				文档节点: 不用获取是全局的，例如document.write();这里就是用到了document节点
+				标签节点（重点）：
+				 * 1、getElementById(id)
+					 * id:节点的id值。
+					 * 不能查到多个id，会视为这是一个id值，所以找不到，例如
+					 * 	getElementById("mydiv1 mydiv2")
+					 * 如果有多个元素的id相同，则只返回第一个元素。一般情况，不要给多个元素起同名id
+					 * 在ie8以下，id值不区分大小写	
+				 * 2、getElementsByTagName(tagName)
+					 * tagName：标签名
+					 * 因为可能有多个相同标签，故返回的是多个Element组成的集合，NodeList
+					 * 【NodeList对象】NodeList表示节点列表
+					 * 类数组集合：返回的是一个只读的类数组对象
+					 * 也拥有length属性，可以像数组一样用索引访问
+						 两种访问方法：
+						 * 	通过下标：h1s[i].id
+						 * 	或item[下标]：访问 h1s.item(i)
+					 * 为了提高性能，在开发的时候应该尽量避免使用getElementsByTagName，应该使用getElementById
+				 * 3、getElementsByClassName(classname)
+				 	classname:标签的class值;
+				 	返回NodeList
+				 * 4、getElementByName(name)
+					 * name：标签的name属性的值
+					 * 返回NodeList
+					 * 只有表单标签input这些才有name属性
+					 * 最好别用，有兼容性问题，如在ie中，此方法可获取id属性匹配的值。所以一般把id和name设为不同的值
+					示例：
+					//根据id获取元素，h1.id
+					//var h1 = document.getElementById("myIdName");
+					//通过classname,返回数组，不能这样h1.id，而是h1[0].id
+					//var h1 = document.getElementsByClassName("myClassName")
+					//通过标签名,返回是数组
+					//var h1 = document.getElementsByTagName("input")
+					//通过name属性,返回数组
+					var h1 = document.getElementsByName("myInputName")
+					console.log(h1[0].id);  //查看这个元素的id
+					console.log(h1[0].className);  //元素的 className,注意不是class，那是关键字
+					console.log(h1[0].innerHTML);	//查看元素包含的所有HTML文本
+				 * 5、querySelector(css选择器)
+				 	返回一个标签，找不到的话返回null
+				 * 6、querySelectorAll(css选择器)
+				 	返回所有匹配的元素，NodeList
+					 * HTML5才开始引入。
+				 * 7、获取documentElement元素，即html：document.documentElement
+				 注意：除了getElementById(id)、querySelector、获取documentElement元素，其他都是返回Nodelist,需要通过数组下标或item访问
+				
+		</pre>
+		<pre>
+			节点与节点关系：
+				根(root)节点，一个文档只能有一个根节点。对html文档来说，根节点就是documentElement,html?。根节点不可能有父节点？document不是html的父节点？ 
+				兄弟（sibling）节点,即同级的子节点，称为同胞（兄弟或姐妹）。同胞是拥有相同父节点的节点
+				父节点（根节点root无父节点）
+					子节点1
+					子节点2（子节点1的兄弟节点）
+			获取节点：
+				childNodes属性：获取一个元素的所有子节点（但是不能获取到子节点的子节点）
+				firstChild属性：获取一个元素的第一个子节点
+				lastChild属性：获取一个元素的最后一个子节点
+				parentNode属性：获取一个元素的父节点
+				previousSibling属性：获取一个元素的上一个兄弟节点
+				nextSibling属性：获取一个元素的下一个兄弟节点
+				 * 拓展：
+					 * 在ie9以下，alert当前节点的firstChild实际上是p
+					 * 但是在新浏览器下，会将div之间的空白节点也解析出来，所以弹出#text,因为空白字符也是文本节点
+					 * 问题L如何删除空白节点，得到有内容的节点？
+					方法一，用函数判断后再去取：
+						function getFirst(elem){
+							for (var i = 0, e; e = elem.childNodes[i++];) {
+								if(e.nodeType == 1){
+									return e
+								}
+							}
+						}
+						 var first = document.getElementsByTagName("div")[0]
+						 console.log(first)
+						 console.log(getFirst(first).nodeName)
+					方法二：使用扩展属性
+						1 * DOM中直接扩展了一个新的属性：
+						  * firstChild----->firstElementChild
+						  * lastChild ----> lastElementChild
+						  * nextSibling ----> nextElementSibling
+						  * previousSibling---> previousElementSibling
+						2【children属性】不是标准属性。返回指定元素的子元素结合。
+						  * 只返回HTML元素节点，不会返回文本节点。虽然不是标准属性，但是它和
+						  * innnerHTML一样，几乎得到了所有的浏览器的支持
+						  【childElementCount属性】获取子元素的数量和children.length相同
+						但是拓展的属性firstElentChild在ie678中没有该属性，一旦使用立即报错，不兼容，
+						所以为了兼容，先判断浏览器版本，低的用最上面那种，高的用扩展属性
+			修改节点：记住这些方法的名字，不借助编辑器也要能写
+				 * 1、创建文本节点：creatTextNode(text)
+				 * 	document调用
+				 * 2、添加一个child元素：appendChild(node)
+				 * 	父元素调用
+				 * 返回值：参数对象本身
+				 * 	如果元素本身有了child，则直接追加到原本的child之后，成为lastChild
+				 * 3、创建新的元素节点：createElement(nodeName)
+				 * 	document调用
+				 * 	nodeName需要创建元素的名称
+				 * 	返回值创建的元素节点
+				 * 4、在一个节点前插入一个新的节点：insertBefore(newnode,existingnode)
+				 * 	用父节点调用？
+				 * 新节点，目标节点
+				 * 5、removeChild(node) 移除子节点
+				 * 	node：需要移除的子节点
+				 * 节点自己不能干掉自己，只能通过父节点来移除
+				 * ？可以是同时移除多个子节点
+				 * 6、replaceChild(newNode,oldNode)
+				 *  父元素调用
+				 * 7、cloneNode(deep) 克隆节点
+				 * 	创建指定节点的精确拷贝，属性、属性值，并返回节点副本
+				 *  deep为true，则深度拷贝，递归复制当前节点所有子节点
+				 * 	false，浅拷贝，只复制当前节点
+			属性节点操作
+				 * element.getAttribute(attributename)
+					 * 获取属性值
+					 * 返回：元素的指定属性的值。
+					 * 参数：属性名  (id, className, title)
+				 * element.setAttribute(attributename,attributevalue)
+					 * 创建或更改某个属性的值
+					 * 参数：属性名 新的属性值
+					 * 如果指定的属性存在，则只设置即可
+					 * 如果不存在，先创建再设置该属性
+				 * element.removeAttribute(attributename)
+					 * 参数：要删除的属性名
+					 * 拓展：hasAttribute(AttributeName)
+					 * 判断属性值是否存在
+			元素节点的常用属性：
+				tagName属性 对于元素节点标签节点，tagName属性==nodeName
+				innerHTML属性  开始和结束标签之间的 HTML
+				innerText属性 innerText值获取标签中的文本内容，子标签本身不会获取到
+					带有标签也会把标签作为纯文本来对待，而不会解析为标签
+				id属性
+				className属性
+				value属性 表单数据才具有vlaue：input、textarea、select
+				拓展：如果元素有id，则浏览器会自动创建同名变量
+				 * 表示这个dom元素，如input1,所以有id的标签其实可以不用找，直接用就行了
+				 * input1.value
+				 * 但是实际开发不建议这么用，因为浏览器自动创建id变量这个以后可能不支持
+			css脚本化：可以通过JavaScript访问css的属性，并修改css属性
+				 * 行间样式
+					 * 1. element.style.css属性名
+						 * 这里属性名写成驼峰式，backgroundColor
+					 * 2. element.style["属性名"]
+						 * 这里写成字符串的形式，“background-color”
+					 * 注意：访问时只能是行间样式，就算行间样式没有，这里也不会访问到内部和外部样式
+					 * 这里是对象访问元素，数组访问是用下标
+				 * 内部和外部样式
+					 * 1. 对ie浏览器：对象.currentSytle["属性名"
+					 ]
+					 * 2. 其他浏览器：window.getComputedStyle(对象，null)["属性名"]
+				为了简化书写和兼容浏览器，一般封装一个方法来获取内部和外部样式
+				   	function getStyle (obj, attributeName) {	
+				   		if(obj.currentStyle){	//如果存在对象，则是在ie浏览器
+				   			return obj.currentStyle[attributeName];
+				   		}else {	//其他浏览器
+				   			return window.getComputedStyle(obj, null)[attributeName];
+				   		}
+				   	}
+		</pre>
+
+
+
+		</pre>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 获取节点的方法
+		 * 1、getElementById(id)
+		 * 	id:节点的id值。
+		 * 	不能查到多个id，会视为这是一个id值，所以找不到，例如
+		 * 		getElementById("mydiv1 mydiv2")
+		 * 	如果有多个元素的id相同，则只返回第一个元素。一般情况，不要给多个元素起同名id
+		 * 	在ie8以下，id值不区分大小写
+		*/
+		//根据id获取元素，h1.id
+		//var h1 = document.getElementById("myIdName");
+		//通过classname,返回数组，不能这样h1.id，而是h1[0].id
+		//var h1 = document.getElementsByClassName("myClassName")
+		//通过标签名,返回是数组
+		//var h1 = document.getElementsByTagName("input")
+		//通过name属性,返回数组
+		var h1 = document.getElementsByName("myInputName")
+		console.log(h1[0].id);  //查看这个元素的id
+		console.log(h1[0].className);  //元素的 className,注意不是class，那是关键字
+		console.log(h1[0].innerHTML);	//查看元素包含的所有HTML文本
+		//console.log(h1.attributes);	//查看元素属性
+		/**
+		 * 2、getElementsByTagName(tagName)
+		 * 	标签名
+		 * 因为可能有多个相同标签，故返回的是多个Element组成的集合，即数组，两种访问方法：
+		 * 通过下标：h1s[i].id
+		 * 或item[下标]：访问 h1s.item(i)
+		 * 	为了提高性能，在开发的时候应该尽量避免使用getElementsByTagName，应该使用getElementById
+		 * 3、getElementByName(name)
+		 * 	name属性
+		 * 	返回的是多个Element组成的集合，看成数组，通过下标访问
+		 * 只有表单标签input这些才有name属性
+		 * 	最好别用，有兼容性问题，如在ie中，此方法可获取id属性匹配的值。所以一般把id和name设为不同的值
+		 */
+		
+		/**
+		 * 拓展：
+		 * 在ie9以下，alert当前节点的firstChild实际上是p
+		 * 但是在新浏览器下，会将div之间的空白节点也解析出来，所以弹出#text,因为空白字符也是文本节点
+		 * 问题L如何删除空白节点，得到有内容的节点？
+		 */
+		function getFirst (elem){
+			for (var i = 0,e; e = elem.childNodes[i++];) {
+				if (e.nodeName == 1) {
+					//return e//返回内容节点
+					
+				}else{
+					return elem//返回父节点
+				}
+				
+			}
+		}
+		var first = document.getElementsByTagName("input")[0]
+		console.log(first)
+		console.log(first.nodeName)//input
+		console.log(getFirst(first))//undefined?
+		//console.log(getFirst(first).nodeName)
+		/**
+		 * DOM中直接扩展了一个新的属性：firstChild ->firstElementChild,
+		 * 同理：lastElementChild,nextElementChild,previousElementChild?
+		 */
+		//console.log(first.firstElementChild.nodeName)
+		/**
+		 * 但是拓展的属性firstElentChild在ie678中没有该属性，一旦使用立即报错，不兼容
+		 * 【childrn属性】不是标准属性。返回指定元素的子元素集合。只返回HTML节点？，不会返回文本节点、注释节点。而且和InnerHTML一样，几乎得到了所有浏览器的支持
+		 
+		 */
+		console.log(first.children.length)//1
+		//childElementCount属性。获取子元素的数量=children.length
+		console.log(first.children[0])
+		/**
+		 * 为了兼容，先判断浏览器版本，低的用最上面那种，高的用扩展属性
+		 */
+		
+		/**
+		 * 修改
+		 * 1、创建文本节点：creatTextNode(text)
+		 * 	document调用
+		 * 2、添加一个child元素：appendChild(node)
+		 * 	父元素调用
+		 * 返回值：参数对象本身
+		 * 	如果元素本身有了child，则直接追加到原本的child之后，成为lastChild
+		 * 3、创建新的元素节点：createElement(nodeName)
+		 * 	document调用
+		 * 	nodeName需要创建元素的名称
+		 * 	返回值创建的元素节点
+		 * 4、在一个节点前插入一个新的节点：insertBefore(newnode,existingnode)
+		 * 	用父节点调用？
+		 * 新节点，目标节点
+		 * 5、removeChild(node) 移除子节点
+		 * 	node：需要移除的子节点
+		 * 节点自己不能干掉自己，只能通过父节点来移除
+		 * ？可以是同时移除多个子节点
+		 * 6、replaceChild(newNode,oldNode)
+		 *  父元素调用
+		 * 7、cloneNode(deep) 克隆节点
+		 * 	创建指定节点的精确拷贝，属性、属性值，并返回节点副本
+		 *  deep为true，则深度拷贝，递归复制当前节点所有子节点
+		 * 	false，浅拷贝，只复制当前节点
+		 * 
+		 */
+		/**
+		 * 属性节点操作
+		 * element.getAttribute(attributename)
+		 * 获取属性值
+		 * 返回：元素的指定属性的值。
+		 * 参数：属性名  (id, className, title)
+		 * element.setAttribute(attributename,attributevalue)
+		 * 创建或更改某个属性的值
+		 * 参数：属性名 新的属性值
+		 * 如果指定的属性存在，则只设置即可
+		 * 如果不存在，先创建再设置该属性
+		 * element.removeAttribute(attributename)
+		 * 参数：要删除的属性名
+		 * 拓展：hasAttribute(AttributeName)
+		 * 判断属性值是否存在
+		 */
+		/**
+		 * 拓展：如果元素有id，则浏览器会自动创建同名变量
+		 * 表示这个dom元素，如input1,所以有id的标签其实可以不用找，直接用就行了
+		 * input1.value
+		 * 但是实际开发不建议这么用，因为浏览器自动创建id变量这个以后可能不支持
+		 */
+		/**
+		 * 操作css样式表
+		 * 行间样式
+		 * 获取：
+		 * element.style.css属性名 如 box是id名，box.style.color
+		 * 有2中方式访问和更改到行间样式表,
+		 * 注意访问时只能是行间样式，就算行间样式没有，也不会这里访问到内部和外部样式
+		 * 1. element.style.css属性名
+		 * 这里属性名写成驼峰式，backgroundColor
+		 * 2. element.style["属性名"]
+		 * 这里写成字符串的形式，“background-color”
+		 * 对象访问元素，数组访问是用下标
+		 * ？element[id]?能获取id?
+
+		 * 内部和外部样式
+		 * 1. 对ie浏览器：对象.currentSytle["属性名"]
+		 * 2. 其他浏览器：
+		 * window.getComputedStyle(对象，null)["属性名"]
+
+		 */
+		/*
+	   		为了简化书写和兼容浏览器，一般封装一个方法来获取内部和外部样式
+	   	*/
+	   	function getStyle (obj, attributeName) {	
+	   		if(obj.currentStyle){	//如果存在对象，则是在ie浏览器
+	   			return obj.currentStyle[attributeName];
+	   		}else {	//其他浏览器
+	   			return window.getComputedStyle(obj, null)[attributeName];
+	   		}
+	   	}
+	</script>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片轮播进阶</title>
+		<style type="text/css">
+		 	.outer{
+		 		width:610px;
+		 		height:350px;
+		 		border:1px dotted pink;
+		 		position: relative;
+		 		margin: 0 auto;
+		 		overflow: hidden;
+		 	}
+		 	.outer #box{
+		 		width:3660px;
+		 		height:350px;
+		 		position: absolute;
+		 		font-size:0;
+		 		/*解决img空隙*/
+		 		
+		 	}
+		 	.outer div.listItem{
+		 		width:610px;
+		 		height:35px;
+		 		position: absolute;
+		 		left: 0;
+		 		bottom:0;
+		 		background-color: rgba(131,131,130,0.7);
+		 	}
+		 	.outer div.listItem ul{
+		 		padding: 0;
+		 		margin: 0 auto ;
+		 		list-style: none;
+		 		/*display: block;*/
+		 		/*border: solid 1px green;*/
+		 		height:35px;
+		 		/*要设置宽度，margin才起作用*/
+		 		width: 168px;
+		 		/*消除浮动带来影响*/
+		 		text-align: center;
+		 	}
+		 	.outer div.listItem ul li{
+		 		float:left;
+		 		/*设为内联块，还能适用父元素的居中text-align*/
+		 		height:35px;
+		 		
+		 		/*垂直居中*/
+		 		width: 22px;
+		 		/*border: solid 1px red;*/
+		 		margin-left: 8px;
+		 		/*margin: 0 auto ;*/
+		 		/*text-align: center;*/
+		 	}
+		 	.outer div.listItem ul li div.item{
+		 		margin-top: 22%;
+		 		/*他的父元素设置行高即可居中*/
+		 		height:22px;
+		 		width: 22px;
+		 		/*border: solid 1px blue;*/
+		 		border-radius: 50%;
+		 		background-color: lightgray;
+		 		/*font-size: 10px;*/
+		 		/*line-height: 35px;*/
+		 		color: white;
+		 		font-weight: 500;
+		 	}
+		 	.outer div.listItem ul li div.item:hover{
+		 		background-color: red;
+		 	}
+		 	img{
+		 		width:610px;
+		 		height:350px;
+		 		
+		 		/*//display: block;*/
+		 		
+		 	}
+		 	#pre{
+		 		position: relative;
+		 		left: 0;
+		 		top: 35%;
+		 		height: 40px;
+		 		width: 50px;
+		 		color: white;
+		 		font-size: 25px;
+		 		line-height: 40px;
+		 		background-color: rgba(131,131,130,0.7);
+		 		/*visibility:hidden ;*/
+		 		display: none;
+		 		/*z-index: 999;*/
+		 		cursor: pointer;
+		 	}
+		 	/*不一定非要放#pre上对#pre进行样式改变，而是通过在其他元素上来控制#pre*/
+		 	.outer:hover #pre{
+		 		
+		 		display: block;
+		 		/*visibility: visible;*/
+		 	
+		 	}
+		 	#next{
+		 		position: absolute;
+		 		right: 0;
+		 		top: 35%;
+		 		height: 40px;
+		 		width: 50px;
+		 		color: white;
+		 		font-size: 25px;
+		 		line-height: 40px;
+		 		text-align: right;
+		 		background-color: rgba(131,131,130,0.7);
+		 		cursor: pointer;
+		 		display: none;
+		 	}
+		 	.outer:hover #next{
+		 		
+		 		display: block;
+		 		/*visibility: visible;*/
+		 	
+		 	}
+		 	</style>
+	</head>
+	<body>
+		<div class="outer">
+			<a href=""></a>
+			<div id="box">
+				<img src="img/1.jpg" alt="" onclick="nowImg(this)" onmouseout="imgLeave()">
+				<!--img[src="img/" alt]*6-->
+				<!--p{$}*8-->
+				<!--div>div_1>div_2>img[src=img/$_1.jpg]*6-->
+				<img src="img/2.jpg" alt="" onclick="nowImg(this)" onmouseleave="imgLeave()" />
+				<img src="img/3.jpg" alt="" onclick="nowImg(this)" onmouseleave="imgLeave()"/>
+				<img src="img/4.jpg" alt="" onclick="nowImg(this)" onmouseleave="imgLeave()"/>
+				<img src="img/5.jpg" alt="" onclick="nowImg(this)" onmouseleave="imgLeave()"/>
+				<img src="img/1.jpg" alt="" onclick="nowImg(this)" onmouseleave="imgLeave()"/>
+				<!--这一张用来使图片轮播时，上一张跳转到第一张时不会闪一下-->
+			</div>
+			<div class = "listItem">
+				<ul>
+					<!--li{$}*5-->
+					<li><div class="item" onmouseover="itemOver(this)" onmouseleave="itemLeave()">1</div></li>
+					<li><div class="item" onmouseover="itemOver(this)"onmouseleave="itemLeave()">2</div></li>
+					<li><div class="item" onmouseover="itemOver(this)"onmouseleave="itemLeave()">3</div></li>
+					<li><div class="item" onmouseover="itemOver(this)"onmouseleave="itemLeave()">4</div></li>
+					<li><div class="item" onmouseover="itemOver(this)"onmouseleave="itemLeave()">5</div></li>
+				</ul>
+			</div>
+			<div id="pre" ><<</div>
+			<div id="next">>></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 显示li表格中div样式的函数
+		 * 不管轮播，还是点击上一张按钮，或点击下一张按钮，其中都有left,由left来判断当前图片对应的li
+		 */
+		function liDivStyle(j){
+			//j为li下标
+			var divs = document.querySelectorAll("li div")
+			//console.log(divs)
+			for (var i = 0; i < divs.length; i++) {
+				divs[i].style.backgroundColor = "lightgray"
+				
+			}
+			if(j == 5){
+				j = 0
+			}
+			divs[j].style.backgroundColor = "red"
+		}
+		//上一张函数
+		pre.onclick = function (){
+			//停下轮播
+			turnStop()
+			//回到上一张图片，即右移，left+610
+			//但是如果一张图片不是刚好完整显示的情况，右移将导致仍不是完整显示的情况
+			if(left == 0){
+				//alert("已经是第一张")
+				left = -2440
+			}
+			//一整张的上一张
+			else if(left % 610 == 0){
+				left += 610
+			}else{
+				left = left-(left % 610)//余数为负数,为刚移了一部分出去的宽，上一张还是这一张图片
+			}
+			//变换图片
+			box.style.left = left + "px"
+			//变换li样式
+				//left为左值，即有abs(left / 610)张在前面，刚好为li坐标
+			var index = Math.abs(left / 610) 
+			console.log("li下标"+index)
+			liDivStyle(index)
+		}
+		//下一张函数
+		next.onclick = function (){
+			//停下轮播
+			turnStop()
+			//回到下一张图片，即左移，left-610
+			
+			if(left == -2440){
+				//alert("已经是最后一张")
+				left = 0
+			}
+			//一整张的下一张
+			else if(left % 610 == 0){
+				left -= 610
+			}else{
+				left = left - (610 + left % 610) 
+				//余数为负数,为刚移了一部分出去的宽，下一张再左移剩下部分即可铺满
+				console.log((-left)+(610-left % 610))
+			}
+			box.style.left = left + "px"
+			//变换li样式
+				//left为左值，即有abs(left / 610)张在前面，刚好为li坐标
+			var index = Math.abs(left / 610) 
+			console.log("li下标"+index)
+			liDivStyle(index)
+		}
+		//鼠标点击图片，轮播暂停并显示当前图片
+		function nowImg(imgObject){
+			/*当前问题描述：图片暂停过程中，将点击图片，延后2秒后图片开始轮播
+				可能原因：上一个定时器未关闭
+			* */
+			//通过前面兄弟的个数。判断当前节点的序号
+			//var subling = imgObject.previousElementSibling
+			//console.log("兄弟"+subling.length)
+			//通过document找到img集合，数组的indexOf方法返回下标
+			//console.log(imgObject)/img
+			var imgList = document.getElementsByTagName("img")
+			//console.log(parentBobje)//div
+			//console.log(imgList)//HTMLCollection(6) [img, img, img, img, img, img]
+			//console.log(imgList.indexOf(imgObject))
+			//数组行不通。认为加index属性给每个img节点
+			for (var i = 0; i < imgList.length; i++) {
+				var a = imgList[i];
+				a.index = i;//给每个img元素添加index属性;
+			}
+			var nowImgIndex = imgObject.index
+			//console.log(nowImgIndex)//0 1 2可以
+			//轮播停止
+			console.log("不停止一下吗？")
+			turnStop()
+			timeOutStop()
+			//回到序号对应的图片
+			left = nowImgIndex * (-610)
+			box.style.left = left + "px"
+		}
+		//图片移出
+		function imgLeave (){
+			console.log("移出图片，定时器id"+turnIntervalId)
+			//为了防止其他地方调用
+			alert("移出")
+			turnPlay()
+		}
+		//轮播开始函数
+		var turnIntervalId = 0
+		var box = document.getElementById("box")
+		var left = 0
+		function turnPlay(){
+			//每隔10ms
+//			turnIntervalId = setInterval(function(){
+//				//往左动
+//				left = left - 1
+//					box.style.left = left + "px"
+//					if (left <= -3050) {
+//						left = 0;
+//					}
+//			},10)
+			//当前定时器不存在才能继续创建
+			console.log("上一个定时器id"+turnIntervalId)
+			if(!turnIntervalId){
+				//这只能判断上一个，而上上个定时器没clearInter,还会继续执行
+				//console.log("上一个定时器id是否清零"+turnIntervalId)
+				console.log("轮播开始")
+				timeInterval()
+				
+			}
+			
+			
+		}
+		function test(){
+			//alert("执行了")
+		}
+		//轮播计时器函数，方便下一次调用
+		function timeInterval(){
+			console.log("这一个定时器id"+turnIntervalId)
+			//每隔10ms
+			turnIntervalId = setInterval(function(){
+				//往左动
+				
+				left = left - 1
+				box.style.left = left + "px"
+				console.log("执行了左移，id:"+turnIntervalId)
+				//动完一张停一下
+				//console.log(-left)
+				
+				if(left % 610 == 0){
+					turnStop()//这里归0导致timePause(turnPlay)每次都通过，再创建了定时器，？但是不是清了上个定时器了吗？清了后面这部分还是会走，只是不会重复调用？
+					//这里需要注意，很有可能在等待的这个过程中，由于turnIntervalId = 0
+					//所以其他函数此时如果去调用	轮播开始函数turnPlay，将通过判断导致再次创建一个定时器				
+					//，所以下面这个调用的应该是turnPlay，再去判断一次，而不是直接再开一个定时器timeInterval
+					//延时2秒重新轮播
+					timePause(turnPlay)
+					//timePause(test)
+					/*但是这样当turnIntervalId为0时就再也不能turnIntervalId = setInterval(function()，
+					 * 即与定时器关联了，这样导致其他地方调用轮播函数turnPlay，都将通过，以至于创建n定时器。
+					 * 故需要在超时定时器中判断当前的定时器是否已清空，清空则说明此时需停止轮播，故不再延时调用
+					 */
+					//变换li样式
+						//left为左值，即有abs(left / 610)张在前面，刚好为li坐标
+					var index = Math.abs(left / 610) 
+					//console.log("li下标"+index)
+					liDivStyle(index)
+				}
+				
+				if (left <= -3050) {
+					left = 0;
+					//最后一张图与第一张图相同，第一张的left = 0刚好，与最后一张left= -3050刚好重合，所以不会闪一下
+				}
+			},1)
+		}
+		//停顿计时器,停顿两秒执行函数a
+		var turnTimeoutId
+		function timePause(a){
+			console.log("将执行延时器，此时定时器id"+turnIntervalId)
+			//console.log("超时定时器，延后两秒再执行")
+			turnTimeoutId = setTimeout(function(){
+				//console.log("将执行延时器，此时定时器id"+turnIntervalId)
+				if(turnIntervalId == 0){
+					//console.log("不执行执行延时器")
+					//return
+					}
+				//console.log("超时定时器，延后两秒再执行")
+					console.log("两秒到了，执行function")
+					a()
+			},2000)
+		}
+		//轮播开始
+		setTimeout(turnPlay,2000)
+		//轮播停止函数
+		function turnStop(){
+			console.log("清空定时器id")
+			clearInterval(turnIntervalId)
+			turnIntervalId = 0;
+		}
+		//超时定时器清除
+		function timeOutStop(){
+			console.log("清空定时器id")
+			clearTimeout(turnTimeoutId)
+			turnTimeoutId = 0;
+		}
+		//turnStop()
+		var onItems = document.getElementsByClassName("item")
+		var onItem1 = onItems[0]
+//		onItem1.onmouseover = function(){
+//			turnStop()
+//			var left = 0//i*610
+//			box.style.left = left + "px"
+//		}
+//		onItem1.onmouseleave = function(){
+//			turnPlay()
+//			
+//		}
+		//不能像下面这样，用集合调用函数
+//		onItems.onmouseover = function(){
+//			turnStop()
+//			var left = 0//i*610
+//			box.style.left = left + "px"
+//		}
+		//这样也不行
+//		for(var i = 0 ; ;i++){
+//			console.log(onItems.length)
+//			onItems[i].onmouseover = function(){
+//				console.log(onItems[i])
+//				turnStop()
+//				var left = i*610
+//				box.style.left = left + "px"
+//			}
+//			//无限循环不可运行
+//			if (i ==4) {
+//				i=0
+//			}
+//			
+//		}
+		//全局获取悬停元素
+		var left
+		function itemOver (a){
+			//console.log(a)//this = div
+			//用text节点判断应该停哪张图
+			//取出文本节点中文本值，文本节点的nodeValue是他本身
+			//console.log(a.firstChild)//"1",但是这是个对象不能直接parseInt（a.firstChild）
+			//console.log(a.firstChild.nodeType)//3,文本节点，用innerText属性取文本?
+			//console.log(a.firstChild.innerHTML)//取不出 ,undefinded
+			//console.log(a.firstChild.innerText)//取不出 ,undefinded
+			//console.log(a.firstChild.this)//取不出 ,undefinded
+			//console.log(a.firstChild.valueOf())//"1"
+			//console.log( typeof a.firstChild.valueOf())//obiect可能value0f()返回的还是个object
+			//console.log(typeof a.firstChild.toString())//string
+			//var strNum = a.firstChild.toString()
+			//console.log(strNum)//[object Text]
+			//console.log(typeof a.firstChild.nodeValue+"文本值"+a.firstChild.nodeValue)
+			var strNum = a.firstChild.nodeValue
+			var itemNum = parseInt(strNum) - 1//1-1
+			//console.log( typeof itemNum+",itemNum的值"+itemNum)
+			//停下轮播	
+			turnStop()
+			//回到序号对应的图片
+			left = itemNum * (-610)
+			box.style.left = left + "px"
+		}
+		function itemLeave (){
+
+			turnPlay()
+		}
+		
+	</script>
+</html>
+</html>

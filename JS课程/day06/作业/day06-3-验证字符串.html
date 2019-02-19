@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>验证字符串</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//我的方法 unioncode比较
+		function checkStr(){
+			var inStr = prompt("请输入字符串")
+			var len = inStr.length
+			var flag = false;
+			//判断首字符不能为数字
+			if(inStr.charCodeAt(0) >=48 && inStr.charCodeAt(0) <= 57){				
+					alert("输入有误，首字符不能为数字")
+			}else{
+				//遍历判断每个字符
+				for(var i = 0, len = inStr.length;i < len;i++){
+					//console.log(inStr[i]+"\t")
+					/**
+					 * * 常见ASCII码
+						 * 0-48
+						 * 9-57
+						 * A-65
+						 * Z-90
+						 * a-97
+						 * z122
+				 * */			 
+					//console.log(inStr.charCodeAt(i));//0-48
+					asciiCode = inStr.charCodeAt(i);
+					//判断长度
+					
+					if(len < 4 || len >16){
+						alert("字符长度为："+len+"，请输入4-16个字符")
+						break
+					}else if((asciiCode >=48 && asciiCode <= 57) || 
+						(asciiCode >=97 && asciiCode <= 122) ||
+						(asciiCode >=65 && asciiCode <= 90)	||
+						asciiCode ==95					
+					){
+						//console.log("_".charCodeAt(0))//下划线的ASCII为：95					
+						//判断数字,大小写英文字符，下划线
+						//alert("输入正确")
+						flag = true;
+					}else{
+						alert("字符只能为数字，大小写英文字符和下划线，"+inStr[i]+"，不是合法字符")
+						flag =false;
+						break
+					}
+					
+				}
+				if (flag) {
+					alert("输入正确")
+				}
+			}
+		}
+		
+		//征哥方法：直接比较会有隐式转换
+		function checkStr2(str){
+			if (str.length < 4 || str.length >16){
+				alert("长度不合法")
+				return false
+			}
+			for(var i = 0; i < str.length; i++){
+				var ch = str.charAt(i);
+				if(i===0 && ch >= "0" &&ch <= "9"){
+					alert("第一个字符不能为数字")
+					return false
+				}
+				if (i > 0 && !(ch >= "a" && ch <= "z")||
+				!(ch >= "A" && ch <= "Z")||
+				!(ch >= "0" && ch <= "9")||
+				!(ch = "_")
+				){
+					alert("字符不能为数字，字母，下划线以外字符")
+					return false
+				}
+				
+			}
+			return true
+			
+		}
+		//调用
+		if(checkStr2("fhdVDS52736JGDS")){
+				alert("正确")
+			}
+	</script>
+</html>

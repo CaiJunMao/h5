@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>放大镜</title>
+		<style type="text/css">
+			#small{
+				width:250px;
+				height: 250px;
+				float: left;
+				border: 1px solid black;
+				position: relative;
+			}
+			#small #magnifying{
+				width: 50px;
+				height: 50px;
+				display: block;
+				position: absolute;
+				/*border: solid 1px rgba(192,192,192,0.2);*/
+				background: rgba(192,192,192,0.5);
+				cursor: move;
+				display: none;
+			}
+			
+			#big{
+				width: 500px;
+				height: 500px;
+				float: left;
+				border: 1px solid black;
+				overflow: hidden;
+				display: none;
+				position: relative;
+			}
+			#small img{
+				height: 250px;
+			}
+			#big img{
+				height: 1000px;
+				width: 1000px;
+				position: relative;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="small">
+			<div id="magnifying"></div>
+			<img src="img/small.jpg"/>
+		</div>
+		<div id="big"><img src="img/big.jpg"/></div>
+	</body>
+	<script type="text/javascript">
+		//找到放大镜
+		var pop = document.getElementById("magnifying")
+		//
+		var small = document.getElementById("small")
+		var big = document.getElementById("big")
+		//
+		var imgs = document.getElementsByTagName("img")
+		var img = document.getElementsByTagName("img")[1]
+		//放大镜中位置
+		var lefts = []
+		var tops = []
+		//把初始位置记录下来
+		//
+		var maxLeft ,maxTop
+		//鼠标在small中移动的时候
+		small.addEventListener("mouseover",function(){
+			pop.style.display= "block"
+			big.style.display = "block"
+			//计算pop所能达到的最大值left和top
+			maxLeft = small.offsetWidth - pop.offsetWidth
+			maxTop = small.offsetHeight - pop.offsetHeight
+		},false)
+		//当光标离开的时候
+		small.addEventListener("mouseout",function(){
+			pop.style.display = "none"
+			big.style.display = "none"
+		})
+		
+		//监听移动事件
+		small.addEventListener("mousemove", function(event){
+			//计算
+			
+			var popLeft = event.clientX - small.offsetLeft - 
+			pop.offsetWidth/2
+			var popTop = event.clientY - small.offsetTop - 
+			pop.offsetHeight/2
+			//限制左值
+			popLeft = popLeft <= 0 ? 0: popLeft
+			popTop = popTop <= 0 ? 0: popTop
+			//限制右值
+			popLeft = popLeft >= maxLeft? maxLeft: popLeft
+			popTop = popTop >= maxTop ? maxTop: popTop
+			// 设置
+			pop.style.left = popLeft + 'px'
+			pop.style.top = popTop + 'px'
+			//右边
+			
+			//imgs[1].style.left = - popLeft / maxLeft * 1000 + 'px'
+			//imgs[1].style.top = - popTop / maxTop * 1000 + "px"
+			//console.log(imgs[1].style.top)
+			img.style.left = - popLeft / maxLeft * 1000 + 'px'
+			img.style.top = - popTop / maxTop * 1000 + "px"
+			console.log(img.style.top)
+		})
+		
+	</script>
+</html>

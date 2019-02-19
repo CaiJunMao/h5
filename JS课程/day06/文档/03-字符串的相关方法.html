@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【str.charAt(index)函数】返回下标index位置
+		 * 的单个字符构成的字符串
+		 */
+		var str = "你好啊"
+		//var str = "abc"
+		console.log(str.charAt(0))
+		console.log(str.charAt(2))
+		console.log(str[0])
+		console.log(str[1])
+		console.log(str[2])
+		console.log(str[9999])
+		//默认是从下标0开始的。但是不建议大家这么做，一般要求写完整
+		console.log(str.charAt())
+		//=================
+		/**
+		 * 【str.charCodeAt(index)】返回指定位置的字符的Unicode编码
+		 * 返回值是0---65535之间
+		 */
+		var str = "你好啊"
+		console.log(str.charCodeAt(0))
+		console.log(str.charCodeAt(1))
+		console.log(str.charCodeAt(2))
+		//====================
+		// 英文的Unicode编码其实就是ASCII码
+		var str = "abc"
+		console.log(str.charCodeAt(0)) //97
+		console.log(str.charCodeAt(1)) //98
+		console.log(str.charCodeAt(2)) //99
+		/**
+		 * 常见的ASCII码：
+		 * 0---> 48
+		 * 9---> 57
+		 * A---> 65
+		 * Z---> 90
+		 * a---> 97
+		 * z---> 122
+		 */
+	</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>字符串的创建</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【创建字符串】1、使用new关键字创建的是对象类型
+		 * 2、不使用new关键字创建的是基本数据类型。包括
+		 * 直接量和String()函数强转的字符串。
+		 * 所以，JS中的字符串有两种：基本类型和对象类型
+		 */
+		var str = 'OWin' //str为基本类型的字符串
+		console.log(typeof str) //string
+		
+		//不使用new关键字的时候，String是一个普通函数
+		var str1 = String(123)
+		console.log(typeof str1) //string
+		
+		//使用new关键字的时候，String是一个【构造方法】
+		var str2 = new String("fghjaajdj")
+		console.log(typeof str2) //object
+	</script>
+</html>

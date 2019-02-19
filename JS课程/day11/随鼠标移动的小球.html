@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		#box{
+			height:700px;
+			background: #6D6D6D;
+			width: 100%;
+			position: relative;
+			margin:  0 auto;
+		}
+		div  p{
+			border-radius: 50%;
+			position: relative;
+			background: greenyellow;
+			height: 100px;
+			width: 100px;
+		}
+		#btn{
+			width: 100px;
+			height: 200px;
+			margin:  0 auto;
+		}
+		</style>
+		
+	</head>
+	<body>
+		<button id="btn">原路返回</button>
+		<div id="box">
+			<p></p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//找到p标签
+		circle = document.querySelector("p")
+		parentBox = document.getElementById("box")
+		//存位置
+		var lefts = []
+		var tops = []
+		//把初始位置记录下来
+		lefts.push(0)
+		tops.push(0)
+		//鼠标在box中移动的时候
+		box.addEventListener("mousemove",function(event){
+			//相对浏览器窗口 - 一半的元素宽大小 = 左移
+			//实际上用相对父元素内的偏移量 - 一半元素大小才对，这样鼠标在圆中间，为了不让超出父元素应该还需做点什么
+			var divLeft = event.clientX - circle.offsetWidth/2
+			
+			//var divTop = event.clientY - circle.offsetHeight/2
+			var divTop = circle.offsetTop - circle.offsetHeight/2
+			console.log(circle.offsetHeight)//circle的高度
+			console.log(circle.offsetTop)//circle的相对父元偏移
+			console.log(circle.offsetTop)//undefinded,clientY是事件的属性，不能用元素来调用
+			//console.log(parentBox.style.width)//空？
+			//console.log(divLeft)
+			//把divleft压栈到lefts中
+			lefts.push(divTop)
+			tops.push(divTop)
+			circle.style.left = divLeft+"px"
+			circle.style.top = divTop+"px"
+		},false)
+		//点击button原路返回
+		btn.onclick = function(){
+			var id = setInterval(function(){
+				if(lefts.length === 0){
+					clearInterval(id)
+				}
+				circle.style.left= lefts.pop()+ "px"
+				circle.style.top = tops.pop()+ "px"
+			})
+			
+		}
+	</script>
+</html>

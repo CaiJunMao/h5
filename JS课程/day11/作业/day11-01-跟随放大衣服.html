@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>跟随显示</title>
+		<style type="text/css">
+			div.box{
+				width: 600px;
+				height: 140px;
+				margin: 0 auto;
+				/*border: 1px solid red;*/
+				clear: both;
+				position: relative;
+			}
+			.box .small{
+				width: 130px;
+				height: 130px;
+				border: solid 1px #D3D3D3;
+				float: left;
+				margin-left: 15px;
+			}
+			.box .small:hover{
+				border:  solid 1px  red;
+			}
+			.box .small img{
+				height: 130px;
+			}
+			div.big{
+				width: 300px;
+				height: 300px;
+				border: solid 1px #D3D3D3;
+				position: absolute;
+				/*top: 100px;*/
+			}
+			div.big img{
+				width: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="small"> <img src="img/shirt_1.jpg"/></div>
+			<div class="small"><img src="img/shirt_2.jpg"/></div>
+			<div class="small"><img src="img/shirt_3.jpg"/></div>
+			<div class="small"><img src="img/shirt_4.jpg"/></div>
+		</div>		
+		<div class="big"><img src="img/shirt_1_big.jpg"/></div>
+	</body>
+	<script type="text/javascript">
+		var box = document.getElementsByClassName("box")[0]
+		var smallDivs= document.getElementsByClassName("small")
+		var smallDivF= document.getElementsByClassName("small")[0]
+		//有效左右值
+		var valiLeft = []
+		var valiRight = []
+		//有效上下值
+		var valiTop = 10
+		var vailBottom = 140
+		var bigDiv = document.getElementsByClassName("big")[0]
+		var bigImg = bigDiv.firstChild
+		box.addEventListener("mousemove",function(event){
+			
+			
+			//鼠标移出，不显示bigDiv,不能smallDivF.clientX
+			//第一个smallDiv的左值
+			//var valiueLeft1 = box.offsetLeft+smallDivF.offsetLeft
+			for (var i= 0;i < smallDivs.length;i ++) {
+				valiLeft[i] = box.offsetLeft+smallDivF.offsetLeft + i*(130+15+2) 
+				valiRight[i] = box.offsetLeft+smallDivF.offsetLeft+(i+1)*131+i*(15+1)
+				
+			}
+			//console.log(valiLeft)
+			console.log(valiLeft[1]+","+valiRight[1]+","+valiTop+","+vailBottom+","+event.clientX+","+event.clientY)
+			//当在有效值范围内，执行大图片出现
+			if(event.clientX >= valiLeft[0] && event.clientX <= valiRight[0] && event.clientY >= valiTop && event.clientY <= vailBottom){change(0)}
+			else if(event.clientX >= valiLeft[1] && event.clientX <= valiRight[1] && event.clientY >= valiTop && event.clientY <= vailBottom){change(1)}
+			else if(event.clientX >= valiLeft[2] && event.clientX <= valiRight[2] && event.clientY >= valiTop && event.clientY <= vailBottom){change(2)}
+			else if(event.clientX >= valiLeft[3] && event.clientX <= valiRight[3] && event.clientY >= valiTop && event.clientY <= vailBottom){
+				change(3)
+			}else{
+				bigDiv.style.display = "none"
+			}
+		},false)
+		//更换图片和位置，跟随鼠标
+		function change(i){
+			i++
+			bigImg.src = 'img/shirt_'+i+"_big.jpg"
+			console.log(bigImg.src)
+			//大图片出现位置，跟随鼠标，
+			bigDiv.style.display = "block"
+			bigLeft = event.clientX + (10)
+			bigTop = event.clientY + (10)
+			bigDiv.style.left = bigLeft + 'px'
+			bigDiv.style.top = bigTop +'px'
+			console.log(bigLeft+"和"+bigDiv.style.left)
+		}
+	</script>
+</html>

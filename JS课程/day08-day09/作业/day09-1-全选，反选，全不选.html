@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body style="text-align: center;">
+		兴趣爱好：
+		大宝剑<input type="checkbox" checked="checked"/>
+		上网<input type="checkbox" />
+		看电影<input type="checkbox" />
+		敲代码<input type="checkbox" />
+		戴绿帽子<input type="checkbox" /><br />
+		<input type="button" name="all" id="all" value="全选" />
+		<input type="button" name="allNo" id="allNo" value="全不选" />
+		<input type="button" name="opp" id="opp" value="全部反选" />
+	</body>
+	<script type="text/javascript">
+		var inputs = document.getElementsByTagName("input")
+		var allChose = document.getElementById("all")
+		var allNotChose = document.getElementById("allNo")
+		var oppChose = document.getElementById("opp")
+		allChose.onclick = function (){
+			//console.log(inputs.length)
+			for (var i = 0; i < inputs.length - 3;i++) {
+				inputs[i].style["checked"] = "checked"
+				console.log(inputs[2].style.checked)
+			}
+		}
+	</script>
+</html>

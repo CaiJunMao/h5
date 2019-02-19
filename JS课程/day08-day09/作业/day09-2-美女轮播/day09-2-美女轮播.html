@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片轮播</title>
+		 <style type="text/css">
+		 	.outer{
+		 		width:380px;
+		 		height:513px;
+		 		border:1px dotted pink;
+		 		position: relative;
+		 		margin: 0 auto;
+		 		overflow: hidden;
+		 	}
+		 	.outer #box{
+		 		width:2660px;
+		 		height:513px;
+		 		position: absolute;
+		 		font-size:0;
+		 		/*解决img空隙*/
+		 		
+		 	}
+		 	img{
+		 		width:380px;
+		 		height:513px;
+		 		/*//display: block;*/
+		 		
+		 	}
+		 </style>
+	</head>
+	<body>
+		<div class="outer">
+			<div id="box">
+				<img src="img/1.jpg" alt="" />
+				<!--img[src="img/" alt]*6-->
+				<!--p{$}*8-->
+				<img src="img/2.jpg" alt="" />
+				<img src="img/3.jpg" alt="" />
+				<img src="img/4.jpg" alt="" />
+				<img src="img/5.jpg" alt="" />
+				<img src="img/6.jpg" alt="" />
+				
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var box = document.getElementById("box")
+		var left = 0
+		//每隔20ms
+		var dire = -8;//开始时左移
+		setInterval(function(){
+			
+			left = left + dire //-8 8
+			box.style.left = left + "px"
+			//到最后一张，左值5*380（即此时最后一张图刚好铺满显示框）开始反向dire = 8
+			if (left <= -5*380) {
+				//left = 0;
+				dire = 8
+				
+			}
+			else if(left >= 0){
+			//到第一张，刚刚left = 0时，图片1铺满显示框，开始反向
+				dire = -8
+			}
+		},20)
+	</script>
+</html>

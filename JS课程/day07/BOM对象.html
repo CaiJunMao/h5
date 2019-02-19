@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>BOM对象</title>
+	</head>
+	<body>
+		<div id="h1">
+			
+		</div>
+		<h1>BOM对象</h1>
+		<pre>
+			基本认识：
+				BOM: Browser Object Model  浏览器对象模型
+					是JavaScript的组成之一，他提供了
+					内容与浏览器窗口进行交互的对象，使用浏览器对象模型可以实现与HTML的交互
+					ECMAScript是 JavaScript的核心
+					BOM 的核心对象是 window
+					BOM作用：将相关的元素组织包装起来，提供给程序设计人员使用
+				
+				Global 对象 是ECMAscript中非常特殊的一个对象，因为这个对象不存在，
+					原因是这个对象无法通过new关键创建，但是这个对象拥有自己的属性、方法甚至全局对象
+					Global对象默认在浏览器引擎启用时自动初始化完成
+			window对象
+				基本认识：
+					window对象是BOM的顶层(核心)对象
+					Window对象是Global对象的一个子对象，但是在浏览器环境下，Global对象就是指window对象
+					document也是window的一个子对象
+				全局作用域
+					window 对象同时扮演着 ECMAScript中 Global 对象的角色，
+					在全局作用域中声明的变量、函数都会变成 **window 对象的属性和方法
+					三种获取全局变量的方式。全局变量，全局函数，this
+						var age = 29;	//声明一个全局变量
+						function sayAge() {	//声明一个全局函数
+    						alert(this.age);
+    						//this表示，调用这个函数时使用的对象。
+    						//将来是通过window调用的，所以this指代的window
+						}
+				window窗口
+					浏览器的视口，不包括工具栏和滚动条;窗口大小非固定，随实际窗口大小改变而改变
+					获取窗口大小：（兼容模式写法）
+						var w = window.innerWidth || document.documentElement.clientWidth;
+						var h = window.innerHeight || document.documentElement.clientHeight;
+						//alert("窗口宽度：" + w + "\n窗口高度：" + h);
+					调整窗口大小（谷歌不可用，ie可用）:
+						window.resizeTo(w, h) ：调整到指定的大小
+						window.resizeBy(宽度变化量, 高度变化量) ：窗口的宽和高变化：增加(参数正数)、缩减（参数负数）
+					打开窗口 open(URL,name,features)
+						打开一个新的浏览器窗口或查找一个已命名的窗口
+						URL 可选，省略打开的窗口为空白
+						name 可选，字符串，用作标记 a 标签和 form标签 的属性 target 的值，常用于frame框架
+							如果指定了一个已经存在的窗口，那么 open() 方法就不再创建一个新窗口，
+							而只是返回对指定窗口的引用。在这种情况下，features 将被忽略
+						features 声明了新窗口要显示的标准浏览器的特征，主要有以下：
+							height、width；left、top（窗口的x坐标、y坐标）；
+							fullscreen=yes | no  |1 | 0 是否全屏模式。黙认是no
+							以下默认为yes
+							toolbar=yes | no  |1 | 0 	工具栏
+							menubar=yes | no  |1 | 0 	菜单栏
+							titlebar=yes | no  |1 | 0  	标题栏
+							status=yes | no  |1 | 0 	状态栏
+							scrollbars=yes | no  |1 | 0 滚动条
+							location=yes | no  |1 | 0  	地址地段
+							resizable=yes | no  |1 | 0 	调节尺寸
+						window.open("http://www.yztcedu.com"); //打开新窗口，窗口特性全部使用默认值
+						open方法返回打开的那个窗口的window对象，所以可以win.close();来关闭
+							win = window.open("http://www.yztcedu.com", "", "width=400, height=400,\
+							toolbar = no, menubar = no,left = 200, right = 200");
+							//注意上面这一句的字符串不能换行，要换行必须加\
+							win.close();
+				window中的定时器
+					JavaScript 是单线程语言，但它允许通过设置超时值和间歇时间值来调度代码在特定的时刻执行
+					window.setTimeout(函数名/匿名函数,间隔时间)
+						 * 超时调用，间隔时间后调用间隔时间单位ms
+					window.setInterval(函数名/匿名函数,间隔时间)
+						 * 周期调用，每间隔时间一次执行一次
+					清除定时器：
+						window.clearTimeout(this.timerId); 
+						window.clearInterval(id);
+					例：
+						var timeountId = window.setTimeout(Go,3000)
+						function Go(){
+							window.open("http://www.baidu.com")
+						}
+					注意：
+						传入函数的时，函数名不要加括号。(因为方法不是我们调用，是引擎帮助我们调用)
+				location对象 
+					location对象其实是window对象的子对象,它提供了与当前窗口中加载的文档有关的信息，还提供了一些导航功能
+					它提供了与当前窗口中加载的文档有关的信息，还提供了一些导航功能
+					属性：
+						host 主机名和当前 URL 的端口号
+						hostname URL 的主机名
+						href 完整的 URL
+						pathname  URL 的路径部分
+						port URL 的端口号
+						protocol URL 的协议
+						search  从问号 (?) 开始的 URL（查询部分）
+					常用方法：
+						assign(newUrl): 加载新的文档
+						replace(reforce): 方法不会在 History 对象中生成一个新的记录。当使用该方法时，
+							新的 URL 将覆盖 History 对象中的当前记录。按下回退键的不会返回到刚才的网页
+						reload([force]) 方法用于重新加载当前文档
+							有参为true时，从服务器重新下载，
+							无参false,检测是否改变，未改变的话从缓存中重新加载，若改变则从服务器重新下载
+							注意：reload()调用之后其后的代码有可能执行有可能不执行，所以一般放在最后
+				history对象(了解)
+					History 对象包含用户（在浏览器窗口中）访问过的 URL
+					属性：length
+					常用方法:
+						history.forward();  history 列表中的下一个 URL
+						back()  加载 history 列表中的前一个 URL
+						go(index)  加载 history 列表中的某个具体页面。// 负代表后退， 正代表前进
+				navigator对象(了解)
+					Navigator 对象包含有关浏览器的信息。
+					属性：
+						appCodeName 浏览器代码名的字符串表示
+						appName 官方浏览器名的字符串表示
+						appVersion 浏览器版本信息的字符串表示
+						systemLanguage 操作系统的语音
+						language 浏览器的主语言
+						onLine 是否联了因特网
+						cookieEnabled 如果启用cookie返回true，否则返回false
+						platform 浏览器所在计算机平台的字符串表示
+						plugins 安装在浏览器中的插件数组
+						userAgent 用户代理头的字符串表示
+				screen对象(了解)
+					screen对象：包含有关用户屏幕的信息
+					属性：
+						height 屏幕的像素高度
+						width 屏幕的像素宽度
+						colorDepth 用于表现颜色的位数
+						availWidth 减去任务栏之后的宽度
+						availHeight 减去任务栏之后的高度
+				window中常用事件
+					onload---加载事件 当整个页面加载完成的时会触发该事件
+						 用于大型的网页特别是游戏防止页面（页面加载是耗时操作）
+						 未加载时，下面的一些函数就开始运行了，导致取不到一些关键数值
+						 语法：window.onload = function(){} 或者 window.onload = 方法名
+						 注意：一般把事件注册的代码放在head中
+					onscroll---滚动事件 当窗口发生滚动会触发该事件
+						语法：window.onscroll = function(){} 或者 window.onscroll = 方法名
+			Cookie
+				基本认识：
+					某些网站为了辨别用户身份、进行 session 跟踪而储存在用户本地终端上的数据（通常经过加密）
+					cookie是浏览器提供的一种机制,它将document 对象的cookie属性提供给JavaScript
+					cookie是存于用户硬盘的一个文件
+					cookie的本质就是用键值对存储在用户本地的一些数据，这些数据不同的网站，不同的浏览器是不能共享的
+					cookie机制将信息存储于用户硬盘，因此可以作为全局变量，最大的优点
+				适用场合
+					保存用户登录状态
+					跟踪用户行为 天气预报
+					定制页面 皮肤
+					创建购物车 
+				缺陷 
+					不安全，可能被删除，不同浏览器不能共享，可能被禁用
+				构成：
+					名称 一个唯一确定 cookie 的名称。cookie 名称是不区分大小写的
+						最好将 cookie 名称看作是区分大小写的，因为某些服务器会这样处理 cookie
+						名称必须是经过 URL 编码的
+					值：储存在 cookie 中的字符串值。值必须被 URL 编码
+					域： cookie 对于哪个域是有效的	
+					路径：
+					失效时间：
+					安全标志：http和https
+				存储：
+					1、服务器端通过http响应头Set-Cookie来通知浏览器存储cookie（了解，先不管）
+					2、通过JavaScript去存储cookie(重点)。Javascript操作cookie需要通过document的cookie属性来完成
+					以下是一个存储、读取、删除的例子
+					function saveCookie(name,value,expiredDay){
+						var date = new Date()
+						alert(date.getDate())//获取天
+						date.setDate(date.getDate() + expiredays)//再过expiredays之后
+						alert(date.toGMTString())
+						
+						//cookie要经过URL编码
+						//var cookieText = encodeURIComponent(name) + "="+
+						//encodeURIComponent(value) + ",expires=" + 
+						//date.toGMTString()document.cookie = cookieText
+					}
+					saveCoolie("name","麻子",5)
+					//获取cokie
+					function getCookie(name){
+						//先拿到cookie字符串
+						var cookieText  = document.cookie
+						console.log(cookieText)
+						//获取要查找的cookie的name所在的下标
+						var index = cookieText.indexOf(name + "=")
+						//如果index != -1,则说明找到了
+						if(index != 1){
+							//查找指定的cookie的结束位置
+							var endIndex = cookieText.indexOf(";",index)
+							//如果endIndex == -1，则说明没找到，则把末尾设置为字符串的末尾
+							endIndex = (endIndex == -1) ?
+							cookieText.length : endIndex
+							//把想要的cookie的value值取出来
+							var value = cookieText.substring(index + 
+								(name + "=").length,endInext)
+							console.log(("拿到的value是"+ value))
+							//查到的东西要用URL解码
+							return decodeURIComponent(value)
+						}
+						
+					}
+					getCookie("name")
+					
+					//删除cookie,设置过期时间为0即可
+					saveCookie("name" ,"李四",0)
+				
+		</pre>
+	</body>
+	<script type="text/javascript">
+		var w = window.innerWidth || document.documentElement.clientWidth;
+		var h = window.innerHeight || document.documentElement.clientHeight;
+		//window.resizeTo(500,500)//谷歌不起作用，ie可以
+		//window.resizeBy(500,-100)//宽度增加500，高度缩小100
+		//alert("窗口宽度：" + w + "\n窗口高度：" + h);
+		/**
+		 * window中的定时器 
+		 * 1window.setTimeout(函数名,间隔时间)
+		 * 间隔时间单位ms
+		 * 超时调用，间隔时间后调用
+		 */
+		//var timeountId = window.setTimeout(Go,3000)//单位毫秒
+		//注意，函数调用时，传入参数没有小括号，写名字就好了
+		//因为这个方法是通过引擎去调用的，不是我们调用的
+		function Go(){
+			window.open("http://www.baidu.com")
+		}
+		/**
+		 * 2window.setInterval(code,间隔时间)
+		 * 语法：周期调用，每间隔时间一次执行一次
+		 * 
+		 * 定时器取消清除方法：window.clearTimeout(this.timerId);；window.clearInterval(定时器名称)
+		 * window可省略
+		 */
+		var count = 0;
+		var timeInterval = window.setInterval(function(){
+			var msg = new Date().toLocaleString()
+			h1.innerHTML = msg;//id为h1
+			count ++;
+			//清除定时器
+			if(count == 10){
+				//window.clearInterval(timeInterval)
+				clearInterval(timeInterval)//window可省略
+				//清除定时器不是将定时器清零，而是断开变量名与定时器对象的联系，定时器变量的值（一个编号）没有变，所以判断定时器存不存在，不能已==0判断，
+				//如果要这样做，再清除定时器时同时设定时器变量为0
+				timeInterval = 0;
+			}
+		},1000)
+		
+		//f2()
+		/**
+		 * location对象
+		 * 属性			描述
+			host		设置或返回主机名和当前 URL 的端口号。
+			hostname	设置或返回当前 URL 的主机名。
+			href		设置或返回完整的 URL。
+			pathname	设置或返回当前 URL 的路径部分。
+			port		设置或返回当前 URL 的端口号。
+			protocol	设置或返回当前 URL 的协议。
+			search		设置或返回从问号 (?) 开始的 URL（查询部分）
+		 */
+		
+		console.log("protocol:"+location.protocol)
+		
+		/**
+		 * location常用方法
+		 * assign(url)加载新文档,跟打开网页差不多
+		 * replace(url) 替换当前文档
+		 * 	方法不会在 History 对象中生成一个新的记录。新的 URL 将覆盖 History 对象中的当前记录。无法回退回之前的网页
+		 * reload([force]) 方法用于重新加载当前文档
+		 * 有参为true时，从服务器重新下载，无参false从,检测是否改变，未改变从缓存中重新加载，若改变从服务器重新下载
+		 */
+		//location.assign("http://www.yztcedu.com");
+		/**
+		 * cookie
+		 * 存储cookie需要指定name和值
+		 * 参数1：cookiede name
+		 * 参数二：value
+		 * 参数三：存储时间 单位天
+		 * 
+		 */
+		function saveCookie(name,value,expiredDay){
+			var date = new Date()
+			alert(date.getDate())//获取天
+			date.setDate(date.getDate() + expiredays)//再过expiredays之后
+			alert(date.toGMTString())
+			
+			//cookie要经过URL编码
+			//var cookieText = encodeURIComponent(name) + "="+
+			//encodeURIComponent(value) + ",expires=" + 
+			//date.toGMTString()document.cookie = cookieText
+		}
+		saveCoolie("name","麻子",5)
+		//获取cokie
+		function getCookie(name){
+			//先拿到cookie字符串
+			var cookieText  = document.cookie
+			console.log(cookieText)
+			//获取要查找的cookie的name所在的下标
+			var index = cookieText.indexOf(name + "=")
+			//如果index != -1,则说明找到了
+			if(index != 1){
+				//查找指定的cookie的结束位置
+				var endIndex = cookieText.indexOf(";",index)
+				//如果endIndex == -1，则说明没找到，则把末尾设置为字符串的末尾
+				endIndex = (endIndex == -1) ?
+				cookieText.length : endIndex
+				//把想要的cookie的value值取出来
+				var value = cookieText.substring(index + 
+					(name + "=").length,endInext)
+				console.log(("拿到的value是"+ value))
+				//查到的东西要用URL解码
+				return decodeURIComponent(value)
+			}
+			
+		}
+		getCookie("name")
+		
+		//删除cookie,设置过期时间为0即可
+		saveCookie("name" ,"李四",0)
+	</script>
+</html>

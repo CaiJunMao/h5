@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件</title>
+	</head>
+	<body>
+		<h1>事件</h1>
+			<pre>
+				基本了解：
+					事件，就是用户或者是浏览器执行的某种动作
+					事件三要素：事件源，事件对象，事件监听器
+						 * 按钮 点击事件作用的对象 给onclick赋值的函数
+					【事件流】
+						1、从内向外：冒泡
+						2、从外向内：捕获
+						DOM事件流：事件捕获阶段、处于目标阶段 和 事件冒泡阶段
+						目前所有的浏览器都支持【DOM事件流】默认都是在冒泡阶段触发事件
+				HTML事件处理程序
+					事件处理程序，就是响应事件的函数。
+					事件处理程序的名字以“on”开头的。
+					例如：事件click --->事件处理程序 onclick
+					事件处理程序都是小写字母
+					两种写法：
+						1、在标签中写，把代码直接写到onclick属性的值
+							button onclick="alert('hello world')">点我可以给整个世界问好/button>
+						2、把代码封装在一个函数中，然后在onclick的属性值中调用封装的函数	
+							button onclick="showMsg();">点我可以给整个世界问好/button>
+						    script type="text/javascript">
+						    	function showMsg () {
+						    		alert("hello world");
+						    	}
+						    /script>
+					HTML中指定事件处理程序有两个缺点：
+						时差问题
+						HTML代码和JavaScript代码紧密耦合
+					故：一般用 JavaScript 指定事件处理程序
+				脚本模型（在JavaScript 中处理事件）DOM0级事件处理程序
+					匿名函数写法：
+						button id="btn">点我可以给整个世界问好/button>
+					    script type="text/javascript">
+					    	// 匿名函数的写法
+					    	document.getElementById("btn").onclick = function () {
+					    		alert("世界你好");
+					    	}
+					    /script>
+					方法名写法：
+						button id="btn">点我可以给整个世界问好/button>
+					    script type="text/javascript">
+					    	//通过方法名赋值.  注意此处不能添加括号：因为方法的调用是在将来点击的时候，而不是现在
+					    	document.getElementById("btn").onclick = showMsg;
+					    	function showMsg () {
+					    		alert("世界你再好");
+					    	}
+					    /script>
+				删除事件处理程序：
+					document.getElementById(id).onclick = null;	使用这种方法可以删除HTML事件和DOM0事件
+			</pre>
+			<pre>
+				事件类型:
+					重点掌握：load，scroll，resize，click，mouseover，mouseout
+					ui事件：
+						onload 页面或图像加载完成立即执行 只是IE浏览器支持
+						onunload 在用户退出页面时发生 只是IE浏览器支持
+						onresize 调整到一个新的高度或宽度
+						onscroll 当滚动条滚动时触发
+					焦点事件：
+						onfocus(获得焦点)  不会冒泡( 也就是不会再往上层传递 )
+						onblur(失去焦点)  不会冒泡
+						onfocusin是onfoucs的冒泡版本，onfocusout是onblur的冒泡版本，这两个方法在chrome和firfox上面均不支持
+					鼠标事件：
+						onclick 鼠标单击事件 单按下鼠标左键或按下回车后触发
+						ondblclick 鼠标双击事件
+						onmousedown  按下任意鼠标按钮 时触发。不能通过键盘触发
+						onmouseup 释放鼠标按钮时触发
+						onmouseover 当鼠标移动到一个元素的上方时触发
+						onmouseout 当鼠标从一个元素的上方移走的时候触发
+						onmouseenter 同onmouseover，但是不冒泡
+						onmouseleave 同onmouseout，但是不冒泡
+						onmousemove 元素内部移动时触发，这个事件会重复触发
+					键盘事件:
+						onkeydown：当用户按下键盘上的任意键时触发，而且如果按住不放的话，会重复触发此事件
+						onkeypress：当用户按下键盘上的字符键时触发，而且如果按住不放的话，会重复触发此事件
+						onkeyup：当用户释放键盘上的键时触发
+						获取键值：
+							div1.onkeypress = function(e) {
+	        					alert(e.keyCode);
+	    					}
+			</pre>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 事件三要素：事件源，事件对象，事件监听器
+		 * 按钮 点击事件作用的对象 给onclick赋值的函数
+		 */
+		/**
+		 * 事件流
+		 * 1、从内向外：冒泡
+		 * 2、从外到内：捕获
+		 * dom事件流：先捕获再冒泡
+		 * 默认在冒泡阶段触发事件
+		 */
+	</script>
+</html>

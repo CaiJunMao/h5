@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>字符串逆序</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//我的方法：
+		function reverseStr(){
+			var inStr = prompt("请输入字符串");
+			//console.log(inStr.reverse())//不能把字符串当数组一样倒置
+			var len = inStr.length;
+			var temp;
+			var newStr="";
+			for (var i = 1; i <= len; i++) {
+				//newStr[0] = inStr[len-1-i];不能这样写，结果还是inStr
+				//newStr.push(inStr.pop());//??不能这样写，这是数组的方法
+				
+				newStr +=inStr[len-i];
+				console.log(newStr);
+			}
+			//console.log(newStr);
+			document.write("您输入的字符串为："+inStr+"，倒置后为："+newStr)
+			var halfLen = Math.ceil(inStr.length / 2);//长度折半，向上取整，如果是奇数个字符，则中间也是自己换自己
+	//		for(var i = 0;i <= halfLen;i++){//asdf
+	//			temp = inStr[i];
+	//			inStr=inStr.replace(inStr[i],inStr[len-1-i]);//0 3
+	//			console.log("头换为尾，中间值为："+temp+"倒换后的字符串为"+inStr)//替换不会对原数组产生影响，所以要赋值回去。fsdf
+	//			console.log(temp+","+inStr[len-1-i])
+	//			inStr=inStr.replace(inStr[len-1-i],temp);//3 替换是对找到的第一个inStr[len-1-i]的字符替换，而不是替换len-1-i该位置的元素，所以替换不可取
+	//			console.log("尾换为temp，中间值为："+temp+"倒换后的字符串为"+inStr)
+	//		}
+		}
+		var str = "IOS Android"
+		//征哥方法一 直接倒取每一个给newStr
+		function reverse_01(str){
+			for (var i = str.length - 1; i >= 0; i++) {
+				var newStr = ""
+				newStr +=str.charAt(i)
+			}
+			return newStr
+			alert(newStr)
+		}
+		//征哥方法二 利用切割（用空字符串切割没影响）产生的数组调用数组的倒置函数reverse和再用数组的拼接函数返回字符串
+		function reverse_02(str){
+			return str.split("").reverse().join("")//用空格切割,返回数组，数组才能调用逆序函数reverse,最后再用数组的连接方法join
+		}
+		
+	</script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>字符串的切割方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【字符串的切割】
+		 * str.split(separator， howmany)  
+		 * separator: 必选参数  字符串或者正则表达式
+		 * 从该参数指定的位置进行切割。
+		 * howmany：可选参数。该参数指定可返回的数组的最大的长度。
+		 * 如果指定了该参数，是那么返回的数组的长度不会大于该参数。
+		 * 如果没有设置参数2，则不考虑数组的长度，将字符串全部切割。
+		 * 一般不设置该参数。
+		 */
+		var str = "how old are you?"
+		//var arr = str.split(" ")
+		var arr = str.split("o")
+		console.log(arr)
+		console.log(arr.length)
+	</script>
+</html>

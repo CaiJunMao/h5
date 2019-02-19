@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			li.li_box{
+				width:170px;
+				height:170px;
+				border: 1px solid red;
+				position: relative;
+			}
+			img.small{
+				width:170px;
+				height:170px;
+				border: 1px solid green;
+				float: left;
+			}
+			img.big{
+				width:250px;
+				height:250px;
+				border: 1px solid blue;
+				/*float: left;*/
+				position: absolute;
+				left: 50px;
+				top: 20px;
+				/*margin:-50px 50px*/ 
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li class="li_box">
+				<img class="small" src="">
+					
+				</img>
+				<img class="big" src="">
+					
+				</img>
+			</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		var liBox = document.getElementsByClassName("li_box")[0]
+		var bigImg = document.getElementsByTagName("img")[1]
+		liBox.onmousemove = function(event){
+			var left = event.offsetX//注意这里的offsetX指光标偏移，是以光标所在元素的，而不一定是loBox
+			console.log(event.offsetX)
+			bigImg.style.left = event.offsetX
+//			console.log(bigImg)
+		}
+	</script>
+</html>

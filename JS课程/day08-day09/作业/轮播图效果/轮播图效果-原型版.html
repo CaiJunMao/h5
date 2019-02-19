@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>轮播图效果</title>
+		<style type="text/css">
+			
+			.outer{
+				width: 400px;
+				height: 400px;
+				border: 1px solid #000;
+				position:relative;
+				margin: 100px auto;
+				overflow: hidden;
+			}
+			.outer div{
+				position: absolute;
+				height:400px;
+				width: 3600px;
+			}
+			.outer img{
+				display: block;
+				width: 400px;
+				height: 400px;
+				float: left;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!--子绝父相-->
+		<div class="outer">
+			<div id="box">
+				<img src="img/1.jpg"/>
+				<img src="img/2.jpg"/>
+				<img src="img/3.jpg"/>
+				<img src="img/4.jpg"/>
+				<img src="img/5.jpg"/>
+				<img src="img/6.jpg"/>
+				<img src="img/7.jpg"/>
+				<img src="img/8.jpg"/>
+				<img src="img/1.jpg"/>
+				
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 构造方法
+		function Banner(className){
+			this.banner = document.getElementsByClassName(className)[0]
+			this.imgBox = this.banner.querySelector("div")
+			this.lis = this.banner.querySelectorAll("img")
+			this.width = this.lis[0].offsetWidth
+			this.index = 0//第几张图片
+			this.timer = null
+		}
+		// 在原型中添加方法
+		Banner.prototype.changeImage = function(){
+			var _this = this;
+			//计时器一次展示一张图
+			this.timer = setInterval(function(){
+				_this.index++;
+				//到达最末尾
+				if(_this.index > _this.lis.length - 1){
+					_this.index = 0;
+				}
+				console.log(_this.index * _this.width)
+				//box.style.left = left + "px"
+				_this.imgBox.style.marginLeft = -(_this.index * _this.width) + "px";
+			}, 1000)
+		}
+		//创建一个轮播对象，传入轮播对象的最外层div
+		var b1 = new Banner("outer")
+		b1.changeImage()
+	</script>
+
+</html>
